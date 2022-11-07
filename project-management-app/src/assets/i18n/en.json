@@ -1,0 +1,24 @@
+{
+  "components": {
+    "confirm-delete": {
+      "message": "Do you really want to DELETE element?",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "login": {
+      "title": "Log In",
+      "login": "Login",
+      "pass": "Password",
+      "button": "Log In",
+      "signup": "Don't have an account yet?"
+    },
+    "signup": {
+      "title": "Sign Up",
+      "name": "Name",
+      "login": "Login",
+      "pass": "Password",
+      "repass": "Confirm password",
+      "button": "Sign Up"
+    }
+  }
+}
