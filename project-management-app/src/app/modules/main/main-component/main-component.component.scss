@@ -1,0 +1,14 @@
+.main-component {
+  display: flex;
+  width: 100%;
+}
+.main-space {
+  width: 100%;
+}
+app-add-borders {
+  background-color: bisque;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  object-position: center ;
+}
