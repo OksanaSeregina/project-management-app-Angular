@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from './core/utils/http-loader.factory';
+import { SharedModule } from './modules';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { HttpLoaderFactory } from './core/utils/http-loader.factory';
     StoreRouterConnectingModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,0 +1,48 @@
+<mat-toolbar>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="bold">EN</mat-button-toggle>
+    <mat-button-toggle value="italic">RU</mat-button-toggle>
+  </mat-button-toggle-group>
+  <button
+    *ngIf="true"
+    mat-icon-button
+    class="example-icon favorite-icon header-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon class="header-icon-img">exit_to_app</mat-icon><span class="header-icon-name">Login</span>
+  </button>
+  <button
+    *ngIf="false"
+    mat-icon-button
+    class="example-icon favorite-icon header-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon class="header-icon-img">add</mat-icon><span class="header-icon-name">New board</span>
+  </button>
+  <button
+    *ngIf="false"
+    mat-icon-button
+    class="example-icon favorite-icon header-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon class="header-icon-img">edit</mat-icon><span class="header-icon-name">Edit profile</span>
+  </button>
+  <button
+    *ngIf="true"
+    mat-icon-button
+    class="example-icon favorite-icon header-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon class="header-icon-img">person_add</mat-icon><span class="header-icon-name">Sign up</span>
+  </button>
+  <button
+    *ngIf="false"
+    mat-icon-button
+    class="example-icon favorite-icon header-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon class="header-icon-img">exit_to_app</mat-icon><span class="header-icon-name">Log out</span>
+  </button>
+</mat-toolbar>
