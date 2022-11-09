@@ -1,9 +1,9 @@
 <mat-toolbar>
-  <span>My App</span>
+  <span>PMA</span>
   <span class="example-spacer"></span>
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle value="bold">EN</mat-button-toggle>
-    <mat-button-toggle value="italic">RU</mat-button-toggle>
+  <mat-button-toggle-group (change)="onValChange()" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="en">RU</mat-button-toggle>
+    <mat-button-toggle value="ru">EN</mat-button-toggle>
   </mat-button-toggle-group>
   <button
     *ngIf="true"
@@ -11,7 +11,8 @@
     class="example-icon favorite-icon header-icon"
     aria-label="Example icon-button with heart icon"
   >
-    <mat-icon class="header-icon-img">exit_to_app</mat-icon><span class="header-icon-name">Login</span>
+    <mat-icon class="header-icon-img">exit_to_app</mat-icon
+    ><span class="header-icon-name">{{ 'header.login' | translate }}</span>
   </button>
   <button
     *ngIf="false"
@@ -19,7 +20,8 @@
     class="example-icon favorite-icon header-icon"
     aria-label="Example icon-button with heart icon"
   >
-    <mat-icon class="header-icon-img">add</mat-icon><span class="header-icon-name">New board</span>
+    <mat-icon class="header-icon-img">add</mat-icon
+    ><span class="header-icon-name">{{ 'header.newboard' | translate }}</span>
   </button>
   <button
     *ngIf="false"
@@ -27,7 +29,8 @@
     class="example-icon favorite-icon header-icon"
     aria-label="Example icon-button with heart icon"
   >
-    <mat-icon class="header-icon-img">edit</mat-icon><span class="header-icon-name">Edit profile</span>
+    <mat-icon class="header-icon-img">edit</mat-icon
+    ><span class="header-icon-name">{{ 'header.editprofile' | translate }}</span>
   </button>
   <button
     *ngIf="true"
@@ -35,7 +38,8 @@
     class="example-icon favorite-icon header-icon"
     aria-label="Example icon-button with heart icon"
   >
-    <mat-icon class="header-icon-img">person_add</mat-icon><span class="header-icon-name">Sign up</span>
+    <mat-icon class="header-icon-img">person_add</mat-icon
+    ><span class="header-icon-name">{{ 'header.signup' | translate }}</span>
   </button>
   <button
     *ngIf="false"

@@ -20,5 +20,18 @@
       "repass": "Confirm password",
       "button": "Sign Up"
     }
+  },
+  "header": {
+    "login": "Login",
+    "newboard": "New board",
+    "editprofile": "Edit profile",
+    "signup": "Sign Up",
+    "logout": "Log out"
+  },
+  "welcome": {
+    "info-project": "It's a work management tool that empowers all team to plan, track and manage any type of work that flexes your team's needs."
+  },
+  "card-team": {
+    "title": "Our team"
   }
 }
