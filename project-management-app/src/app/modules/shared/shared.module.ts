@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { HeaderComponent } from './components';
-import { MaterialModule } from './material';
 import { TranslateModule } from '@ngx-translate/core';
+import { MaterialModule } from './material';
+import { ConfirmDeleteComponent, HeaderComponent, FooterComponent, NotFoundComponent } from './components';
 
 @NgModule({
-  declarations: [ConfirmDeleteComponent, NotFoundComponent, HeaderComponent],
+  declarations: [ConfirmDeleteComponent, NotFoundComponent, HeaderComponent, FooterComponent],
   imports: [CommonModule, MaterialModule, TranslateModule],
-  exports: [HeaderComponent, MaterialModule],
+  exports: [HeaderComponent, FooterComponent, MaterialModule],
 })
 export class SharedModule {}
