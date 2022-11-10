@@ -1,19 +1,10 @@
 <button mat-button>+{{ translate ? 'Create new border' : 'Создать новую доску' }}</button>
 <mat-list>
-  <mat-list-item>
-    <h2 class="border-title">borderTitle</h2>
-    <button mat-raised-button>Basic</button>
-  </mat-list-item>
-  <mat-list-item>
-    <h2 class="border-title">borderTitle</h2>
-    <button mat-raised-button>Basic</button>
-  </mat-list-item>
-  <mat-list-item>
-    <h2 class="border-title">borderTitle</h2>
-    <button mat-raised-button>Basic</button>
-  </mat-list-item>
-  <mat-list-item>
-    <h2 class="border-title">borderTitle</h2>
-    <button mat-raised-button>Basic</button>
+  <mat-list-item *ngFor="let border of borders">
+    <div class="border-item">
+      <h2 class="border-title">{{ border.title }}</h2>
+      <p>{{ border.discription }}</p>
+      <button mat-raised-button>{{ translate ? 'Delete' : 'Удалить' }}</button>
+    </div>
   </mat-list-item>
 </mat-list>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Border } from '../../models/models';
 import { TranslateService } from '../../services/translate.service';
+import { selectCard } from '../../state/selectors';
 
 @Component({
   selector: 'app-main-borders',
@@ -7,12 +10,18 @@ import { TranslateService } from '../../services/translate.service';
   styleUrls: ['./main-borders.component.scss'],
 })
 export class MainBordersComponent implements OnInit {
-  // borders = 10;
+  borders: Border[] = [];
   translate = true;
 
-  constructor(public translateService: TranslateService) {}
+  constructor(public translateService: TranslateService, private store: Store) {}
+
+  borders$ = this.store.select(selectCard);
 
   ngOnInit(): void {
     this.translateService.initTranslate$.subscribe((res) => (this.translate = res));
+
+    this.borders$.subscribe((res) => {
+      this.borders = res;
+    });
   }
 }

@@ -1,12 +1,15 @@
-<form class="add-borders">
+<form class="add-borders" [formGroup]="form" novalidate>
   <h2>Add Borders</h2>
   <mat-form-field appearance="fill">
     <mat-label>Input</mat-label>
-    <input matInput />
+    <input matInput formControlName="title" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="discription"></textarea>
   </mat-form-field>
-  <div class="buttons"></div>
+  <div class="buttons">
+    <button mat-button>{{ translate ? 'Cansel' : 'Отменить' }}</button>
+    <button mat-button (click)="onSubmit()">{{ translate ? 'Create' : 'Создайте' }}</button>
+  </div>
 </form>

@@ -2,11 +2,14 @@
   display: flex;
   width: 100%;
 }
+.main-borders {
+  width: 15%;
+}
 .main-space {
-  width: 100%;
+  width: 85%;
 }
 app-add-borders {
-  background-color: bisque;
+  background-color:burlywood;
   position: absolute;
   top: 30%;
   left: 30%;

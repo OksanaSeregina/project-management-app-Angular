@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MainHeaderComponent } from './main-component/main-header/main-header.component';
 import { MainBordersComponent } from './main-component/main-borders/main-borders.component';
@@ -12,6 +13,8 @@ import { MainComponentComponent } from './main-component/main-component.componen
 import { AddBordersComponent } from './main-component/main-borders/add-borders/add-borders.component';
 import { MainSpaceComponent } from './main-component/main-space/main-space.component';
 import { MainRoutingModule } from './main-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { addCardReducer } from './state/reducers';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { MainRoutingModule } from './main-routing.module';
     AddBordersComponent,
   ],
   imports: [
+    // StoreModule.forFeature({}, {}),
+    // StoreModule.forFeature({ 'borderState': addCardReducer }, {}),
     CommonModule,
     MatListModule,
     MatButtonModule,
@@ -29,6 +34,8 @@ import { MainRoutingModule } from './main-routing.module';
     MatIconModule,
     MatInputModule,
     MainRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [MainComponentComponent, MainSpaceComponent, MainBordersComponent],
 })
