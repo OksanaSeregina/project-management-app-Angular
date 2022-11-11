@@ -14,7 +14,8 @@ import { AddBordersComponent } from './main-component/main-borders/add-borders/a
 import { MainSpaceComponent } from './main-component/main-space/main-space.component';
 import { MainRoutingModule } from './main-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { addCardReducer } from './state/reducers';
+import { CardReducer, BORDER_FEATURE_NAME } from './state/reducers';
+import { BorderComponent } from './main-component/main-borders/border/border.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,10 @@ import { addCardReducer } from './state/reducers';
     MainBordersComponent,
     MainComponentComponent,
     AddBordersComponent,
+    BorderComponent,
   ],
   imports: [
-    // StoreModule.forFeature({}, {}),
-    // StoreModule.forFeature({ 'borderState': addCardReducer }, {}),
+    StoreModule.forFeature(BORDER_FEATURE_NAME, CardReducer),
     CommonModule,
     MatListModule,
     MatButtonModule,

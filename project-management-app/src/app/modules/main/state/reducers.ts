@@ -4,14 +4,12 @@ import * as CardActions from './actions';
 import { Border } from '../models/models';
 // import { BorderState } from './state';
 
+export const BORDER_FEATURE_NAME = 'borderState';
+
 export const initialState: Border[] = [];
 
-export const addCardReducer = createReducer(
+export const CardReducer = createReducer(
   initialState,
   on(CardActions.addBorder, (state, { cardBorder }) => [...state, cardBorder]),
-);
-
-export const RemoveCardReducer = createReducer(
-  initialState,
-  on(CardActions.removeBorder, (state, { cardId }) => state.filter((border) => border.id !== cardId)),
+  on(CardActions.removeBorder, (state, { titleBorder }) => state.filter((border) => border.title !== titleBorder)),
 );

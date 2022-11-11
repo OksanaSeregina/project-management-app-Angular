@@ -1,0 +1,22 @@
+.border {
+  background-color: chartreuse;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 15vh;
+  color: blue;
+  border-radius: 1rem;
+  margin-top: 1vh;
+  h2 {
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
+  button {
+    margin-left: auto;
+    margin-right: .5vw;
+  }
+}

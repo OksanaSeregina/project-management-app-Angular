@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { TranslateService } from '../../../services/translate.service';
-import { BorderService } from '../../../services/border.service';
+import { BorderAddService } from '../../../services/border.service';
 import * as UserAction from '../../../state/actions';
 import { Border } from '../../../models/models';
 import { Store } from '@ngrx/store';
@@ -15,8 +15,13 @@ import { Store } from '@ngrx/store';
 export class AddBordersComponent implements OnInit {
   form!: FormGroup;
   translate!: boolean;
+  addBorders!: boolean;
 
-  constructor(private store: Store, private borderservice: BorderService, private translateService: TranslateService) {
+  constructor(
+    private store: Store,
+    private borderservice: BorderAddService,
+    private translateService: TranslateService,
+  ) {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       discription: new FormControl('', [Validators.required]),
@@ -25,6 +30,7 @@ export class AddBordersComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateService.initTranslate$.subscribe((res) => (this.translate = res));
+    this.borderservice.initborder$.subscribe((res) => (this.addBorders = res));
   }
 
   onSubmit(): void {
@@ -34,5 +40,9 @@ export class AddBordersComponent implements OnInit {
     };
 
     this.store.dispatch(UserAction.addBorder({ cardBorder }));
+  }
+
+  onClick(): void {
+    this.borderservice.addBorder(false);
   }
 }

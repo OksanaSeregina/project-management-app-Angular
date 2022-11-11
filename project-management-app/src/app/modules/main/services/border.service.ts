@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Border } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BorderService {
-  private borderSubject = new BehaviorSubject<Border[]>([]);
+export class BorderAddService {
+  private borderSubject = new BehaviorSubject<boolean>(false);
 
-  initborder$: Observable<Border[]> = this.borderSubject.asObservable();
+  initborder$: Observable<boolean> = this.borderSubject.asObservable();
 
-  constructor() {}
-
-  translateByText(order: Border) {
-    // this.borderSubject.next(order);
+  addBorder(order: boolean): void {
+    this.borderSubject.next(order);
   }
 }
