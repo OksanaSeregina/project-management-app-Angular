@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslateNames } from '../../../../enums';
+import { StorageService } from '../../../../core';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +9,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public translateService: TranslateService) {}
+  constructor(public translate: TranslateService, private storage: StorageService) {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
   public onValChange(): void {
-    const currentLang = localStorage.getItem('lang');
-    const newLang = currentLang === 'en' ? 'ru' : 'en';
-    this.translateService.use(newLang);
-    localStorage.setItem('lang', newLang);
+    const currentLang = this.storage.get('lang');
+    const newLang = currentLang === TranslateNames.En ? TranslateNames.Ru : TranslateNames.En;
+    this.translate.use(newLang);
+    this.storage.set('lang', newLang);
   }
 }
