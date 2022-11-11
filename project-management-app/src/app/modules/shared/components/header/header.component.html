@@ -1,9 +1,14 @@
 <mat-toolbar>
   <span>PMA</span>
   <span class="example-spacer"></span>
-  <mat-button-toggle-group (change)="onValChange()" name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle value="en">RU</mat-button-toggle>
-    <mat-button-toggle value="ru">EN</mat-button-toggle>
+  <mat-button-toggle-group
+    name="fontStyle"
+    aria-label="Font Style"
+    [value]="language$ | async"
+    (change)="languageChange($event)"
+  >
+    <mat-button-toggle [value]="translateNames.En">EN</mat-button-toggle>
+    <mat-button-toggle [value]="translateNames.Ru">RU</mat-button-toggle>
   </mat-button-toggle-group>
   <button
     *ngIf="true"

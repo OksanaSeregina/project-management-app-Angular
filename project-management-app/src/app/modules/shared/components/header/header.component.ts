@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { CommonFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
-import { StorageService } from '../../../../core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  constructor(public translate: TranslateService, private storage: StorageService) {}
+  constructor(public translate: TranslateService, private commonFacade: CommonFacade) {}
 
-  public ngOnInit(): void {}
+  public translateNames = TranslateNames;
+  public language$: Observable<TranslateNames>;
 
-  public onValChange(): void {
-    const currentLang = this.storage.get('lang');
-    const newLang = currentLang === TranslateNames.En ? TranslateNames.Ru : TranslateNames.En;
-    this.translate.use(newLang);
-    this.storage.set('lang', newLang);
+  public ngOnInit(): void {
+    this.language$ = this.commonFacade.language$;
+  }
+
+  public languageChange(language: MatButtonToggleChange): void {
+    this.commonFacade.updateLanguage(language.value);
   }
 }

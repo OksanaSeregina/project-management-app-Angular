@@ -1,29 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateNames } from './enums/translate.enums';
-import { StorageService } from './core';
+import { Subscription } from 'rxjs';
+import { CommonFacade } from './core';
+import { TranslateNames } from './enums';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+
   title = 'project-management-app';
 
-  constructor(private translate: TranslateService, private storage: StorageService) {}
+  constructor(private commonFacade: CommonFacade, private translate: TranslateService) {
+    this.translate.addLangs([TranslateNames.En, TranslateNames.Ru]);
+  }
 
   public ngOnInit(): void {
-    this.translate.addLangs([TranslateNames.En, TranslateNames.Ru]);
+    this.subscription = this.commonFacade.language$.subscribe((language) => this.translate.use(language));
+    this.commonFacade.loadLanguage();
+  }
 
-    const langLocalStorage = this.storage.get('lang');
-    if (!langLocalStorage) {
-      const langBrowser = this.translate.getBrowserLang();
-      const defaultLang = langBrowser.match(/en|ru/) ? <TranslateNames>langBrowser : TranslateNames.En;
-      this.translate.use(defaultLang);
-      this.storage.set('lang', defaultLang);
-    } else {
-      this.translate.use(langLocalStorage);
-    }
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
