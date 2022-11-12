@@ -1,5 +1,4 @@
 export enum TranslateNames {
-  lang = 'lang',
-  en = 'en',
-  ru = 'ru',
+  En = 'en',
+  Ru = 'ru',
 }

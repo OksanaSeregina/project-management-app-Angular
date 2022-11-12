@@ -1,0 +1,15 @@
+.info-project {
+  display: flex;
+  align-items: center;
+  min-height: 400px;
+  background-image: url(../../../../../assets/images/kanban.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 50%;
+  padding: 0 16px;
+
+  &-title {
+    width: 50%;
+    margin: 0;
+  }
+}
