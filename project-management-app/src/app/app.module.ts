@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { SharedModule } from './modules';
-import { AppStoreModule, HttpLoaderFactory } from './core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpLoaderFactory } from './core/utils/http-loader.factory';
+
 
 @NgModule({
   declarations: [AppComponent],

@@ -1,0 +1,15 @@
+<form class="add-borders" [formGroup]="form" novalidate *ngIf="addBorders">
+  <h2>Add Borders</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput formControlName="discription"></textarea>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-button (click)="onClick()">{{ translate ? 'Cansel' : 'Отменить' }}</button>
+    <button mat-button (click)="onSubmit()" [disabled]="form.invalid">{{ translate ? 'Create' : 'Создайте' }}</button>
+  </div>
+</form>

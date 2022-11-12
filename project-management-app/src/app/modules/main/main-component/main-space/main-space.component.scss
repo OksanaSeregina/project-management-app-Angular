@@ -1,0 +1,53 @@
+.spaceMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.colomns {
+  display: flex;
+}
+
+.colomn {
+  display: flex;
+  flex-direction: column;
+}
+mat-panel-title {
+  background-color: burlywood;
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: cadetblue;
+  width: 332px;
+  p {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+  button {
+    border-radius: 50%;
+  }
+  mat-icon {
+    cursor: pointer;
+    visibility: hidden;
+  }
+}
+
+.title:hover {
+  mat-icon {
+    visibility: visible;
+  }
+}
+.button-add-colomn {
+  height: 3rem;
+}
+.task-input {
+  display: flex;
+}
+
