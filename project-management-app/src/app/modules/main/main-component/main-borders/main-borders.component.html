@@ -1,8 +1,0 @@
-<button mat-button
-  class="button-translate"
-  (click)="onClick()">
-  +{{ translate ? 'Create new border' : 'Создать новую доску' }}
-</button>
-<div class="borders">
-  <app-border class="border" *ngFor="let border of borders" [border]="border"></app-border>
-</div>
