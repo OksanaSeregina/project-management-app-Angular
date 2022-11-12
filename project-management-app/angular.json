@@ -148,7 +148,6 @@
   },
   "defaultProject": "project-management-app",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics",
-    "analytics": "64829b11-b888-45ab-afb4-549cdf50d462"
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }
