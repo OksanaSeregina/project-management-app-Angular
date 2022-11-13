@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  background-color: rgb(230, 223, 223);
+  font-size: 1.5rem;
+
+  .content-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+.link-github {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .link-github-footer {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.item-link-github {
+  margin-right: 20px;
+}
+
+.link-github-footer:hover .item-link-github {
+  color: blue;
+}
+
+.rslink-footer {
+  margin-right: 40px;
+}

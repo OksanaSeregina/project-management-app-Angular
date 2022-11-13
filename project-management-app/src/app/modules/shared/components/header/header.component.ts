@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HEADER_BUTTONS } from '../../../../constants';
 import { CommonFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
-import { HEADER_BUTTONS } from '../../constants';
 import { IHeaderButton } from './models';
 
 @Component({

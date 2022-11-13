@@ -1,5 +1,5 @@
-import { ICardTeam } from '../welcome';
-import { IHeaderButton } from './components';
+import { IHeaderButton } from './modules/shared';
+import { ICardTeam } from './modules/welcome/components';
 
 export const CARD_TEAM: ICardTeam[] = [
   {

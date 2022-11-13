@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CARD_TEAM } from '../../constants';
+import { CARD_TEAM } from '../../../../constants';
 
 @Component({
   selector: 'app-footer',

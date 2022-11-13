@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CARD_TEAM } from '../../../shared';
+import { CARD_TEAM } from '../../../../constants';
 
 @Component({
   selector: 'app-card-team',
