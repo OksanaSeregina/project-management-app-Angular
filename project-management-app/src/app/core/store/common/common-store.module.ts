@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { commonReducers } from './common.reducers';
+import { StoreModule } from '@ngrx/store';
 import { CommonEffects } from './common.effects';
 import { CommonFacade } from './common.facade';
+import { commonReducers } from './common.reducers';
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule, StoreModule.forFeature('common', commonReducers), EffectsModule.forFeature([CommonEffects])],
   providers: [CommonFacade],
 })

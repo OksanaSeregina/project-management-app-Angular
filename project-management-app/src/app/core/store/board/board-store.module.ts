@@ -7,7 +7,6 @@ import { BoardFacade } from './board.facade';
 import { boardReducers } from './board.reducers';
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule, StoreModule.forFeature('boards', boardReducers), EffectsModule.forFeature([BoardEffects])],
   providers: [BoardFacade],
 })

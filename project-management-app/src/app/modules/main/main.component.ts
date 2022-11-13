@@ -20,11 +20,6 @@ export class MainComponent implements OnInit {
     this.boards$ = this.boardFacade.boards$.pipe(map((boards: IBoard[]) => this.sort(boards)));
   }
 
-  public createBoard(): void {
-    const board: Omit<IBoard, 'id'> = { description: 'Test', title: 'Demo' }; // TODO: TBD Implement modal
-    this.boardFacade.createBoard(board);
-  }
-
   public deleteBoard(id: string): void {
     this.boardFacade.deleteBoard(id);
   }

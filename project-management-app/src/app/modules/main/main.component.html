@@ -1,8 +1,3 @@
-<button mat-icon-button class="button" (click)="createBoard()">
-  <mat-icon>add</mat-icon>
-  <span class="header-icon-name">{{ 'board.add_board' | translate }}</span>
-</button>
-
 <div class="grid-container">
   <app-simple-list
     *ngFor="let value of boards$ | async"

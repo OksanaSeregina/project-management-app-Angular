@@ -40,7 +40,7 @@ export const HEADER_BUTTONS: IHeaderButton[] = [
     isVisibleForUser: true,
     icon: 'add',
     value: 'newboard',
-    route: 'board',
+    route: '',
   },
   {
     isVisibleForUser: true,

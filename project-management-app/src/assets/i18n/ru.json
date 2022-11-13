@@ -35,7 +35,11 @@
     "title": "Наша команда"
   },
   "board": {
-    "add_board": "Добавить",
-    "delete_board": "Удалить"
+    "add_board": "Добавить новую доску",
+    "delete_board": "Удалить",
+    "add_board_success_message": "Доска успешно добавлена",
+    "add_board_fail_message": "Не удалось добавить доску",
+    "delete_board_success_message": "Доска успешно удалена",
+    "delete_board_fail_message": "Не удалось удалить доску"
   }
 }

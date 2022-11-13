@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../../environments/environment';
+import { BoardStoreModule } from './board';
 import { CommonStoreModule } from './common';
+import { NotificationStoreModule } from './notification/notification.module';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { CommonStoreModule } from './common';
     ),
     EffectsModule.forRoot([]),
     CommonStoreModule,
+    BoardStoreModule,
+    NotificationStoreModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
 })

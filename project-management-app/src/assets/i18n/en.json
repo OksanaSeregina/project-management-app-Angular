@@ -36,6 +36,10 @@
   },
   "board": {
     "add_board": "Add new board",
-    "delete_board": "Delete"
+    "delete_board": "Delete",
+    "add_board_success_message": "New board was successfully added",
+    "add_board_fail_message": "Can not add new board",
+    "delete_board_success_message": "The board was successfully deleted",
+    "delete_board_fail_message": "Can not delete the board"
   }
 }

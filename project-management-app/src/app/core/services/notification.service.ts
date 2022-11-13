@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationDialogComponent } from '../../modules';
+import { ConfirmationDialogComponent } from '../../modules/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class NotificationService {
    * this.notificationService.success("confirm oked");
    */
   public success(message: string): void {
-    this.openSnackBar(message, '', 'success-snackbar');
+    this.openSnackBar(message, '', 'success-snackbar', 100000);
   }
 
   /**
@@ -26,7 +26,7 @@ export class NotificationService {
    * this.notificationService.error("confirm canceled");
    */
   public error(message: string): void {
-    this.openSnackBar(message, '', 'error-snackbar');
+    this.openSnackBar(message, '', 'error-snackbar', 2000);
   }
 
   /**

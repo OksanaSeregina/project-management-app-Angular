@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HEADER_BUTTONS } from '../../../../constants';
-import { CommonFacade } from '../../../../core';
+import { BoardFacade, CommonFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
 import { IHeaderButton } from './models';
 
@@ -16,7 +16,12 @@ import { IHeaderButton } from './models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  constructor(public translate: TranslateService, private commonFacade: CommonFacade, private router: Router) {}
+  constructor(
+    public translate: TranslateService,
+    private commonFacade: CommonFacade,
+    private boardFacade: BoardFacade,
+    private router: Router,
+  ) {}
 
   public translateNames = TranslateNames;
   public language$: Observable<TranslateNames>;
@@ -40,6 +45,11 @@ export class HeaderComponent implements OnInit {
     const route = value.route;
     if (route) {
       this.router.navigate([route]);
+    } else {
+      switch (value.value) {
+        case 'newboard':
+          this.boardFacade.createBoard({ description: 'Test', title: 'Demo' }); // TODO: TBD Implement modal
+      }
     }
   }
 }
