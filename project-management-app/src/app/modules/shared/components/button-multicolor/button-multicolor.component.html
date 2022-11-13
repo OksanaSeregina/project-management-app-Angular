@@ -1,0 +1,6 @@
+<ng-container *ngFor="let button of buttons">
+  <button mat-icon-button class="btn-multicolor header-icon" (click)="onClick(button)">
+    <mat-icon class="header-icon-img">{{ button.icon }}</mat-icon
+    ><span class="header-icon-name">{{ 'header.' + button.value | translate }}</span>
+  </button>
+</ng-container>

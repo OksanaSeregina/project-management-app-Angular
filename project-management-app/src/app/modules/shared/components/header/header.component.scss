@@ -1,18 +1,31 @@
+@import '../../../../../styles/styles.scss';
+
+.header {
+  background: $gray;
+}
+
+.logo {
+  height: 60px;
+  width: 180px;
+  background-image: url(../../../../../assets/images/logo.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-size: contain;
+  filter: brightness(0) saturate(100%) invert(10%) sepia(50%) saturate(2024%) hue-rotate(100deg) brightness(99%)
+    contrast(104%);
+}
+
 .example-spacer {
   flex: 1 1 auto;
 }
 
-mat-button-toggle-group {
+.btn-toggle-group {
   margin-left: 12px;
-}
 
-.header-icon {
-  width: 120px;
-  margin-left: 40px;
-  cursor: pointer;
-
-  &-img,
-  &-name {
-    vertical-align: middle;
+  .btn-toggle {
+    background-color: $green;
+  }
+  .mat-button-toggle-checked {
+    background-color: $light-green;
   }
 }

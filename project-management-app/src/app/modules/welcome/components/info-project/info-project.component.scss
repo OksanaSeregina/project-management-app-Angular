@@ -1,3 +1,5 @@
+@import '../../../../../styles/styles.scss';
+
 .info-project {
   display: flex;
   align-items: center;
@@ -7,6 +9,7 @@
   background-position: right;
   background-size: 50%;
   padding: 0 16px;
+  color: $dusty-brown;
 
   &-title {
     width: 50%;

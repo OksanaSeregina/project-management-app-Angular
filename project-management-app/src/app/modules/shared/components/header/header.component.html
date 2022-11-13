@@ -1,57 +1,15 @@
-<mat-toolbar>
-  <span>PMA</span>
+<mat-toolbar class="header">
+  <div class="logo"></div>
   <span class="example-spacer"></span>
   <mat-button-toggle-group
     name="fontStyle"
     aria-label="Font Style"
     [value]="language$ | async"
     (change)="languageChange($event)"
+    class="btn-toggle-group"
   >
-    <mat-button-toggle [value]="translateNames.En">EN</mat-button-toggle>
-    <mat-button-toggle [value]="translateNames.Ru">RU</mat-button-toggle>
+    <mat-button-toggle [value]="translateNames.En" class="btn-toggle">EN</mat-button-toggle>
+    <mat-button-toggle [value]="translateNames.Ru" class="btn-toggle">RU</mat-button-toggle>
   </mat-button-toggle-group>
-  <button
-    *ngIf="true"
-    mat-icon-button
-    class="example-icon favorite-icon header-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon class="header-icon-img">exit_to_app</mat-icon
-    ><span class="header-icon-name">{{ 'header.login' | translate }}</span>
-  </button>
-  <button
-    *ngIf="false"
-    mat-icon-button
-    class="example-icon favorite-icon header-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon class="header-icon-img">add</mat-icon
-    ><span class="header-icon-name">{{ 'header.newboard' | translate }}</span>
-  </button>
-  <button
-    *ngIf="false"
-    mat-icon-button
-    class="example-icon favorite-icon header-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon class="header-icon-img">edit</mat-icon
-    ><span class="header-icon-name">{{ 'header.editprofile' | translate }}</span>
-  </button>
-  <button
-    *ngIf="true"
-    mat-icon-button
-    class="example-icon favorite-icon header-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon class="header-icon-img">person_add</mat-icon
-    ><span class="header-icon-name">{{ 'header.signup' | translate }}</span>
-  </button>
-  <button
-    *ngIf="false"
-    mat-icon-button
-    class="example-icon favorite-icon header-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon class="header-icon-img">exit_to_app</mat-icon><span class="header-icon-name">Log out</span>
-  </button>
+  <app-button-multicolor [buttons]="buttons$ | async" (navigate)="navigateToRoute($event)"></app-button-multicolor>
 </mat-toolbar>

@@ -1,4 +1,5 @@
 import { ICardTeam } from '../welcome';
+import { IHeaderButton } from './components';
 
 export const CARD_TEAM: ICardTeam[] = [
   {
@@ -24,5 +25,39 @@ export const CARD_TEAM: ICardTeam[] = [
     namePerson: 'Ivan Hubarau',
     donePerson:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id assumenda voluptatum pariatur accusamus consectetur. Error tenetur, velit vero corporis ex cum sed molestias fuga quidem libero temporibus voluptate dolore est?',
+  },
+];
+
+// TODO: Updates routes
+export const HEADER_BUTTONS: IHeaderButton[] = [
+  {
+    isVisibleForUser: false,
+    icon: 'exit_to_app',
+    value: 'login',
+    route: 'auth',
+  },
+  {
+    isVisibleForUser: true,
+    icon: 'add',
+    value: 'newboard',
+    route: 'board',
+  },
+  {
+    isVisibleForUser: true,
+    icon: 'edit',
+    value: 'editprofile',
+    route: 'user',
+  },
+  {
+    isVisibleForUser: false,
+    icon: 'person_add',
+    value: 'signup',
+    route: 'auth',
+  },
+  {
+    isVisibleForUser: true,
+    icon: 'exit_to_app',
+    value: 'logout',
+    route: 'welcome',
   },
 ];

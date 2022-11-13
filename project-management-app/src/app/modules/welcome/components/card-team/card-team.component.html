@@ -2,11 +2,11 @@
 <a *ngFor="let card of cardTeam" class="link-github-team" href="{{ card.hrefPerson }}" target="_blank">
   <mat-card class="card-team">
     <img class="card-team-img" mat-card-image src="{{ card.srcPerson }}" alt="Photo" />
-    <mat-card-title> {{ card.namePerson }} </mat-card-title>
+    <mat-card-title class="card-team-name"> {{ card.namePerson }} </mat-card-title>
     <mat-card-subtitle>
       <mark>{{ card.subTitlePerson }}</mark>
     </mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content class="card-team-content">
       <p>{{ card.donePerson }}</p>
     </mat-card-content>
   </mat-card>

@@ -1,9 +1,12 @@
+@import '../../../../../styles/styles.scss';
+
 :host {
   display: flex;
   align-items: center;
   height: 100px;
-  background-color: rgb(230, 223, 223);
+  background-color: $gray;
   font-size: 1.5rem;
+  padding: 0 16px;
 
   .content-footer {
     display: flex;
@@ -30,12 +33,34 @@
 
 .item-link-github {
   margin-right: 20px;
+  font-weight: bold;
 }
 
 .link-github-footer:hover .item-link-github {
-  color: blue;
+  color: #fff;
 }
 
 .rslink-footer {
   margin-right: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  .link-github {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .content-footer {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+  }
 }
