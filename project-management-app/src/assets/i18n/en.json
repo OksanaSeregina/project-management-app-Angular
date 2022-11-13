@@ -33,5 +33,9 @@
   },
   "card-team": {
     "title": "Our team"
+  },
+  "board": {
+    "add_board": "Add new board",
+    "delete_board": "Delete"
   }
 }

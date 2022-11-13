@@ -1,0 +1,12 @@
+<article class="list single-columns">
+  <header>
+    <h3>{{ value.title }}</h3>
+  </header>
+  <div>
+    <p>{{ value.description }}</p>
+  </div>
+  <button mat-icon-button class="button center" (click)="deleteBoard()">
+    <mat-icon>delete</mat-icon>
+    <span class="header-icon-name">{{ 'board.delete_board' | translate }}</span>
+  </button>
+</article>
