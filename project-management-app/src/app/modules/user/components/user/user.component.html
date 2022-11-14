@@ -1,0 +1,122 @@
+<form class="user__form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <h2 class="user__title">{{ 'components.user.title' | translate }}</h2>
+  <div class="user__input_wrapper">
+    <label for="user__input_name" class="user__text">{{ 'components.user.name' | translate }}</label>
+    <input
+      type="text"
+      class="user__input user__input_login"
+      id="user__input_name"
+      formControlName="name"
+      title="......."
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+      <small *ngIf="hasFieldError('name', 'required')">
+        {{ 'validators.name.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('name', 'required')">
+        {{ 'validators.name.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('name', 'minlength')">
+        {{ 'validators.name.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('name', 'onlyLetters') && !hasFieldError('name', 'required')">
+        {{ 'validators.name.onlyLetters' | translate }}
+      </small>
+    </div>
+  </div>
+
+  <div class="user__input_wrapper">
+    <label for="user__input_login" class="user__text">{{ 'components.user.login' | translate }}</label>
+    <input
+      type="text"
+      class="user__input user__input_login"
+      id="user__input_login"
+      formControlName="username"
+      title="......."
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+      <small *ngIf="hasFieldError('username', 'required')">
+        {{ 'validators.username.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('username', 'required')">
+        {{ 'validators.username.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('username', 'minlength')">
+        {{ 'validators.username.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('username', 'onlyLettersAndNumbers') && !hasFieldError('username', 'required')">
+        {{ 'validators.username.lettersOrNumbers' | translate }}
+      </small>
+    </div>
+  </div>
+
+  <div class="user__input_wrapper">
+    <label for="user__input_password" class="user__text">{{ 'components.login.pass' | translate }}</label>
+    <input
+      type="password"
+      class="user__input user__input_password"
+      id="user__input_password"
+      formControlName="password"
+      placeholder="*******"
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+      <small *ngIf="hasFieldError('password', 'required')">
+        {{ 'validators.pass.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('password', 'required')">
+        {{ 'validators.pass.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('password', 'minlength')">
+        {{ 'validators.pass.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('password', 'isLettersAndNumbers') && !hasFieldError('password', 'required')">
+        {{ 'validators.pass.lettersAndNumbers' | translate }}
+      </small>
+    </div>
+  </div>
+
+  <div class="user__input_wrapper">
+    <label for="user__input_repass" class="user__text">{{ 'components.user.repass' | translate }}</label>
+    <input
+      type="password"
+      class="user__input user__input_password"
+      id="user__input_repass"
+      formControlName="repass"
+      placeholder="*******"
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="userForm.get('repass')?.invalid && userForm.get('repass')?.touched">
+      <small *ngIf="hasFieldError('repass', 'required')">
+        {{ 'validators.pass.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('repass', 'required')">
+        {{ 'validators.pass.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('repass', 'minlength')">
+        {{ 'validators.pass.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('repass', 'isLettersAndNumbers') && !hasFieldError('repass', 'required')">
+        {{ 'validators.pass.lettersAndNumbers' | translate }}
+      </small>
+    </div>
+
+    <div class="input__explainer" *ngIf="userForm.errors?.confirmedPass">
+      <small> {{ 'validators.pass.confirmed' | translate }} </small>
+    </div>
+  </div>
+  <div class="user__button-wrapper">
+    <button class="user__button" type="submit" [disabled]="userForm.invalid">
+      {{ 'components.user.button' | translate }}
+    </button>
+    <button class="user__button" (click)="removeUser()">
+      {{ 'components.user.buttonDelete' | translate }}
+    </button>
+  </div>
+  <div class="user__button-wrapper">
+    <button class="user__button" (click)="getAllUser()">GET All user</button>
+    <button class="user__button" (click)="getUser()">GET Current user</button>
+  </div>
+</form>
