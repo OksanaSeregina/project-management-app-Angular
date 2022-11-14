@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CommonFacade } from './core';
 import { TranslateNames } from './enums';
+import { SpinnerService } from './modules/shared';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   title = 'project-management-app';
 
-  constructor(private commonFacade: CommonFacade, private translate: TranslateService) {
+  constructor(
+    private commonFacade: CommonFacade,
+    private translate: TranslateService,
+    public spinnerService: SpinnerService,
+  ) {
     this.translate.addLangs([TranslateNames.En, TranslateNames.Ru]);
   }
 
