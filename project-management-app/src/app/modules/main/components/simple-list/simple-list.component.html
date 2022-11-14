@@ -3,7 +3,7 @@
     <h3>{{ value.title }}</h3>
   </header>
   <div>
-    <p>{{ value.description }}</p>
+    <p>{{ value.description | truncate: 300 }}</p>
   </div>
   <button mat-icon-button class="button center" (click)="deleteBoard()">
     <mat-icon>delete</mat-icon>

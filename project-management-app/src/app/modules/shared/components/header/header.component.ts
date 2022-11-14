@@ -1,3 +1,4 @@
+import { isLoweredSymbol } from '@angular/compiler';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Router } from '@angular/router';
@@ -46,9 +47,10 @@ export class HeaderComponent implements OnInit {
     if (route) {
       this.router.navigate([route]);
     } else {
+      const description = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
       switch (value.value) {
         case 'newboard':
-          this.boardFacade.createBoard({ description: 'Test', title: 'Demo' }); // TODO: TBD Implement modal
+          this.boardFacade.createBoard({ description, title: 'Test' }); // TODO: TBD Implement modal
       }
     }
   }

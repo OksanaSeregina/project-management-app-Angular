@@ -10,6 +10,7 @@ import {
   SpinnerModule,
 } from './components';
 import { MaterialModule } from './material';
+import { PipesModule } from './pipes';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { MaterialModule } from './material';
     FooterComponent,
     ButtonMulticolorComponent,
   ],
-  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule.forRoot()],
-  exports: [HeaderComponent, FooterComponent, ConfirmationDialogComponent, MaterialModule, SpinnerModule],
+  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule.forRoot(), PipesModule],
+  exports: [HeaderComponent, FooterComponent, ConfirmationDialogComponent, MaterialModule, SpinnerModule, PipesModule],
 })
 export class SharedModule {}
