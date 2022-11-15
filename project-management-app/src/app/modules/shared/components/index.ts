@@ -4,3 +4,4 @@ export * from './header';
 export * from './not-found';
 export * from './button-multicolor';
 export * from './spinner';
+export * from './board-modal';

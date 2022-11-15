@@ -1,13 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  ButtonMulticolorComponent,
-  ConfirmationDialogComponent,
-  FooterComponent,
-  HeaderComponent,
-  NotFoundComponent,
-  SpinnerModule,
+  BoardModalComponent, ButtonMulticolorComponent, ConfirmationDialogComponent, FooterComponent, HeaderComponent,
+  NotFoundComponent, SpinnerModule,
 } from './components';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';
@@ -19,8 +16,17 @@ import { PipesModule } from './pipes';
     HeaderComponent,
     FooterComponent,
     ButtonMulticolorComponent,
+    BoardModalComponent,
   ],
-  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule.forRoot(), PipesModule],
-  exports: [HeaderComponent, FooterComponent, ConfirmationDialogComponent, MaterialModule, SpinnerModule, PipesModule],
+  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule.forRoot(), PipesModule, FormsModule],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    ConfirmationDialogComponent,
+    MaterialModule,
+    SpinnerModule,
+    PipesModule,
+    BoardModalComponent,
+  ],
 })
 export class SharedModule {}
