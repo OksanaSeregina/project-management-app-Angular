@@ -1,0 +1,60 @@
+<form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <h2 class="login__title">{{ 'components.login.title' | translate }}</h2>
+  <div class="login__input_wrapper">
+    <label for="login__input_login" class="login__text">{{ 'components.login.login' | translate }}</label>
+    <input
+      type="text"
+      class="login__input login__input_login"
+      id="login__input_login"
+      formControlName="username"
+      placeholder="you name..."
+      title="......."
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+      <small *ngIf="hasFieldError('username', 'required')">
+        {{ 'validators.username.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('username', 'required')">
+        {{ 'validators.username.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('username', 'minlength')">
+        {{ 'validators.username.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('username', 'onlyLettersAndNumbers') && !hasFieldError('username', 'required')">
+        {{ 'validators.username.lettersOrNumbers' | translate }}
+      </small>
+    </div>
+  </div>
+  <div class="login__input_wrapper">
+    <label for="login__input_password" class="login__text">{{ 'components.login.pass' | translate }}</label>
+    <input
+      type="password"
+      class="login__input login__input_password"
+      id="login__input_password"
+      formControlName="password"
+      placeholder="*******"
+      autocomplete="off"
+    />
+    <div class="input__explainer" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <small *ngIf="hasFieldError('password', 'required')">
+        {{ 'validators.pass.required' | translate }}
+      </small>
+      <small *ngIf="!hasFieldError('password', 'required')">
+        {{ 'validators.pass.common' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('password', 'minlength')">
+        {{ 'validators.pass.minLength' | translate }}
+      </small>
+      <small *ngIf="hasFieldError('password', 'isLettersAndNumbers') && !hasFieldError('password', 'required')">
+        {{ 'validators.pass.lettersAndNumbers' | translate }}
+      </small>
+    </div>
+  </div>
+  <div class="login__button-wrapper">
+    <button class="login__button" type="submit" [disabled]="loginForm.invalid">
+      {{ 'components.login.button' | translate }}
+    </button>
+  </div>
+  <a [routerLink]="['/auth/signup']" class="login__link">{{ 'components.login.signup' | translate }}</a>
+</form>

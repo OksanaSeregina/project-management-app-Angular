@@ -1,0 +1,41 @@
+@import '_styles';
+
+small {
+  color: rgb(184, 6, 6);
+}
+
+.user__form {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: .8em;
+  background-color: $gray;
+  padding: 1.2rem 0;
+  border-radius: 5px;
+}
+
+.user__title {
+  text-align: center;
+}
+
+.user__input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+  width: 80%;
+}
+
+.user__input {
+  line-height: 1.2;
+  padding: 0.3em 0.5em;
+  border-radius: 0.4em;
+  box-shadow: 0 0 2vw 0.4vh rgba(255, 255, 230, 0.06);
+}
+
+.user__button-wrapper {
+  display: flex;
+  gap: 2em;
+  padding: 0.3em 0.8em;
+}

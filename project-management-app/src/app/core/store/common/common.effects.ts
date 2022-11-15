@@ -25,7 +25,7 @@ export class CommonEffects {
       this.actions$.pipe(
         ofType(CommonActions.loadLanguage),
         switchMap(() => {
-          let lang = this.storage.get('lang');
+          let lang = this.storage.get('lang') as TranslateNames;
           if (!lang) {
             const browserLang = this.translate.getBrowserLang();
             lang = browserLang.match(/en|ru/) ? <TranslateNames>browserLang : TranslateNames.En;

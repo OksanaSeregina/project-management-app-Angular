@@ -19,6 +19,36 @@
       "pass": "Password",
       "repass": "Confirm password",
       "button": "Sign Up"
+    },
+    "user": {
+      "title": "Edit profile",
+      "name": "Name",
+      "login": "Login",
+      "pass": "Password",
+      "repass": "Confirm password",
+      "button": "Update",
+      "buttonDelete": "Delete"
+    }
+  },
+  "validators": {
+    "username": {
+      "required": "Please, enter login",
+      "common": "Your login doesn't match the rules ",
+      "minLength": "at least 2 characters",
+      "lettersOrNumbers": "only letters or numbers"
+    },
+    "pass": {
+      "required": "Please, enter password",
+      "common": "Your password is not strong enough ",
+      "minLength": "at least 4 characters",
+      "lettersAndNumbers": "and letters, and numbers",
+      "confirmed": "Password not the same"
+    },
+    "name": {
+      "required": "Please, enter your name",
+      "common": "Your name doesn't match the rules ",
+      "minLength": "at least 2 characters",
+      "onlyLetters": "only letters"
     }
   },
   "header": {

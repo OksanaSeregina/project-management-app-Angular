@@ -5,4 +5,5 @@ import { TranslateNames } from '../../enums';
  */
 export interface IStorage {
   lang: TranslateNames;
+  token: string;
 }
