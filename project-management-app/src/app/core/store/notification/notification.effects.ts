@@ -37,7 +37,7 @@ export class NotificationEffects {
     this.showFailToast$ = createEffect(
       () =>
         this.actions$.pipe(
-          ofType(NotificationActions.showSuccessToast),
+          ofType(NotificationActions.showFailToast),
           map(({ message }) => {
             this.notificationService.error(this.translateService.instant(message));
           }),

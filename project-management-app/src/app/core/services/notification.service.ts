@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationDialogComponent } from '../../modules/shared';
+import { ConfirmationDialogComponent } from '../../modules';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class NotificationService {
    * this.notificationService.success("confirm oked");
    */
   public success(message: string): void {
-    this.openSnackBar(message, '', 'success-snackbar', 100000);
+    this.openSnackBar(message, '', 'success-snackbar', 2000);
   }
 
   /**
@@ -53,8 +53,8 @@ export class NotificationService {
     okCallback: () => void,
     title = 'Are you sure?',
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    cancelCallback: () => any = () => {},
-  ) {
+    cancelCallback: () => unknown = () => {},
+  ): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
       data: { message: message, title: title },
@@ -77,7 +77,7 @@ export class NotificationService {
    * @param className Optional extra css class to apply
    * @param duration Optional number of SECONDS to display the notification for
    */
-  openSnackBar(message: string, action: string, className = '', duration = 1000) {
+  openSnackBar(message: string, action: string, className = '', duration = 1000): void {
     this.snackBar.open(message, action, {
       duration: duration,
       panelClass: [className],
