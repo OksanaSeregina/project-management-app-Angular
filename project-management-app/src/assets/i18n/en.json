@@ -71,5 +71,12 @@
     "add_board_fail_message": "Can not add new board",
     "delete_board_success_message": "The board was successfully deleted",
     "delete_board_fail_message": "Can not delete the board"
+  },
+  "board-modal": {
+    "title": "Board name",
+    "description": "Description",
+    "cancel": "Cancel",
+    "create": "Create"
+
   }
 }

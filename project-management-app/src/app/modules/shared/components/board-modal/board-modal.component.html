@@ -1,0 +1,16 @@
+<form class="board-modal" [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'board-modal.title' | translate }}</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'board-modal.description' | translate }}</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'board-modal.cancel' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="onYesClick()" [disabled]="form.invalid">
+      {{ 'board-modal.create' | translate }}
+    </button>
+  </div>
+</form>

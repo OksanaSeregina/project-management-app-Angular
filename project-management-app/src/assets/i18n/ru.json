@@ -71,5 +71,11 @@
     "add_board_fail_message": "Не удалось добавить доску",
     "delete_board_success_message": "Доска успешно удалена",
     "delete_board_fail_message": "Не удалось удалить доску"
+  },
+  "board-modal": {
+    "title": "Название доски",
+    "description": "Описание",
+    "cancel": "Отменить",
+    "create": "Создать"
   }
 }
