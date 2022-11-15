@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { isLettersAndNumbersValidator, onlyLettersAndNumbersValidator, UserAction, UserState } from 'src/app/core';
-
+import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
+import { UserState } from '../../../../core/store/user/user.state';
+import * as UserAction from '../../../../core/store/user/user.actions';
+import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
 import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants/login.constant';
 import { AuthService } from '../../services';
 
@@ -14,7 +16,7 @@ import { AuthService } from '../../services';
 export class LoginComponent implements OnInit {
   constructor(protected authService: AuthService, private store: Store<UserState>) {}
 
-  public loginForm!: FormGroup;
+  public loginForm: FormGroup;
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
 import { HTTP_CONFIG, HTTP_OPTIONS } from '../../../constants/http.constant';
-import { StorageService, UserResp, UserSigninReq, UserSignupReq, UserState, UserToken } from 'src/app/core';
+import { UserResp, UserSignupReq, UserSigninReq, UserToken } from '../../../core/models/user.model';
+import { UserState } from '../../../core/store/user/user.state';
+import { StorageService } from '../../../core/services/storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,6 @@ export class AuthService {
       login: req.login,
       password: req.password,
     });
-
     return this.http.post<UserToken>(url, body, HTTP_OPTIONS);
   }
 

@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants/login.constant';
-import {
-  confirmedPassValidator,
-  isLettersAndNumbersValidator,
-  onlyLettersAndNumbersValidator,
-  onlyLettersValidator,
-  UserAction,
-  UserState,
-} from 'src/app/core';
+import { onlyLettersValidator } from '../../../../core/validators/only-letters.validator';
+import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
+import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
+import { confirmedPassValidator } from '../../../../core/validators/confirmed-pass.validator';
+import { UserState } from '../../../../core/store/user/user.state';
+import * as UserAction from '../../../../core/store/user/user.actions';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +15,7 @@ import {
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  public signupForm!: FormGroup;
+  public signupForm: FormGroup;
 
   constructor(private store: Store<UserState>) {}
 
@@ -55,7 +52,6 @@ export class SignupComponent implements OnInit {
         password: password,
       };
       this.store.dispatch(UserAction.signup({ userReq }));
-
       this.signupForm.reset();
     }
   }

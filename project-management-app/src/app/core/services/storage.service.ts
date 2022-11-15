@@ -26,7 +26,7 @@ export class StorageService {
   }
 
   public remove(key: keyof IStorage): void {
-    localStorage.setItem(key, '');
+    localStorage.removeItem(key);
   }
 
   private getStorage(): IStorage {

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {
-  confirmedPassValidator,
-  isLettersAndNumbersValidator,
-  onlyLettersAndNumbersValidator,
-  onlyLettersValidator,
-  UserAction,
-  UsersAction,
-  UserState,
-} from 'src/app/core';
+import { onlyLettersValidator } from '../../../../core/validators/only-letters.validator';
+import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
+import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
+import { confirmedPassValidator } from '../../../../core/validators/confirmed-pass.validator';
+import { UserState } from '../../../../core/store/user/user.state';
+import * as UserAction from '../../../../core/store/user/user.actions';
+import * as UsersAction from '../../../../core/store/users/users.actions';
 import { TokenService } from 'src/app/core/services/token.service';
 
 export const MIN_LENGTH_LOGIN = 2;
@@ -21,7 +19,7 @@ export const MIN_LENGTH_PASSWORD = 4;
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  public userForm!: FormGroup;
+  public userForm: FormGroup;
 
   constructor(private store: Store<UserState>, private tokenService: TokenService) {}
 
@@ -58,7 +56,6 @@ export class UserComponent implements OnInit {
         password: password,
       };
       this.store.dispatch(UserAction.update({ userReq }));
-
       this.userForm.reset();
     }
   }

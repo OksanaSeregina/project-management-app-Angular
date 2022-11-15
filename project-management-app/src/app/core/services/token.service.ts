@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { DecodedToken } from '../models';
 import { StorageService } from './storage.service';
 

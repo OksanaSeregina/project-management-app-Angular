@@ -4,13 +4,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
-
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
-
+import { AuthService } from '../../../modules/auth/services/auth.service';
 import { selectUser } from './user.selectors';
 import * as UserAction from './user.actions';
 import { UserState } from './user.state';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { UserService } from '../../../modules/user/services/user.service';
 import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../../models';
 import { TokenService } from '../../services/token.service';
 import { NotificationActions } from '../notification';
@@ -33,17 +31,17 @@ export class UserEffects {
         return this.authService.signin(userReq).pipe(
           tap((token: UserToken) => {
             this.authService.setTokenToStorage(token.token);
+            this.router.navigate(['main']);
           }),
-          tap(() => this.router.navigate(['main'])),
-
           map((token: UserToken) => {
             return UserAction.loginSuccess({ token });
           }),
-
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.loginFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
@@ -55,15 +53,17 @@ export class UserEffects {
       ofType(UserAction.LOGOUT_USER),
       tap(() => {
         this.authService.removeFromStorage();
+        this.router.navigate(['welcome']);
       }),
-      tap(() => this.router.navigate(['welcome'])),
       map(() => {
         return UserAction.logoutSuccess();
       }),
       catchError((err) => {
         const fail = err.message;
-        NotificationActions.showFailToast({ message: fail });
-        return of(UserAction.logoutFail({ fail }));
+        return of(
+          NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+          UserAction.loadFail({ fail }),
+        );
       }),
     );
   });
@@ -74,15 +74,15 @@ export class UserEffects {
       switchMap(({ userReq }: { userReq: UserSignupReq }) => {
         return this.authService.signup(userReq).pipe(
           tap(() => this.router.navigate(['main'])),
-
           map((userResp: UserResp) => {
             return UserAction.signupSuccess({ userResp });
           }),
-
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.signupFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
@@ -104,17 +104,17 @@ export class UserEffects {
         return this.authService.signin(userReq).pipe(
           tap((token) => {
             this.authService.setTokenToStorage(token.token);
+            this.router.navigate(['main']);
           }),
-          tap(() => this.router.navigate(['main'])),
-
           map((token) => {
             return UserAction.loginSuccess({ token });
           }),
-
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.loginFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
@@ -132,20 +132,19 @@ export class UserEffects {
         }
         return this.userService.update(userReq, id).pipe(
           tap(() => this.router.navigate(['main'])),
-
           /**
            * Check the feature
            */
           tap((userResp: UserResp) => console.log('Update that user: ', userResp)),
-
           map((userResp: UserResp) => {
             return UserAction.updateSuccess({ userResp });
           }),
-
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.updateFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
@@ -158,23 +157,23 @@ export class UserEffects {
       switchMap(() => {
         const id = this.tokenService.getDataByToken()?.id as string;
         return this.userService.remove(id).pipe(
-          tap(() => this.router.navigate(['welcome'])),
           tap(() => {
             this.authService.removeFromStorage();
+            this.router.navigate(['welcome']);
           }),
-
           /**
            * Check the feature
            */
           tap((userResp: UserResp) => console.log('Remove that user: ', userResp)),
-
           map((userResp: UserResp) => {
             return UserAction.removeSuccess({ userResp });
           }),
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.removeFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
@@ -186,20 +185,20 @@ export class UserEffects {
       ofType(UserAction.LOAD_USER),
       switchMap(() => {
         const id = this.tokenService.getDataByToken()?.id as string;
-        return this.userService.loadUser(id).pipe(
+        return this.userService.loadUser('id').pipe(
           /**
            * Check the feature
            */
           tap((userResp: UserResp) => console.log('Current user: ', userResp)),
-
           map((userResp: UserResp) => {
             return UserAction.loadSuccess({ userResp });
           }),
-
           catchError((err) => {
             const fail = err.message;
-            NotificationActions.showFailToast({ message: fail });
-            return of(UserAction.loadFail({ fail }));
+            return of(
+              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              UserAction.loadFail({ fail }),
+            );
           }),
         );
       }),
