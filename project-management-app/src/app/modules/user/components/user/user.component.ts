@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { onlyLettersValidator } from '../../../../core/validators/only-letters.validator';
-import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
-import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
-import { confirmedPassValidator } from '../../../../core/validators/confirmed-pass.validator';
-import { UserState } from '../../../../core/store/user/user.state';
-import * as UserAction from '../../../../core/store/user/user.actions';
-import * as UsersAction from '../../../../core/store/users/users.actions';
+import {
+  onlyLettersValidator,
+  isLettersAndNumbersValidator,
+  onlyLettersAndNumbersValidator,
+  confirmedPassValidator,
+  UserFacade,
+  UsersFacade,
+} from '../../../../core';
 import { TokenService } from 'src/app/core/services/token.service';
 
 export const MIN_LENGTH_LOGIN = 2;
@@ -21,7 +21,7 @@ export const MIN_LENGTH_PASSWORD = 4;
 export class UserComponent implements OnInit {
   public userForm: FormGroup;
 
-  constructor(private store: Store<UserState>, private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService, private usersFacade: UsersFacade, private userFacade: UserFacade) {}
 
   ngOnInit() {
     this.userForm = new FormGroup(
@@ -55,24 +55,22 @@ export class UserComponent implements OnInit {
         login: username,
         password: password,
       };
-      this.store.dispatch(UserAction.update({ userReq }));
+      this.userFacade.update({ userReq });
       this.userForm.reset();
     }
   }
 
   public removeUser(): void {
     const userId = this.tokenService.getDataByToken()?.id as string;
-    this.store.dispatch(UserAction.remove({ userId }));
+    this.userFacade.remove({ userId });
   }
 
-  public getAllUser(): void {
-    const userId = this.tokenService.getDataByToken()?.id as string;
-    this.store.dispatch(UsersAction.load());
+  public loadUser(): void {
+    this.userFacade.load();
   }
 
-  public getUser(): void {
-    const userId = this.tokenService.getDataByToken()?.id as string;
-    this.store.dispatch(UserAction.load({ userId }));
+  public loadUsers(): void {
+    this.usersFacade.load();
   }
 
   public hasFieldError(field: string, errorType: string): boolean {

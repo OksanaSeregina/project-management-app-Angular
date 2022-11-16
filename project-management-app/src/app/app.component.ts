@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { CommonFacade } from './core';
+import { CommonFacade, UserFacade } from './core';
 import { TranslateNames } from './enums';
 import { SpinnerService } from './modules/shared';
 
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private commonFacade: CommonFacade,
+    private userFacade: UserFacade,
     private translate: TranslateService,
     public spinnerService: SpinnerService,
   ) {
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscription = this.commonFacade.language$.subscribe((language) => this.translate.use(language));
     this.commonFacade.loadLanguage();
+    this.userFacade.load();
   }
 
   public ngOnDestroy(): void {

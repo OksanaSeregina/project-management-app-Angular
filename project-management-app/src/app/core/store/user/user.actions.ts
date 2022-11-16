@@ -41,7 +41,7 @@ export const remove = createAction(REMOVE_USER, props<{ userId: string }>());
 export const removeSuccess = createAction(REMOVE_USER_SUCCESS, props<{ userResp: UserResp }>());
 export const removeFail = createAction(REMOVE_USER_FAIL, props<{ fail: string }>());
 
-export const load = createAction(LOAD_USER, props<{ userId: string }>());
+export const load = createAction(LOAD_USER);
 export const loadSuccess = createAction(LOAD_USER_SUCCESS, props<{ userResp: UserResp }>());
 export const loadFail = createAction(LOAD_USER_FAIL, props<{ fail: string }>());
 
