@@ -33,6 +33,6 @@ export class MainComponent implements OnInit {
   }
 
   private sort(boards: IBoard[]): IBoard[] {
-    return [...boards].sort((a, b) => (<string>a.id).localeCompare(<string>b.id, undefined, { numeric: false }));
+    return [...boards].sort((a, b) => (<string>a._id).localeCompare(<string>b._id, undefined, { numeric: false }));
   }
 }

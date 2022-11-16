@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
-import { BoardsService } from '../../../modules/board';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { BoardsService, IBoard } from '../../../modules/board';
 import { NotificationActions } from '../notification';
+import { UserFacade } from '../user';
 import * as BoardActions from './board.actions';
 
 /**
@@ -18,7 +19,7 @@ export class BoardEffects {
   public createBoard$: Observable<Action>;
   public deleteBoard$: Observable<Action>;
 
-  constructor(actions$: Actions, private boardService: BoardsService) {
+  constructor(actions$: Actions, private boardService: BoardsService, private userFacade: UserFacade) {
     this.actions$ = actions$;
 
     this.loadBoards$ = createEffect(() =>
@@ -34,12 +35,18 @@ export class BoardEffects {
       this.actions$.pipe(
         ofType(BoardActions.createBoard),
         switchMap((payload) => {
-          return this.boardService.create(payload.board).pipe(
-            switchMap((board) => [
-              BoardActions.createBoardSuccess({ board }),
-              NotificationActions.showSuccessToast({ message: 'board.add_board_success_message' }),
-            ]),
-            catchError(() => of(NotificationActions.showFailToast({ message: 'board.add_board_fail_message' }))),
+          return userFacade.user$.pipe(
+            map((user) => user?._id),
+            switchMap((_id) => {
+              const board = { ...payload.board, owner: _id };
+              return this.boardService.create(<IBoard>board).pipe(
+                switchMap((board) => [
+                  BoardActions.createBoardSuccess({ board }),
+                  NotificationActions.showSuccessToast({ message: 'board.add_board_success_message' }),
+                ]),
+                catchError(() => of(NotificationActions.showFailToast({ message: 'board.add_board_fail_message' }))),
+              );
+            }),
           );
         }),
       ),
@@ -50,8 +57,8 @@ export class BoardEffects {
         ofType(BoardActions.deleteBoard),
         switchMap((payload) => {
           return this.boardService.delete(payload.id).pipe(
-            switchMap((id) => [
-              BoardActions.deleteBoardSuccess({ id }),
+            switchMap((board) => [
+              BoardActions.deleteBoardSuccess({ id: board._id }),
               NotificationActions.showSuccessToast({ message: 'board.delete_board_success_message' }),
             ]),
             catchError(() => of(NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }))),

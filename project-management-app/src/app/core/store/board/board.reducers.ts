@@ -11,7 +11,7 @@ const reducer: ActionReducer<BoardState> = createReducer(
     return { ...state, boards: [...state.boards, board] };
   }),
   on(BoardActions.deleteBoardSuccess, (state, { id }) => {
-    return { ...state, boards: state.boards.filter((board) => board.id !== id) };
+    return { ...state, boards: state.boards.filter((board) => board._id !== id) };
   }),
 );
 

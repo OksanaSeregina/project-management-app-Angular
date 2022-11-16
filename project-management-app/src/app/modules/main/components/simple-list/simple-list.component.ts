@@ -13,6 +13,6 @@ export class SimpleListComponent {
   @Output() public delete = new EventEmitter<string>();
 
   public deleteBoard(): void {
-    this.delete.emit(this.value.id);
+    this.delete.emit(this.value._id);
   }
 }

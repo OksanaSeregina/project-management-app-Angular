@@ -24,7 +24,7 @@ export class BoardFacade {
     this.store.dispatch(BoardActions.loadBoards());
   }
 
-  public createBoard(board: Omit<IBoard, 'id'>): void {
+  public createBoard(board: Omit<IBoard, '_id'>): void {
     this.store.dispatch(BoardActions.createBoard({ board }));
   }
 

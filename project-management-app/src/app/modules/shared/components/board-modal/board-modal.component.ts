@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
-import { BoardActions } from '../../../../core';
+import { BoardFacade } from '../../../../core';
 import { IBoard } from '../../../../modules/board';
 
 @Component({
@@ -13,7 +12,7 @@ import { IBoard } from '../../../../modules/board';
 export class BoardModalComponent {
   form: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<BoardModalComponent>, private store: Store) {
+  constructor(private dialogRef: MatDialogRef<BoardModalComponent>, private boardFacade: BoardFacade) {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -26,10 +25,11 @@ export class BoardModalComponent {
 
   onYesClick(): void {
     this.dialogRef.close(true);
-    const board: IBoard = {
+    const board: Omit<IBoard, '_id'> = {
       title: this.form.value.title,
-      description: this.form.value.description,
+      owner: '',
+      users: [],
     };
-    this.store.dispatch(BoardActions.createBoard({ board }));
+    this.boardFacade.createBoard(board);
   }
 }
