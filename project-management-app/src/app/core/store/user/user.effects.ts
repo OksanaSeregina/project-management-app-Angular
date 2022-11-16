@@ -12,6 +12,7 @@ import { UserService } from '../../../modules/user/services/user.service';
 import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../../models';
 import { TokenService } from '../../services/token.service';
 import { NotificationActions } from '../notification';
+import { StorageService } from '../../services';
 
 @Injectable()
 export class UserEffects {
@@ -22,6 +23,7 @@ export class UserEffects {
     private authService: AuthService,
     private userService: UserService,
     private tokenService: TokenService,
+    private storageService: StorageService,
   ) {}
 
   login$ = createEffect(() => {
@@ -30,7 +32,7 @@ export class UserEffects {
       switchMap(({ userReq }: { userReq: UserSigninReq }) => {
         return this.authService.signin(userReq).pipe(
           tap((token: UserToken) => {
-            this.authService.setTokenToStorage(token.token);
+            this.storageService.set('token', token.token);
             this.router.navigate(['main']);
           }),
           map((token: UserToken) => {
@@ -51,12 +53,10 @@ export class UserEffects {
   logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserAction.LOGOUT_USER),
-      tap(() => {
-        this.authService.removeFromStorage();
+      switchMap(() => {
+        this.storageService.remove('token');
         this.router.navigate(['welcome']);
-      }),
-      map(() => {
-        return UserAction.logoutSuccess();
+        return of(UserAction.logoutSuccess());
       }),
       catchError((err) => {
         const fail = err.message;
@@ -103,7 +103,7 @@ export class UserEffects {
         });
         return this.authService.signin(userReq).pipe(
           tap((token) => {
-            this.authService.setTokenToStorage(token.token);
+            this.storageService.set('token', token.token);
             this.router.navigate(['main']);
           }),
           map((token) => {
@@ -158,7 +158,7 @@ export class UserEffects {
         const id = this.tokenService.getDataByToken()?.id as string;
         return this.userService.remove(id).pipe(
           tap(() => {
-            this.authService.removeFromStorage();
+            this.storageService.remove('token');
             this.router.navigate(['welcome']);
           }),
           /**

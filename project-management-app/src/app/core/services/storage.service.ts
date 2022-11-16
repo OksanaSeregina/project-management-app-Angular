@@ -26,7 +26,11 @@ export class StorageService {
   }
 
   public remove(key: keyof IStorage): void {
-    localStorage.removeItem(key);
+    const storage: IStorage = this.getStorage();
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(storage ? { ...storage, [key]: undefined } : { [key]: undefined }),
+    );
   }
 
   private getStorage(): IStorage {

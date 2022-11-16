@@ -3,11 +3,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import moment from 'moment';
 import { HTTP_CONFIG, HTTP_OPTIONS } from '../../../constants/http.constant';
-import { UserResp, UserSignupReq, UserSigninReq, UserToken } from '../../../core/models/user.model';
-import { UserState } from '../../../core/store/user/user.state';
-import { StorageService } from '../../../core/services/storage.service';
-
+import {
+  StorageService,
+  TokenService,
+  UserState,
+  UserResp,
+  UserSignupReq,
+  UserSigninReq,
+  UserToken,
+} from '../../../core';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +23,7 @@ export class AuthService {
     private router: Router,
     private store: Store<UserState>,
     private storage: StorageService,
+    private tokenService: TokenService,
   ) {}
 
   public signup(req: UserSignupReq): Observable<UserResp> {
@@ -38,11 +45,13 @@ export class AuthService {
     return this.http.post<UserToken>(url, body, HTTP_OPTIONS);
   }
 
-  public setTokenToStorage(token: string): void {
-    this.storage.set('token', token);
+  public isLoggedIn() {
+    return this.getExpiration() && moment().isBefore(this.getExpiration());
   }
 
-  public removeFromStorage(): void {
-    this.storage.remove('token');
+  private getExpiration() {
+    const token = this.tokenService.getDataByToken();
+    const expiresAt = token && token.exp * 1000;
+    return expiresAt;
   }
 }

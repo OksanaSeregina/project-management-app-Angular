@@ -58,6 +58,6 @@ export const HEADER_BUTTONS: IHeaderButton[] = [
     isVisibleForUser: true,
     icon: 'exit_to_app',
     value: 'logout',
-    route: 'welcome',
+    route: '',
   },
 ];

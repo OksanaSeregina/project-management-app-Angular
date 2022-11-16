@@ -25,7 +25,7 @@ export const login = createAction(LOGIN_USER, props<{ userReq: UserSigninReq }>(
 export const loginSuccess = createAction(LOGIN_USER_SUCCESS, props<{ token: UserToken }>());
 export const loginFail = createAction(LOGIN_USER_FAIL, props<{ fail: string | number }>());
 
-export const logout = createAction(LOGOUT_USER, props<{ userReq?: string }>());
+export const logout = createAction(LOGOUT_USER);
 export const logoutSuccess = createAction(LOGOUT_USER_SUCCESS);
 export const logoutFail = createAction(LOGOUT_USER_FAIL, props<{ fail: string }>());
 
