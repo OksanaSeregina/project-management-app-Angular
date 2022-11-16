@@ -1,8 +1,9 @@
 {
   "components": {
-    "confirm-delete": {
-      "message": "Do you really want to DELETE element?",
-      "delete": "Delete",
+    "confirmation-board": {
+      "title": "",
+      "message": "Do you really want to delete the board?",
+      "submit": "Confirm",
       "cancel": "Cancel"
     },
     "login": {
@@ -77,6 +78,5 @@
     "description": "Description",
     "cancel": "Cancel",
     "create": "Create"
-
   }
 }

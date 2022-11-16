@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  BoardModalComponent, ButtonMulticolorComponent, ConfirmationDialogComponent, FooterComponent, HeaderComponent,
-  NotFoundComponent, SpinnerModule,
+  BoardModalComponent,
+  ButtonMulticolorComponent,
+  ConfirmationDialogComponent,
+  FooterComponent,
+  HeaderComponent,
+  NotFoundComponent,
 } from './components';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';
@@ -18,13 +22,12 @@ import { PipesModule } from './pipes';
     ButtonMulticolorComponent,
     BoardModalComponent,
   ],
-  imports: [CommonModule, MaterialModule, TranslateModule, SpinnerModule.forRoot(), PipesModule, FormsModule],
+  imports: [CommonModule, MaterialModule, TranslateModule, PipesModule, FormsModule],
   exports: [
     HeaderComponent,
     FooterComponent,
     ConfirmationDialogComponent,
     MaterialModule,
-    SpinnerModule,
     PipesModule,
     BoardModalComponent,
   ],

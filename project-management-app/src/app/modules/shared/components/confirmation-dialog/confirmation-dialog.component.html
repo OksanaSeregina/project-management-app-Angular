@@ -3,6 +3,10 @@
   {{ data.message }}
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onYesClick()" cdkFocusInitial>Ok</button>
+  <button mat-raised-button color="primary" (click)="onYesClick()" cdkFocusInitial>
+    {{ 'components.confirmation-board.submit' | translate }}
+  </button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">
+    {{ 'components.confirmation-board.cancel' | translate }}
+  </button>
 </div>

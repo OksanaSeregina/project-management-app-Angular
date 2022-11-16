@@ -38,7 +38,7 @@ export class NotificationService {
    * @param cancelCallback Option function to call when the user clicks Cancel
    * @example
    * //displays a success or error message depending on what button is clicked.
-   * this.notificationService.confirmation(
+   * this.notificationService.confirm(
    * 'it will be gone forever', //message body
    * () => { //okCallback
       this.notificationService.success("confirm oked");
@@ -48,12 +48,12 @@ export class NotificationService {
       this.notificationService.error("confirm canceled");
     });
    */
-  public confirmation(
+  public confirm(
     message: string,
     okCallback: () => void,
     title = 'Are you sure?',
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    cancelCallback: () => unknown = () => {},
+    cancelCallback: () => void = () => {},
   ): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',

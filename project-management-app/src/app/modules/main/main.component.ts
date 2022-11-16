@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BoardFacade } from '../../core';
+import { BoardFacade, NotificationService } from '../../core';
 import { IBoard } from '../board';
 
 @Component({
@@ -13,7 +14,11 @@ import { IBoard } from '../board';
 export class MainComponent implements OnInit {
   public boards$: Observable<IBoard[]>;
 
-  constructor(private boardFacade: BoardFacade) {}
+  constructor(
+    private boardFacade: BoardFacade,
+    private notificationService: NotificationService,
+    private translate: TranslateService,
+  ) {}
 
   public ngOnInit(): void {
     this.boardFacade.loadBoards();
@@ -21,7 +26,10 @@ export class MainComponent implements OnInit {
   }
 
   public deleteBoard(id: string): void {
-    this.boardFacade.deleteBoard(id);
+    const message = this.translate.instant('components.confirmation-board.message');
+    const okCallback = (): void => this.boardFacade.deleteBoard(id);
+    const title = this.translate.instant('components.confirmation-board.title');
+    this.notificationService.confirm(message, okCallback, title);
   }
 
   private sort(boards: IBoard[]): IBoard[] {

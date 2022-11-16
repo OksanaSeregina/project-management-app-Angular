@@ -1,8 +1,9 @@
 {
   "components": {
-    "confirm-delete": {
-      "message": "Вы действительно хотите УДАЛИТЬ элемент?",
-      "delete": "Удалить",
+    "confirmation-board": {
+      "title": "",
+      "message": "Вы действительно хотите удалить доску?",
+      "submit": "Подтвердить",
       "cancel": "Отмена"
     },
     "login": {

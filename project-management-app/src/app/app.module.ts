@@ -6,7 +6,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppStoreModule, HttpLoaderFactory, InterceptorsModule } from './core';
-import { SharedModule } from './modules/shared';
+import { SharedModule, SpinnerModule } from './modules/shared';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +18,7 @@ import { SharedModule } from './modules/shared';
     InterceptorsModule,
     HttpClientModule,
     SharedModule,
+    SpinnerModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
