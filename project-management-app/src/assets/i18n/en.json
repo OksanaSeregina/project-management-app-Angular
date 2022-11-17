@@ -52,6 +52,25 @@
       "onlyLetters": "only letters"
     }
   },
+  "errors": {
+    "http": {
+      "400": "Bad Request",
+      "401": "Authorization error",
+      "402": "File already exist",
+      "403": "Invalid token",
+      "404": "Task was not founded!",
+      "409": "Login already exist"
+    },
+    "user": {
+      "signin": "Error signin user",
+      "signup": "Error signup user",
+      "update": "Error update user",
+      "remove": "Error remove user",
+      "logout": "Error logout user",
+      "loadUser": "Error load user",
+      "loadAllUsers": "Error load all users"
+    }
+  },
   "header": {
     "login": "Login",
     "newboard": "New board",

@@ -41,7 +41,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.signin' }),
               UserAction.loadFail({ fail }),
             );
           }),
@@ -60,10 +60,7 @@ export class UserEffects {
       }),
       catchError((err) => {
         const fail = err.message;
-        return of(
-          NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
-          UserAction.loadFail({ fail }),
-        );
+        return of(NotificationActions.showFailToast({ message: 'errors.user.logout' }), UserAction.loadFail({ fail }));
       }),
     );
   });
@@ -80,7 +77,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.signup' }),
               UserAction.loadFail({ fail }),
             );
           }),
@@ -112,7 +109,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.signin' }),
               UserAction.loadFail({ fail }),
             );
           }),
@@ -142,7 +139,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.update' }),
               UserAction.loadFail({ fail }),
             );
           }),
@@ -171,7 +168,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.remove' }),
               UserAction.loadFail({ fail }),
             );
           }),
@@ -185,7 +182,7 @@ export class UserEffects {
       ofType(UserAction.LOAD_USER),
       switchMap(() => {
         const id = this.tokenService.getDataByToken()?.id as string;
-        return this.userService.loadUser(id).pipe(
+        return this.userService.loadUser('id').pipe(
           /**
            * Check the feature
            */
@@ -196,7 +193,7 @@ export class UserEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.loadUser' }),
               UserAction.loadFail({ fail }),
             );
           }),
