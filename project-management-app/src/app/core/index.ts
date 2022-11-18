@@ -4,3 +4,4 @@ export * from './store';
 export * from './utils';
 export * from './interceptors';
 export * from './validators';
+export * from './guards';

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
-import { NotFoundComponent } from './modules/shared/components/not-found/not-found.component';
+import { AuthGuard } from './core';
+import { NotFoundComponent } from './modules/';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },

@@ -182,7 +182,7 @@ export class UserEffects {
       ofType(UserAction.LOAD_USER),
       switchMap(() => {
         const id = this.tokenService.getDataByToken()?.id as string;
-        return this.userService.loadUser('id').pipe(
+        return this.userService.loadUser(id).pipe(
           /**
            * Check the feature
            */
