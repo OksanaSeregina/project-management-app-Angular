@@ -26,7 +26,7 @@ export class UsersEffects {
           catchError((err) => {
             const fail = err.message;
             return of(
-              NotificationActions.showFailToast({ message: 'board.delete_board_fail_message' }),
+              NotificationActions.showFailToast({ message: 'errors.user.loadAllUsers' }),
               UsersAction.loadFail({ fail }),
             );
           }),

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './modules/shared/components/not-found/not-found.component';
+import { AuthGuard } from './core';
+import { NotFoundComponent } from './modules/';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -11,10 +12,12 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./modules/main/main.module').then((module) => module.MainModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'board',
     loadChildren: () => import('./modules/board/board.module').then((module) => module.BoardModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
@@ -23,6 +26,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./modules/user/user.module').then((module) => module.UserModule),
+    canActivate: [AuthGuard],
   },
   { path: 'page-not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' },
