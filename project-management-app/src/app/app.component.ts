@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscription = this.commonFacade.language$.subscribe((language) => this.translate.use(language));
     this.commonFacade.loadLanguage();
-    this.userFacade.load();
+    this.userFacade.loadUser();
   }
 
   public ngOnDestroy(): void {

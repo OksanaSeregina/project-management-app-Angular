@@ -1,204 +1,133 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Action } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
-import { AuthService } from '../../../modules/auth/services/auth.service';
-import { selectUser } from './user.selectors';
-import * as UserAction from './user.actions';
-import { UserState } from './user.state';
-import { UserService } from '../../../modules/user/services/user.service';
+import { AuthService } from '../../../modules/auth';
+import { UserService } from '../../../modules/user';
 import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../../models';
-import { TokenService } from '../../services/token.service';
 import { NotificationActions } from '../notification';
-import { StorageService } from '../../services';
+import { StorageService, TokenService } from '../../services';
+import * as UserActions from './user.actions';
 
 @Injectable()
 export class UserEffects {
+  public loginUser$: Observable<Action>;
+  public logoutUser$: Observable<Action>;
+  public signupUser$: Observable<Action>;
+  public updateUser$: Observable<Action>;
+  public deleteUser$: Observable<Action>;
+  public loadUser$: Observable<Action>;
+
   constructor(
     private readonly actions$: Actions,
     private readonly router: Router,
-    private store: Store<UserState>,
     private authService: AuthService,
     private userService: UserService,
     private tokenService: TokenService,
     private storageService: StorageService,
-  ) {}
+  ) {
+    this.loginUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.loginUser),
+        switchMap(({ userReq }: { userReq: UserSigninReq }) => {
+          return this.authService.signin(userReq).pipe(
+            map((token: UserToken) => {
+              this.storageService.set('token', token.token);
+              return UserActions.loadUser();
+            }),
+            catchError(() => {
+              return of(NotificationActions.showFailToast({ message: 'errors.user.login' }));
+            }),
+          );
+        }),
+      );
+    });
 
-  login$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.LOGIN_USER),
-      switchMap(({ userReq }: { userReq: UserSigninReq }) => {
-        return this.authService.signin(userReq).pipe(
-          tap((token: UserToken) => {
-            this.storageService.set('token', token.token);
-            this.router.navigate(['main']);
-          }),
-          map((token: UserToken) => {
-            return UserAction.loginSuccess({ token });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.signin' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
+    this.logoutUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.logoutUser),
+        switchMap(() => {
+          this.storageService.remove('token');
+          this.router.navigate(['welcome']);
+          return of(UserActions.logoutSuccess());
+        }),
+      );
+    });
 
-  logout$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.LOGOUT_USER),
-      switchMap(() => {
-        this.storageService.remove('token');
-        this.router.navigate(['welcome']);
-        return of(UserAction.logoutSuccess());
-      }),
-      catchError((err) => {
-        const fail = err.message;
-        return of(NotificationActions.showFailToast({ message: 'errors.user.logout' }), UserAction.loadFail({ fail }));
-      }),
-    );
-  });
+    this.signupUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.signupUser),
+        switchMap(({ userReq }: { userReq: UserSignupReq }) => {
+          return this.authService.signup(userReq).pipe(
+            map(() => {
+              return UserActions.loginUser({ userReq });
+            }),
+            catchError(() => {
+              return of(NotificationActions.showFailToast({ message: 'errors.user.signup' }));
+            }),
+          );
+        }),
+      );
+    });
 
-  signup$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.SIGNUP_USER),
-      switchMap(({ userReq }: { userReq: UserSignupReq }) => {
-        return this.authService.signup(userReq).pipe(
-          tap(() => this.router.navigate(['main'])),
-          map((userResp: UserResp) => {
-            return UserAction.signupSuccess({ userResp });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.signup' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
+    this.updateUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.updateUser),
+        switchMap(({ userReq }: { userReq: UserSignupReq }) => {
+          const token = this.tokenService.getDataByToken();
+          let id = '';
+          if (token) {
+            id = token.id;
+          }
+          return this.userService.update(userReq, id).pipe(
+            map((userResp: UserResp) => {
+              return UserActions.updateUserSuccess({ userResp });
+            }),
+            catchError(() => {
+              return of(NotificationActions.showFailToast({ message: 'errors.user.update' }));
+            }),
+          );
+        }),
+      );
+    });
 
-  signupSuccess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.SIGNUP_USER_SUCCESS),
-      switchMap(({ userResp }: { userResp: UserResp }) => {
-        const userReq = {
-          login: '',
-          password: '',
-        };
-        this.store.select(selectUser).subscribe((user) => {
-          userReq.password = user?.password as string;
-          userReq.login = user?.login as string;
-        });
-        return this.authService.signin(userReq).pipe(
-          tap((token) => {
-            this.storageService.set('token', token.token);
-            this.router.navigate(['main']);
-          }),
-          map((token) => {
-            return UserAction.loginSuccess({ token });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.signin' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
+    this.deleteUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.deleteUser),
+        switchMap(() => {
+          const id = this.tokenService.getDataByToken()?.id as string;
+          return this.userService.remove(id).pipe(
+            map(() => {
+              this.storageService.remove('token');
+              this.router.navigate(['welcome']);
+              return UserActions.deleteUserSuccess();
+            }),
+            catchError(() => {
+              return of(NotificationActions.showFailToast({ message: 'errors.user.remove' }));
+            }),
+          );
+        }),
+      );
+    });
 
-  update$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.UPDATE_USER),
-      switchMap(({ userReq }: { userReq: UserSignupReq }) => {
-        const token = this.tokenService.getDataByToken();
-        let id = '';
-        if (token) {
-          id = token.id;
-        }
-        return this.userService.update(userReq, id).pipe(
-          tap(() => this.router.navigate(['main'])),
-          /**
-           * Check the feature
-           */
-          tap((userResp: UserResp) => console.log('Update that user: ', userResp)),
-          map((userResp: UserResp) => {
-            return UserAction.updateSuccess({ userResp });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.update' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
-
-  remove$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.REMOVE_USER),
-      switchMap(() => {
-        const id = this.tokenService.getDataByToken()?.id as string;
-        return this.userService.remove(id).pipe(
-          tap(() => {
-            this.storageService.remove('token');
-            this.router.navigate(['welcome']);
-          }),
-          /**
-           * Check the feature
-           */
-          tap((userResp: UserResp) => console.log('Remove that user: ', userResp)),
-          map((userResp: UserResp) => {
-            return UserAction.removeSuccess({ userResp });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.remove' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
-
-  loadUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserAction.LOAD_USER),
-      switchMap(() => {
-        const id = this.tokenService.getDataByToken()?.id as string;
-        return this.userService.loadUser(id).pipe(
-          /**
-           * Check the feature
-           */
-          tap((userResp: UserResp) => console.log('Current user: ', userResp)),
-          map((userResp: UserResp) => {
-            return UserAction.loadSuccess({ userResp });
-          }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.loadUser' }),
-              UserAction.loadFail({ fail }),
-            );
-          }),
-        );
-      }),
-    );
-  });
+    this.loadUser$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(UserActions.loadUser),
+        switchMap(() => {
+          const id = this.tokenService.getDataByToken()?.id as string;
+          return this.userService.loadUser(id).pipe(
+            map((userResp: UserResp) => {
+              this.router.navigate(['main']);
+              return UserActions.loadUserSuccess({ userResp });
+            }),
+            catchError(() => {
+              return of(NotificationActions.showFailToast({ message: 'errors.user.loadUser' }));
+            }),
+          );
+        }),
+      );
+    });
+  }
 }

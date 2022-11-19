@@ -55,18 +55,18 @@ export class UserComponent implements OnInit {
         login: username,
         password: password,
       };
-      this.userFacade.update({ userReq });
+      this.userFacade.updateUser({ userReq });
       this.userForm.reset();
     }
   }
 
   public removeUser(): void {
     const userId = this.tokenService.getDataByToken()?.id as string;
-    this.userFacade.remove({ userId });
+    this.userFacade.deleteUser({ userId });
   }
 
   public loadUser(): void {
-    this.userFacade.load();
+    this.userFacade.loadUser();
   }
 
   public loadUsers(): void {

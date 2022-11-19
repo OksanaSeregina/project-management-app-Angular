@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
           this.openDialog();
           break;
         case 'header.logout':
-          this.userFacade.logout();
+          this.userFacade.logoutUser();
       }
     }
   }

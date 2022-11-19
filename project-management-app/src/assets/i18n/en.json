@@ -65,13 +65,12 @@
       "409": "Login already exist"
     },
     "user": {
-      "signin": "Error signin user",
-      "signup": "Error signup user",
-      "update": "Error update user",
-      "remove": "Error remove user",
-      "logout": "Error logout user",
-      "loadUser": "Error load user",
-      "loadAllUsers": "Error load all users"
+      "signup": "Can not register new user",
+      "update": "Can not update user",
+      "remove": "Can not delete user",
+      "login": "Login/password are not valid",
+      "loadUser": "Can not load user",
+      "loadAllUsers": "Can not load all users"
     }
   },
   "header": {

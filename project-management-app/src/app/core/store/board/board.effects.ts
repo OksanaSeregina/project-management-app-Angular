@@ -13,16 +13,12 @@ import * as BoardActions from './board.actions';
  */
 @Injectable()
 export class BoardEffects {
-  private actions$: Actions;
-
   public loadBoards$: Observable<Action>;
   public createBoard$: Observable<Action>;
   public updateBoard$: Observable<Action>;
   public deleteBoard$: Observable<Action>;
 
-  constructor(actions$: Actions, private boardService: BoardsService, private userFacade: UserFacade) {
-    this.actions$ = actions$;
-
+  constructor(private actions$: Actions, private boardService: BoardsService, private userFacade: UserFacade) {
     this.loadBoards$ = createEffect(() =>
       this.actions$.pipe(
         ofType(BoardActions.loadBoards),

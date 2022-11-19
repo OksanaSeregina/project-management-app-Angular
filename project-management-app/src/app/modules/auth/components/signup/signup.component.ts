@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants/login.constant';
-import { onlyLettersValidator } from '../../../../core/validators/only-letters.validator';
-import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
-import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
-import { confirmedPassValidator } from '../../../../core/validators/confirmed-pass.validator';
-import { UserState } from '../../../../core/store/user/user.state';
-import * as UserAction from '../../../../core/store/user/user.actions';
+import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
+import {
+  isLettersAndNumbersValidator,
+  onlyLettersAndNumbersValidator,
+  confirmedPassValidator,
+  onlyLettersValidator,
+} from '../../../../core/validators';
+import { UserFacade } from '../../../../core';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +17,7 @@ import * as UserAction from '../../../../core/store/user/user.actions';
 export class SignupComponent implements OnInit {
   public signupForm: FormGroup;
 
-  constructor(private store: Store<UserState>) {}
+  constructor(private userFacade: UserFacade) {}
 
   ngOnInit() {
     this.signupForm = new FormGroup(
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
         login: username,
         password: password,
       };
-      this.store.dispatch(UserAction.signup({ userReq }));
+      this.userFacade.signupUser(userReq);
       this.signupForm.reset();
     }
   }

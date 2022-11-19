@@ -14,7 +14,7 @@ export const createBoardFail = createAction('[Board] CREATE_BOARD_FAIL');
 
 export const updateBoard = createAction('[Board] UPDATE_BOARD', props<{ board: IBoard }>());
 export const updateBoardSuccess = createAction('[Board] UPDATE_BOARD_SUCCESS', props<{ board: IBoard }>());
-export const updateBoardFail = createAction('[Board]UPDATE_BOARD_FAIL');
+export const updateBoardFail = createAction('[Board] UPDATE_BOARD_FAIL');
 
 export const deleteBoard = createAction('[Board] DELETE_BOARD', props<{ id: string }>());
 export const deleteBoardSuccess = createAction('[Board] DELETE_BOARD_SUCCESS', props<{ id: string }>());

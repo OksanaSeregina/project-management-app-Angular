@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { isLettersAndNumbersValidator } from '../../../../core/validators/is-letters-and-numbers.validator';
-import { UserState } from '../../../../core/store/user/user.state';
-import * as UserAction from '../../../../core/store/user/user.actions';
-import { onlyLettersAndNumbersValidator } from '../../../../core/validators/only-letters-and-numbers.validator';
-import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants/login.constant';
+import { isLettersAndNumbersValidator, onlyLettersAndNumbersValidator } from '../../../../core/validators';
+import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
+import { UserFacade, UserSigninReq } from '../../../../core';
 import { AuthService } from '../../services';
 
 @Component({
@@ -14,7 +11,7 @@ import { AuthService } from '../../services';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(protected authService: AuthService, private store: Store<UserState>) {}
+  constructor(protected authService: AuthService, private userFacade: UserFacade) {}
 
   public loginForm: FormGroup;
 
@@ -36,11 +33,11 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      const userReq = {
+      const userReq: UserSigninReq = {
         login: username,
         password: password,
       };
-      this.store.dispatch(UserAction.login({ userReq }));
+      this.userFacade.loginUser(userReq);
       this.loginForm.reset();
     }
   }
