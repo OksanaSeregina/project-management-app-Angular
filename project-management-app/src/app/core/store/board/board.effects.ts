@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { BoardsService, IBoard } from '../../../modules/board';
 import { NotificationActions } from '../notification';
 import { UserFacade } from '../user';
@@ -17,6 +17,7 @@ export class BoardEffects {
 
   public loadBoards$: Observable<Action>;
   public createBoard$: Observable<Action>;
+  public updateBoard$: Observable<Action>;
   public deleteBoard$: Observable<Action>;
 
   constructor(actions$: Actions, private boardService: BoardsService, private userFacade: UserFacade) {
@@ -35,10 +36,11 @@ export class BoardEffects {
       this.actions$.pipe(
         ofType(BoardActions.createBoard),
         switchMap((payload) => {
-          return userFacade.user$.pipe(
+          return this.userFacade.user$.pipe(
             map((user) => user?._id),
+            filter((id) => !!payload && !!id),
             switchMap((_id) => {
-              const board = { ...payload.board, owner: _id };
+              const board = { ...payload.board, owner: _id, users: [''] };
               return this.boardService.create(<IBoard>board).pipe(
                 switchMap((board) => [
                   BoardActions.createBoardSuccess({ board }),
@@ -47,6 +49,21 @@ export class BoardEffects {
                 catchError(() => of(NotificationActions.showFailToast({ message: 'board.add_board_fail_message' }))),
               );
             }),
+          );
+        }),
+      ),
+    );
+
+    this.updateBoard$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(BoardActions.updateBoard),
+        switchMap((payload) => {
+          return this.boardService.update(payload.board).pipe(
+            switchMap((board) => [
+              BoardActions.updateBoardSuccess({ board }),
+              NotificationActions.showSuccessToast({ message: 'board.update_board_success_message' }),
+            ]),
+            catchError(() => of(NotificationActions.showFailToast({ message: 'board.update_board_fail_message' }))),
           );
         }),
       ),

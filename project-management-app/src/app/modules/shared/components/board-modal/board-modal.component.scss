@@ -1,8 +1,41 @@
+@import '../../../../../styles/styles.scss';
+
 .board-modal {
   display: grid;
 
   div {
     display: flex;
     justify-content: space-around;
+    width: 100%;
   }
+}
+
+mat-form-field.mat-form-field,
+.mat-form-field.mat-form-field-invalid {
+  font-family: $font-comfortaa;
+
+  &.mat-focused {
+    .mat-form-field-label {
+      color: $light-blue;
+    }
+    .mat-form-field-ripple {
+      background-color: $light-blue !important;
+    }
+  }
+  .mat-form-field-label,
+  .mat-form-field-label.mat-focused,
+  .mat-form-field.mat-focused.matform-field-should-float {
+    color: $light-blue;
+  }
+  .mat-form-field-underline,
+  .mat-form-field-underline.mat-focused {
+    background-color: $light-blue;
+  }
+}
+
+.mat-error {
+  justify-self: flex-start;
+  display: inline-block;
+  width: inherit;
+  color: $light-blue;
 }

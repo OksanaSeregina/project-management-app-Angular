@@ -32,6 +32,9 @@
     }
   },
   "validators": {
+    "common": {
+      "required": "This field is required"
+    },
     "username": {
       "required": "Please, enter login",
       "common": "Your login doesn't match the rules ",
@@ -86,9 +89,12 @@
   },
   "board": {
     "add_board": "Add new board",
+    "edit_board": "Edit",
     "delete_board": "Delete",
     "add_board_success_message": "New board was successfully added",
     "add_board_fail_message": "Can not add new board",
+    "update_board_success_message": "Board was successfully updated",
+    "update_board_fail_message": "Can not update the board",
     "delete_board_success_message": "The board was successfully deleted",
     "delete_board_fail_message": "Can not delete the board"
   },
@@ -96,6 +102,7 @@
     "title": "Board name",
     "description": "Description",
     "cancel": "Cancel",
-    "create": "Create"
+    "create": "Create",
+    "save": "Save"
   }
 }

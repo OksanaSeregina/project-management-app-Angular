@@ -1,16 +1,11 @@
+<h2 *ngIf="data.title">{{ data.title | translate }}</h2>
 <form class="board-modal" [formGroup]="form">
   <mat-form-field appearance="fill">
     <mat-label>{{ 'board-modal.title' | translate }}</mat-label>
     <input matInput formControlName="title" />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'board-modal.description' | translate }}</mat-label>
-    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="form.invalid">{{ 'validators.common.required' | translate }}</mat-error>
   </mat-form-field>
   <div mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onNoClick()">{{ 'board-modal.cancel' | translate }}</button>
-    <button mat-raised-button color="primary" (click)="onYesClick()" [disabled]="form.invalid">
-      {{ 'board-modal.create' | translate }}
-    </button>
+    <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
   </div>
 </form>

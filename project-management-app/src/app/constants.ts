@@ -1,4 +1,4 @@
-import { IHeaderButton } from './modules/shared';
+import { INavigateButton } from './modules/shared';
 import { ICardTeam } from './modules/welcome/components';
 
 export const CARD_TEAM: ICardTeam[] = [
@@ -29,35 +29,35 @@ export const CARD_TEAM: ICardTeam[] = [
 ];
 
 // TODO: Updates routes
-export const HEADER_BUTTONS: IHeaderButton[] = [
+export const HEADER_BUTTONS: INavigateButton[] = [
   {
     isVisibleForUser: false,
     icon: 'exit_to_app',
-    value: 'login',
-    route: 'auth',
+    value: 'header.login',
+    route: 'auth/login',
   },
   {
     isVisibleForUser: true,
     icon: 'add',
-    value: 'newboard',
+    value: 'header.newboard',
     route: '',
   },
   {
     isVisibleForUser: true,
     icon: 'edit',
-    value: 'editprofile',
+    value: 'header.editprofile',
     route: 'user',
   },
   {
     isVisibleForUser: false,
     icon: 'person_add',
-    value: 'signup',
-    route: 'auth',
+    value: 'header.signup',
+    route: 'auth/signup',
   },
   {
     isVisibleForUser: true,
     icon: 'exit_to_app',
-    value: 'logout',
+    value: 'header.logout',
     route: '',
   },
 ];

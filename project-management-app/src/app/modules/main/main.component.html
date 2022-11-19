@@ -2,6 +2,8 @@
   <app-simple-list
     *ngFor="let value of boards$ | async"
     [value]="value"
+    (click)="navigate(value)"
+    (edit)="editBoard($event)"
     (delete)="deleteBoard($event)"
   ></app-simple-list>
 </div>

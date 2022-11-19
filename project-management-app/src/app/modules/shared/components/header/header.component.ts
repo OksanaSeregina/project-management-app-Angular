@@ -4,12 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { HEADER_BUTTONS } from '../../../../constants';
-import { CommonFacade, UserFacade } from '../../../../core';
+import { BoardFacade, CommonFacade, UserFacade } from '../../../../core';
+import { IBoard } from '../../../board';
 import { TranslateNames } from '../../../../enums';
-import { BoardModalComponent } from '../board-modal';
-import { IHeaderButton } from './models';
+import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../board-modal';
+import { INavigateButton } from '../models';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private commonFacade: CommonFacade,
+    private boardFacade: BoardFacade,
     private router: Router,
     private dialog: MatDialog,
     private userFacade: UserFacade,
@@ -28,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   public translateNames = TranslateNames;
   public language$: Observable<TranslateNames>;
-  public buttons$: Observable<IHeaderButton[]>;
+  public buttons$: Observable<INavigateButton[]>;
 
   public ngOnInit(): void {
     this.language$ = this.commonFacade.language$;
@@ -41,19 +43,38 @@ export class HeaderComponent implements OnInit {
     this.commonFacade.updateLanguage(language.value);
   }
 
-  public navigateToRoute(value: IHeaderButton): void {
+  public navigateToRoute(value: INavigateButton): void {
     const route = value.route;
     if (route) {
       this.router.navigate([route]);
     } else {
       switch (value.value) {
-        case 'newboard':
+        case 'header.newboard':
           this.router.navigate(['main']);
-          this.dialog.open(BoardModalComponent);
+          this.openDialog();
           break;
-        case 'logout':
+        case 'header.logout':
           this.userFacade.logout();
       }
     }
+  }
+
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(BoardModalComponent, {
+      width: '50vw',
+      data: {
+        title: 'board.add_board',
+        action: IBoardModalAction.Create,
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((boardModal: IBoardModal) => {
+        if (boardModal?.board) {
+          const board: Pick<IBoard, 'title'> = boardModal.board;
+          this.boardFacade.createBoard(board);
+        }
+      });
   }
 }

@@ -32,6 +32,9 @@
     }
   },
   "validators": {
+    "common": {
+      "required": "Поле обязательно для заполнения"
+    },
     "username": {
       "required": "Введите логин",
       "common": "Ваш Логин не соответствует правилам ",
@@ -86,9 +89,12 @@
   },
   "board": {
     "add_board": "Добавить новую доску",
+    "edit_board": "Редактировать",
     "delete_board": "Удалить",
     "add_board_success_message": "Доска успешно добавлена",
     "add_board_fail_message": "Не удалось добавить доску",
+    "update_board_success_message": "Доска успешно обновлена",
+    "update_board_fail_message": "Не удалось обновить доску",
     "delete_board_success_message": "Доска успешно удалена",
     "delete_board_fail_message": "Не удалось удалить доску"
   },
@@ -96,6 +102,7 @@
     "title": "Название доски",
     "description": "Описание",
     "cancel": "Отменить",
-    "create": "Создать"
+    "create": "Создать",
+    "save": "Сохранить"
   }
 }

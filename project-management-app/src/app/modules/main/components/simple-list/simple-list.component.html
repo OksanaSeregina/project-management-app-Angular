@@ -1,9 +1,6 @@
 <article class="list single-columns">
   <header>
-    <h3>{{ value.title }}</h3>
+    <h3>{{ value.title | truncate: 50 }}</h3>
   </header>
-  <button mat-icon-button class="button center" (click)="deleteBoard()">
-    <mat-icon>delete</mat-icon>
-    <span class="header-icon-name">{{ 'board.delete_board' | translate }}</span>
-  </button>
+  <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
 </article>

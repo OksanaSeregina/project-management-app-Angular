@@ -30,6 +30,7 @@ import { PipesModule } from './pipes';
     MaterialModule,
     PipesModule,
     BoardModalComponent,
+    ButtonMulticolorComponent,
   ],
 })
 export class SharedModule {}

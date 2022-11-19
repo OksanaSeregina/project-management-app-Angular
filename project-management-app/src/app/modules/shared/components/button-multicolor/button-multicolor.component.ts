@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IHeaderButton } from '../header';
+import { INavigateButton } from '../../../shared';
 
 @Component({
   selector: 'app-button-multicolor',
@@ -8,11 +8,11 @@ import { IHeaderButton } from '../header';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonMulticolorComponent {
-  @Input() public buttons: IHeaderButton[] = [];
+  @Input() public buttons: INavigateButton[] = [];
 
-  @Output() public navigate = new EventEmitter<IHeaderButton>();
+  @Output() public navigate = new EventEmitter<INavigateButton>();
 
-  public onClick(value: IHeaderButton): void {
+  public onClick(value: INavigateButton): void {
     this.navigate.emit(value);
   }
 }

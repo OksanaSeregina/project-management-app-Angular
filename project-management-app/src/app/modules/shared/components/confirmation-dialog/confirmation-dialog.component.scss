@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  align-content: center;
+
+  .mat-dialog-actions {
+    padding: 0;
+    min-height: 0;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
