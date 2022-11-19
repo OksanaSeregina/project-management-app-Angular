@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, tap, catchError } from 'rxjs/operators';
+import { map, switchMap, tap, catchError, filter } from 'rxjs/operators';
 import { AuthService } from '../../../modules/auth';
 import { UserService } from '../../../modules/user';
 import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../../models';
@@ -115,8 +115,9 @@ export class UserEffects {
     this.loadUser$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(UserActions.loadUser),
-        switchMap(() => {
-          const id = this.tokenService.getDataByToken()?.id as string;
+        switchMap(() => of(this.tokenService.getDataByToken()?.id as string)),
+        filter((id) => !!id),
+        switchMap((id) => {
           return this.userService.loadUser(id).pipe(
             map((userResp: UserResp) => {
               this.router.navigate(['main']);
