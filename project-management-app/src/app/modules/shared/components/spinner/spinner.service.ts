@@ -1,4 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { publishReplay, refCount, debounceTime, takeUntil, tap } from 'rxjs/operators';
 
@@ -9,8 +10,15 @@ export class SpinnerService implements OnDestroy {
 
   public isVisible$: Observable<boolean>;
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     this.isVisible$ = this.visibleSubj.asObservable().pipe(
+      tap((isVisible) => {
+        if (isVisible) {
+          this.document.body.classList.add('no-scroll');
+        } else {
+          this.document.body.classList.remove('no-scroll');
+        }
+      }),
       // debounceTime using to fix error ExpressionChangedAfterItHasBeenCheckedError
       debounceTime(100),
       takeUntil(this.destroySubj),
