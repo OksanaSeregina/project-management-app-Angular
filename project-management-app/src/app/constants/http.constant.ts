@@ -8,6 +8,7 @@ export const HTTP_CONFIG = {
   boards: 'boards',
   columns: 'columns',
   tasks: 'tasks',
+  taskSet: 'taskSet',
   file: 'file',
   points: 'points',
   logsError: 'logs/error',
