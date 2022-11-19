@@ -71,6 +71,9 @@
       "login": "Login/password are not valid",
       "loadUser": "Can not load user",
       "loadAllUsers": "Can not load all users"
+    },
+    "page": {
+      "404": "Page not found"
     }
   },
   "header": {
