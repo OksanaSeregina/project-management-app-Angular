@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { isNull } from 'lodash';
+import { isNil } from 'lodash';
 import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
 import { StorageService } from '../../services';
@@ -99,7 +99,7 @@ export class CommonEffects {
       this.actions$.pipe(
         ofType(CommonActions.loadIsList),
         switchMap(() => {
-          const isListExist: boolean = !isNull(this.storage.get('isList'));
+          const isListExist: boolean = !isNil(this.storage.get('isList'));
           const isList = isListExist ? <boolean>this.storage.get('isList') : true;
           return of(CommonActions.loadIsListSuccess({ isList }));
         }),
