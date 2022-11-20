@@ -106,5 +106,11 @@
     "cancel": "Отменить",
     "create": "Создать",
     "save": "Сохранить"
+  },
+  "main": {
+    "sort_by_title": "Сортировать по названию",
+    "search_by_button": "Найти",
+    "search_by_placeholder": "Поиск по названию",
+    "toggle_view": "Переключить вид"
   }
 }

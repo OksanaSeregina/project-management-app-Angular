@@ -1,6 +1,6 @@
-<article class="list single-columns">
+<article class="list" [ngClass]="{ row: isList, columns: !isList }">
   <header>
     <h3>{{ value.title | truncate: 50 }}</h3>
   </header>
-  <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
+  <app-button-multicolor class="buttons" [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
 </article>

@@ -106,5 +106,11 @@
     "cancel": "Cancel",
     "create": "Create",
     "save": "Save"
+  },
+  "main": {
+    "sort_by_title": "Sort by title",
+    "search_by_button": "Search",
+    "search_by_placeholder": "Search by title",
+    "toggle_view": "Toggle view"
   }
 }

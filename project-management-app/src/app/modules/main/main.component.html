@@ -1,9 +1,19 @@
-<div class="grid-container">
-  <app-simple-list
-    *ngFor="let value of boards$ | async"
-    [value]="value"
-    (click)="navigate(value)"
-    (edit)="editBoard($event)"
-    (delete)="deleteBoard($event)"
-  ></app-simple-list>
+<div class="wrapper">
+  <div class="head">
+    <app-search-form (search)="onSearch($event)"></app-search-form>
+    <app-sort-form (sort)="onSort($event)"></app-sort-form>
+    <app-toggle-form (isListView)="toggleList($event)"></app-toggle-form>
+  </div>
+  <div class="grid-container" [ngClass]="{ row: isList, columns: !isList }">
+    <app-simple-list
+      *ngFor="
+        let value of boards$ | async | searchByTag: (searchValue$ | async | lowercase) | sortByValue: (sortBy$ | async)
+      "
+      [value]="value"
+      [isList]="isList"
+      (click)="navigate(value)"
+      (edit)="editBoard($event)"
+      (delete)="deleteBoard($event)"
+    ></app-simple-list>
+  </div>
 </div>

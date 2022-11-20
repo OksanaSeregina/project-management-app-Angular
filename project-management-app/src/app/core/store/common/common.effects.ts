@@ -4,6 +4,8 @@ import { Action } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { isNull } from 'lodash';
+import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
 import { StorageService } from '../../services';
 import * as CommonActions from './common.actions';
@@ -17,6 +19,13 @@ export class CommonEffects {
 
   public loadLanguage$: Observable<Action>;
   public updateLanguage$: Observable<Action>;
+  public loadSearchValue$: Observable<Action>;
+  public updateSearchValue$: Observable<Action>;
+  public loadSortBy$: Observable<Action>;
+  public updateSortBy$: Observable<Action>;
+  public loadIsList$: Observable<Action>;
+  public loadIsListSuccess$: Observable<Action>;
+  public updateIsList$: Observable<Action>;
 
   constructor(actions$: Actions, private translate: TranslateService, private storage: StorageService) {
     this.actions$ = actions$;
@@ -42,6 +51,67 @@ export class CommonEffects {
         switchMap(({ lang }) => {
           this.storage.set('lang', lang);
           return of(CommonActions.updateLanguageSuccess({ lang }));
+        }),
+      ),
+    );
+
+    this.loadSearchValue$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.loadSearchValue),
+        switchMap(() => {
+          const searchValue = <string>this.storage.get('searchValue') || '';
+          return of(CommonActions.loadSearchValueSuccess({ searchValue }));
+        }),
+      ),
+    );
+
+    this.updateSearchValue$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.updateSearchValue),
+        switchMap(({ searchValue }) => {
+          this.storage.set('searchValue', searchValue);
+          return of(CommonActions.updateSearchValueSuccess({ searchValue }));
+        }),
+      ),
+    );
+
+    this.loadSortBy$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.loadSortBy),
+        switchMap(() => {
+          const sortBy = <ISort>this.storage.get('sortBy') || { isAsc: false, isDesc: false };
+          return of(CommonActions.loadSortBySuccess({ sortBy }));
+        }),
+      ),
+    );
+
+    this.updateSortBy$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.updateSortBy),
+        switchMap(({ sortBy }) => {
+          this.storage.set('sortBy', sortBy);
+          return of(CommonActions.updateSortBySuccess({ sortBy }));
+        }),
+      ),
+    );
+
+    this.loadIsList$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.loadIsList),
+        switchMap(() => {
+          const isListExist: boolean = !isNull(this.storage.get('isList'));
+          const isList = isListExist ? <boolean>this.storage.get('isList') : true;
+          return of(CommonActions.loadIsListSuccess({ isList }));
+        }),
+      ),
+    );
+
+    this.updateIsList$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CommonActions.updateIsList),
+        switchMap(({ isList }) => {
+          this.storage.set('isList', isList);
+          return of(CommonActions.updateIsListSuccess({ isList }));
         }),
       ),
     );

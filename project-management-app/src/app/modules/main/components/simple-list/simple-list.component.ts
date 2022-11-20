@@ -29,6 +29,7 @@ export class SimpleListComponent implements OnInit, OnDestroy {
   ];
 
   @Input() public value: IBoard;
+  @Input() public isList: boolean;
 
   @Output() public delete = new EventEmitter<IBoard>();
   @Output() public edit = new EventEmitter<IBoard>();
