@@ -6,7 +6,6 @@ const initialTasks: TasksState = {};
 
 export const tasksReducers = createReducer(
   initialTasks,
-
   on(TasksActions.loadTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;
     return {
@@ -14,15 +13,13 @@ export const tasksReducers = createReducer(
       [key]: [...state[key], taskResp],
     };
   }),
-
   on(TasksActions.loadTasksSuccess, (state, { tasksResp }): TasksState => {
     const key = tasksResp[0].columnId;
     return {
       ...state,
-      [key]: [...state[key], ...tasksResp],
+      [key]: [...tasksResp],
     };
   }),
-
   on(TasksActions.createTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;
     return {
@@ -30,27 +27,24 @@ export const tasksReducers = createReducer(
       [key]: [...state[key], taskResp],
     };
   }),
-
   on(TasksActions.updateTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;
-    const id = taskResp._id;
-    const filterColumn = state[key].filter(({ _id }) => _id !== id);
+    const index = state[key].findIndex(({ _id }) => _id === taskResp._id);
+    const task = [...state[key].slice(0, index), taskResp, ...state[key].slice(index + 1)];
     return {
       ...state,
-      [key]: [...filterColumn, taskResp],
+      [key]: [...task],
     };
   }),
-
   on(TasksActions.deleteTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;
-    const id = taskResp._id;
-    const filterColumn = state[key].filter(({ _id }) => _id !== id);
+    const index = state[key].findIndex(({ _id }) => _id === taskResp._id);
+    const task = [...state[key].slice(0, index), ...state[key].slice(index + 1)];
     return {
       ...state,
-      [key]: [...filterColumn],
+      [key]: [...task],
     };
   }),
-
   on(TasksActions.searchTasksSuccess, (state, { tasksResp }): TasksState => {
     const key = 'search';
     return {

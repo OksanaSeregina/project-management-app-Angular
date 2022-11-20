@@ -7,7 +7,6 @@ import { TasksEffects } from './tasks.effects';
 import { TasksFacade } from './tasks.facade';
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule, StoreModule.forFeature('tasks', tasksReducers), EffectsModule.forFeature([TasksEffects])],
   providers: [TasksFacade],
 })

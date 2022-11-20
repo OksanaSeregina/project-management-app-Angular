@@ -1,18 +1,18 @@
 import { createAction, props } from '@ngrx/store';
-import { TaskResp } from '../../../modules/board/models/task.model';
+import { TaskResp } from '../../../modules/board';
 
-export const LOAD_TASK = '[Tasks] Load Task';
-export const LOAD_TASK_SUCCESS = '[Tasks] Load Task Success';
-export const LOAD_TASKS = '[Tasks] Load Tasks';
-export const LOAD_TASKS_SUCCESS = '[Tasks] Load Tasks Success';
-export const CREATE_TASK = '[Tasks] Create Task';
-export const CREATE_TASK_SUCCESS = '[Tasks] Create Task Success';
-export const UPDATE_TASK = '[Tasks] Update Task';
-export const UPDATE_TASK_SUCCESS = '[Tasks] Update Task Success';
-export const DELETE_TASK = '[Tasks] Delete Task';
-export const DELETE_TASK_SUCCESS = '[Tasks] Delete Task Success';
-export const SEARCH_TASKS = '[Tasks] Search Tasks';
-export const SEARCH_TASKS_SUCCESS = '[Tasks] Search Tasks Success';
+const LOAD_TASK = '[Tasks] LOAD_TASK';
+const LOAD_TASK_SUCCESS = '[Tasks] LOAD_TASK_SUCCESS';
+const LOAD_TASKS = '[Tasks] LOAD_TASKS';
+const LOAD_TASKS_SUCCESS = '[Tasks] LOAD_TASKS_SUCCESS';
+const CREATE_TASK = '[Tasks] CREATE_TASK';
+const CREATE_TASK_SUCCESS = '[Tasks] CREATE_TASK_SUCCESS';
+const UPDATE_TASK = '[Tasks] UPDATE_TASK';
+const UPDATE_TASK_SUCCESS = '[Tasks] UPDATE_TASK_SUCCESS';
+const DELETE_TASK = '[Tasks] DELETE_TASK';
+const DELETE_TASK_SUCCESS = '[Tasks] DELETE_TASK_SUCCESS';
+const SEARCH_TASKS = '[Tasks] EARCH_TASKS';
+const SEARCH_TASKS_SUCCESS = '[Tasks] SEARCH_TASKS_SUCCESS';
 
 export const loadTask = createAction(LOAD_TASK, props<{ boardId: string; columnId: string; taskId: string }>());
 export const loadTaskSuccess = createAction(LOAD_TASK_SUCCESS, props<{ taskResp: TaskResp }>());

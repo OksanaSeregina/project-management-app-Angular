@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.state';
-import { TaskResp } from '../../../modules/board/models/task.model';
+import { TaskResp } from '../../../modules/board';
 import * as TasksActions from './tasks.actions';
 
 @Injectable()
