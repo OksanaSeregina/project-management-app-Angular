@@ -6,6 +6,10 @@
       "submit": "Confirm",
       "cancel": "Cancel"
     },
+    "confirmation-column": {
+      "title": "",
+      "message": "Do you really want to delete the column?"
+    },
     "login": {
       "title": "Log In",
       "login": "Login",
@@ -95,13 +99,13 @@
     "delete_board": "Delete",
     "add_board_success_message": "New board was successfully added",
     "add_board_fail_message": "Can not add new board",
-    "update_board_success_message": "Board was successfully updated",
+    "update_board_success_message": "The board was successfully updated",
     "update_board_fail_message": "Can not update the board",
     "delete_board_success_message": "The board was successfully deleted",
     "delete_board_fail_message": "Can not delete the board"
   },
   "board-modal": {
-    "title": "Board name",
+    "title": "Title",
     "description": "Description",
     "cancel": "Cancel",
     "create": "Create",
@@ -112,5 +116,16 @@
     "search_by_button": "Search",
     "search_by_placeholder": "Search by title",
     "toggle_view": "Toggle view"
+  },
+  "column": {
+    "add_column": "Add new column",
+    "add_column_success_message": "New column was successfully added",
+    "add_column_fail_message": "Can not add new column",
+    "edit_column": "Edit",
+    "delete_column": "Delete",
+    "update_column_success_message": "The column was successfully updated",
+    "update_column_fail_message": "Can not update the column",
+    "delete_column_success_message": "The column was successfully deleted",
+    "delete_column_fail_message": "Can not delete the column"
   }
 }

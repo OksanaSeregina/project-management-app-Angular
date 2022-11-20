@@ -1,0 +1,11 @@
+.itemscolumn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .item-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}

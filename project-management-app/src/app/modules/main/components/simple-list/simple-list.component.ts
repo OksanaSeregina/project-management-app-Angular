@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { INavigateButton } from '../../../shared';
+import { Router } from '@angular/router';
+import { ColumnFacade } from 'src/app/core';
 import { IBoard } from '../../../board';
 
 @Component({

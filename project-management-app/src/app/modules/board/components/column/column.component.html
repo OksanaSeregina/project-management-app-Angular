@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="head">
+    <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
+  </div>
+  <div class="grid-container">
+    <app-column-item
+      *ngFor="let value of columns$ | async"
+      [value]="value"
+      (update)="updateColumn($event)"
+      (delete)="deleteColumn($event)"
+    ></app-column-item>
+  </div>
+</div>

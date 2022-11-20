@@ -6,6 +6,10 @@
       "submit": "Подтвердить",
       "cancel": "Отмена"
     },
+    "confirmation-column": {
+      "title": "",
+      "message": "Вы действительно хотите удалить колонку?"
+    },
     "login": {
       "title": "Войти",
       "login": "Логин",
@@ -101,7 +105,7 @@
     "delete_board_fail_message": "Не удалось удалить доску"
   },
   "board-modal": {
-    "title": "Название доски",
+    "title": "Название",
     "description": "Описание",
     "cancel": "Отменить",
     "create": "Создать",
@@ -112,5 +116,16 @@
     "search_by_button": "Найти",
     "search_by_placeholder": "Поиск по названию",
     "toggle_view": "Переключить вид"
+  },
+  "column": {
+    "add_column": "Добавить колонку",
+    "add_column_success_message": "Новая колонка успешно добавлена",
+    "add_column_fail_message": "Не удалось добавить колонку",
+    "edit_column": "Редактировать",
+    "delete_column": "Удалить",
+    "update_column_success_message": "Колонка успешно обновлена",
+    "update_column_fail_message": "Не удалось обновить колонку",
+    "delete_column_success_message": "Колонка успешно удалена",
+    "delete_column_fail_message": "Не удалось удалить колонку"
   }
 }

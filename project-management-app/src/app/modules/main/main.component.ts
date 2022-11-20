@@ -66,7 +66,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((boardModal: IBoardModal) => {
         if (boardModal?.board) {
-          const board: IBoard = boardModal.board;
+          const board: IBoard = <IBoard>boardModal.board;
           this.boardFacade.updateBoard(board);
         }
       });

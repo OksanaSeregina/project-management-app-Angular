@@ -1,5 +1,6 @@
 export * from './app.state';
 export * from './common';
+export * from './column';
 export * from './board';
 export * from './users';
 export * from './user';
