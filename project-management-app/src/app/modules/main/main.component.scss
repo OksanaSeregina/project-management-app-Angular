@@ -1,6 +1,6 @@
-:host {
-  display: grid;
-  padding: 16px;
+.wrapper {
+  width: inherit;
+  margin: 16px;
 }
 
 .button {
@@ -20,6 +20,21 @@
 .grid-container {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: minmax(230px, 1fr);
+
+  &.single-column {
+    grid-template-columns: minmax(230px, 1fr);
+  }
+
+  &.columns {
+    grid-template-rows: max-content 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
 }
 
+.head {
+  display: flex;
+  flex: 1 1 0px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 16px;
+}

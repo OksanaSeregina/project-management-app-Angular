@@ -6,7 +6,7 @@ import { CommonState } from './common.state';
  */
 export const selectCommonState = createFeatureSelector<CommonState>('common');
 
-/**
- * Language selector
- */
 export const selectLanguage = createSelector(selectCommonState, (state: CommonState) => state.lang);
+export const selectSearchValue = createSelector(selectCommonState, (state: CommonState) => state.searchValue);
+export const selectSortBy = createSelector(selectCommonState, (state: CommonState) => state.sortBy);
+export const selectIsList = createSelector(selectCommonState, (state: CommonState) => state.isList);

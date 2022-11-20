@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { BoardFacade, NotificationService } from '../../core';
+import { BoardFacade, CommonFacade, NotificationService } from '../../core';
 import { IBoard } from '../board';
 import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../shared';
+import { ISort } from './components';
 
 @Component({
   selector: 'app-main',
@@ -14,11 +15,17 @@ import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../shared';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+
   public boards$: Observable<IBoard[]>;
+  public searchValue$: Observable<string>;
+  public sortBy$: Observable<ISort>;
+  public isList: boolean;
 
   constructor(
     private boardFacade: BoardFacade,
+    private commonFacade: CommonFacade,
     private notificationService: NotificationService,
     private translate: TranslateService,
     private dialog: MatDialog,
@@ -26,8 +33,23 @@ export class MainComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.commonFacade.loadSearchValue();
+    this.searchValue$ = this.commonFacade.searchValue$;
+
+    this.commonFacade.loadSortBy();
+    this.sortBy$ = this.commonFacade.sortBy$;
+
+    this.commonFacade.loadIsList();
+    this.subscription = this.commonFacade.isList$.subscribe((isList: boolean) => (this.isList = isList));
+
     this.boardFacade.loadBoards();
     this.boards$ = this.boardFacade.boards$.pipe(map((boards: IBoard[]) => this.sort(boards)));
+  }
+
+  public ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   public editBoard(board: IBoard): void {
@@ -44,7 +66,7 @@ export class MainComponent implements OnInit {
       .pipe(take(1))
       .subscribe((boardModal: IBoardModal) => {
         if (boardModal?.board) {
-          const board: IBoard = boardModal.board;
+          const board: IBoard = <IBoard>boardModal.board;
           this.boardFacade.updateBoard(board);
         }
       });
@@ -59,6 +81,18 @@ export class MainComponent implements OnInit {
 
   public navigate(board: IBoard): void {
     this.router.navigate([`board/${board._id}`]);
+  }
+
+  public onSearch(value: string): void {
+    this.commonFacade.updateSearchValue(value);
+  }
+
+  public onSort(value: ISort): void {
+    this.commonFacade.updateSortBy(value);
+  }
+
+  public toggleList(value: boolean): void {
+    this.commonFacade.updateIsList(value);
   }
 
   private sort(boards: IBoard[]): IBoard[] {

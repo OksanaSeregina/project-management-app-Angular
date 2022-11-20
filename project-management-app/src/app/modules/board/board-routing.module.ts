@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from '../main';
+import { ColumnComponent } from './components';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: ':id', component: MainComponent }, // TODO: Test only, replace with real component
+  { path: '', redirectTo: ':id', pathMatch: 'full' },
+  { path: ':id', component: ColumnComponent },
 ];
 
 @NgModule({

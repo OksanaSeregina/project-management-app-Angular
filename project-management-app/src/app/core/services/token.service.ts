@@ -9,7 +9,7 @@ export class TokenService {
   constructor(private storage: StorageService) {}
 
   public getDataByToken(): DecodedToken | null {
-    const jwt = this.storage.get('token');
+    const jwt = <string>this.storage.get('token');
     if (jwt) {
       const token: DecodedToken = this.parseJwt(jwt);
       return token;

@@ -11,10 +11,18 @@
     cursor: pointer;
   }
 
-  &.single-columns {
+  &.row {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr max-content;
     grid-column-gap: $gap;
+  }
+
+  &.columns {
+    grid-template-rows: minmax(100px, max-content) minmax(40px, max-content);
+
+    .buttons {
+      justify-content: center;
+    }
   }
 
   .center {

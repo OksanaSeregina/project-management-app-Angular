@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { INavigateButton } from '../../../shared';
+import { Router } from '@angular/router';
+import { ColumnFacade } from 'src/app/core';
 import { IBoard } from '../../../board';
 
 @Component({
@@ -29,6 +31,7 @@ export class SimpleListComponent implements OnInit, OnDestroy {
   ];
 
   @Input() public value: IBoard;
+  @Input() public isList: boolean;
 
   @Output() public delete = new EventEmitter<IBoard>();
   @Output() public edit = new EventEmitter<IBoard>();

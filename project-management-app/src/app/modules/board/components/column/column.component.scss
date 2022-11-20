@@ -1,0 +1,31 @@
+.wrapper {
+  width: inherit;
+  margin: 16px;
+}
+
+.button {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: flex-end;
+  margin-right: 30px;
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.head {
+  display: flex;
+  flex: 1 1 0px;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 32px 16px;
+}
