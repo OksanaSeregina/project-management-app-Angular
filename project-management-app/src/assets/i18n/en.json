@@ -74,6 +74,14 @@
     },
     "page": {
       "404": "Page not found"
+    },
+    "tasks": {
+      "loadTask": "Can not load task",
+      "loadTasks": "Can not load tasks",
+      "create": "Can not create task",
+      "update": "Can not update task",
+      "delete": "Can not delete task",
+      "search": "Can not find tasks"
     }
   },
   "header": {

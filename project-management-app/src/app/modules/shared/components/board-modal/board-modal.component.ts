@@ -42,7 +42,7 @@ export class BoardModalComponent implements OnInit, OnDestroy {
       title: new FormControl(this.data?.board?.title || '', [Validators.required]),
     });
     this.subscription = (<FormControl>this.form.get('title')).valueChanges.subscribe((value) => {
-      const disabled: boolean = !value;
+      const disabled = !value;
       const [saveBtn, cancelBtn] = this.buttons;
       if (disabled !== saveBtn.disabled) {
         this.buttons = [{ ...saveBtn, disabled }, cancelBtn];
