@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   BoardModalComponent,
@@ -22,7 +23,7 @@ import { PipesModule } from './pipes';
     ButtonMulticolorComponent,
     BoardModalComponent,
   ],
-  imports: [CommonModule, MaterialModule, TranslateModule, PipesModule, FormsModule],
+  imports: [CommonModule, RouterModule, MaterialModule, TranslateModule, PipesModule, FormsModule],
   exports: [
     HeaderComponent,
     FooterComponent,
