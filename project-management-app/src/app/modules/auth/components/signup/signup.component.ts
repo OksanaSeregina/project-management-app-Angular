@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
 import {
-  isLettersAndNumbersValidator,
-  onlyLettersAndNumbersValidator,
-  confirmedPassValidator,
-  onlyLettersValidator,
-} from '../../../../core/validators';
-import { UserFacade } from '../../../../core';
+  confirmedPassValidator, isLettersAndNumbersValidator, onlyLettersAndNumbersValidator, onlyLettersValidator, UserFacade
+} from '../../../../core';
+import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
 
 @Component({
   selector: 'app-signup',

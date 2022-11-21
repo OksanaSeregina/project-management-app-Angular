@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 import { BoardStoreModule } from './board';
 import { ColumnStoreModule } from './column';
 import { CommonStoreModule } from './common';
-import { NotificationStoreModule } from './notification/notification.module';
+import { NotificationStoreModule } from './notification';
 import { UserStoreModule } from './user';
 import { UsersStoreModule } from './users';
 

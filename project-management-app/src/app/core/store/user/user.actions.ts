@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserSigninReq, UserSignupReq, UserResp } from '../../models/user.model';
+import { UserResp, UserSigninReq, UserSignupReq } from '../../models';
 
 export const RESET_USER_DATA_STATE = '[User] Reset User data State';
 

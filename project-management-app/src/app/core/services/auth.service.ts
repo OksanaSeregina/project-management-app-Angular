@@ -1,19 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import moment from 'moment';
-import { HTTP_CONFIG, HTTP_OPTIONS } from '../../../constants/http.constant';
-import {
-  StorageService,
-  TokenService,
-  UserState,
-  UserResp,
-  UserSignupReq,
-  UserSigninReq,
-  UserToken,
-} from '../../../core';
+import { Observable } from 'rxjs';
+import { HTTP_CONFIG, HTTP_OPTIONS } from '../../constants';
+import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../models';
+import { StorageService } from './storage.service';
+import { TokenService } from './token.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +15,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store<UserState>,
     private storage: StorageService,
     private tokenService: TokenService,
   ) {}

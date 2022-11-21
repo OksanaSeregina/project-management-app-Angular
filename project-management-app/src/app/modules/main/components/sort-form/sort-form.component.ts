@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CommonFacade } from '../../../../core';
 import { take } from 'rxjs/operators';
-import { ISort } from './models';
+import { CommonFacade, ISort } from '../../../../core';
 
 @Component({
   selector: 'app-sort-form',

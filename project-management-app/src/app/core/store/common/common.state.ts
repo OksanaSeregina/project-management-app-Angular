@@ -1,5 +1,5 @@
-import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
+import { ISort } from '../../models';
 
 /**
  * Common state model

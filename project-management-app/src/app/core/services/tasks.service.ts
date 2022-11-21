@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HTTP_CONFIG, HTTP_OPTIONS } from '../../../constants/http.constant';
+import { HTTP_CONFIG, HTTP_OPTIONS } from '../../constants';
 import { TaskResp, TaskSetReq } from '../models';
 
 @Injectable({

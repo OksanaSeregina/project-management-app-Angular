@@ -1,5 +1,5 @@
-import { ISort } from '../../modules/main';
 import { TranslateNames } from '../../enums';
+import { ISort } from './sort.model';
 
 /**
  * LocalStorage interface

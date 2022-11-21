@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { isNil } from 'lodash';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { isNil } from 'lodash';
-import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
+import { ISort } from '../../models';
 import { StorageService } from '../../services';
 import * as CommonActions from './common.actions';
 

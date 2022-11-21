@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IColumn } from '../../../modules/board';
+import { IColumn } from '../../models';
 import { AppState } from '../app.state';
 import * as ColumnActions from './column.actions';
 import { selectColumns } from './column.selectors';

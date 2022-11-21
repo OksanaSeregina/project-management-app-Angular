@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { isLettersAndNumbersValidator, onlyLettersAndNumbersValidator } from '../../../../core/validators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AuthService, isLettersAndNumbersValidator, onlyLettersAndNumbersValidator, UserFacade, UserSigninReq
+} from '../../../../core';
 import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
-import { UserFacade, UserSigninReq } from '../../../../core';
-import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-login',

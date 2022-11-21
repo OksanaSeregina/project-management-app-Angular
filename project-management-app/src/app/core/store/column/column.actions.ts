@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IColumn } from '../../../modules/board';
+import { IColumn } from '../../models';
 
 /**
  * Column state actions

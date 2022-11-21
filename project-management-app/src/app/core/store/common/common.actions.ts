@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
+import { ISort } from '../../models';
 
 /**
  * Common state actions

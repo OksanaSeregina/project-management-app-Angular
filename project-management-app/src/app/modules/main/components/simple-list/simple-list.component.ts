@@ -1,10 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { INavigateButton } from '../../../shared';
-import { Router } from '@angular/router';
-import { ColumnFacade } from 'src/app/core';
-import { IBoard } from '../../../board';
+import { IBoard, INavigateButton } from '../../../../core';
 
 @Component({
   selector: 'app-simple-list',

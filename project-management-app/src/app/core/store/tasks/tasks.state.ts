@@ -1,4 +1,4 @@
-import { TaskResp } from '../../../modules/board/models/task.model';
+import { TaskResp } from '../../models';
 
 export interface TasksState {
   [key: string]: TaskResp[];

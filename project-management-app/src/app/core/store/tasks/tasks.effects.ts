@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { TaskResp } from '../../models';
+import { TasksService } from '../../services';
 import { NotificationActions } from '../notification';
-import { TasksService } from '../../../modules/board/services/tasks.service';
-import { TaskResp } from '../../../modules/board/models/task.model';
 import * as TasksActions from './tasks.actions';
 
 @Injectable()

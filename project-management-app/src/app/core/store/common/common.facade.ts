@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ISort } from '../../../modules/main';
 import { TranslateNames } from '../../../enums';
+import { ISort } from '../../models';
 import { AppState } from '../app.state';
-import { selectLanguage, selectSearchValue, selectSortBy, selectIsList } from './common.selectors';
 import * as CommonActions from './common.actions';
+import { selectIsList, selectLanguage, selectSearchValue, selectSortBy } from './common.selectors';
 
 /**
  * Common Facade service

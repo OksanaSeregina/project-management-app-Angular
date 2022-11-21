@@ -1,8 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { publishReplay, refCount, debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, publishReplay, refCount, takeUntil } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SpinnerService implements OnDestroy {
   private destroySubj: Subject<boolean> = new Subject();
   private visibleSubj: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

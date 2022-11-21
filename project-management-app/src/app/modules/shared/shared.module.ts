@@ -4,19 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  BoardModalComponent,
-  ButtonMulticolorComponent,
-  ConfirmationDialogComponent,
-  FooterComponent,
-  HeaderComponent,
-  NotFoundComponent,
+  BoardModalComponent, ButtonMulticolorComponent, FooterComponent, HeaderComponent, NotFoundComponent,
 } from './components';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';
 
 @NgModule({
   declarations: [
-    ConfirmationDialogComponent,
     NotFoundComponent,
     HeaderComponent,
     FooterComponent,
@@ -27,7 +21,7 @@ import { PipesModule } from './pipes';
   exports: [
     HeaderComponent,
     FooterComponent,
-    ConfirmationDialogComponent,
+    NotFoundComponent,
     MaterialModule,
     PipesModule,
     BoardModalComponent,

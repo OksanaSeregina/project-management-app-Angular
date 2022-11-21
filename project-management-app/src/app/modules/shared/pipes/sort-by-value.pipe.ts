@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IBoard } from '../../board';
-import { ISort } from '../../main';
+import { IBoard, ISort } from '../../../core';
 
 @Pipe({ name: 'sortByValue' })
 export class SortByValuePipe implements PipeTransform {

@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { IColumn } from '../../../models';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { IColumn } from '../../../../../core';
 
 @Component({
   selector: 'app-column-item',

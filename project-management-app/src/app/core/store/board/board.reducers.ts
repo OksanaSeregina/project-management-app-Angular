@@ -1,5 +1,5 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
-import { IBoard } from 'src/app/modules/board';
+import { IBoard } from '../../models';
 import * as BoardActions from './board.actions';
 import { BoardState, initialBoardState } from './board.state';
 

@@ -1,5 +1,5 @@
-import { INavigateButton } from './modules/shared';
-import { ICardTeam } from './modules/welcome/components';
+import { INavigateButton } from '../core';
+import { ICardTeam } from '../modules/welcome';
 
 export const CARD_TEAM: ICardTeam[] = [
   {

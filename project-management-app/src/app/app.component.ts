@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { CommonFacade, UserFacade } from './core';
+import { CommonFacade, SpinnerService, UserFacade } from './core';
 import { TranslateNames } from './enums';
-import { SpinnerService } from './modules/shared';
 
 @Component({
   selector: 'app-root',

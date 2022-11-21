@@ -4,10 +4,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { BoardFacade, CommonFacade, NotificationService } from '../../core';
-import { IBoard } from '../board';
+import { BoardFacade, CommonFacade, IBoard, ISort, NotificationService } from '../../core';
 import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../shared';
-import { ISort } from './components';
 
 @Component({
   selector: 'app-main',

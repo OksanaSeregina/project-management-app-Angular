@@ -1,4 +1,4 @@
-import { IColumn } from '../../../modules/board';
+import { IColumn } from '../../models';
 
 /**
  * Column state model

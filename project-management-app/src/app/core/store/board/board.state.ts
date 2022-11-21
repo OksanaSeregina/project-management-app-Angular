@@ -1,4 +1,4 @@
-import { IBoard } from '../../../modules/board';
+import { IBoard } from '../../models';
 
 /**
  * Board state model

@@ -3,7 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { ColumnsService, IColumn } from '../../../modules/board';
+import { IColumn } from '../../models';
+import { ColumnsService } from '../../services';
 import { NotificationActions } from '../notification';
 import * as ColumnActions from './column.actions';
 

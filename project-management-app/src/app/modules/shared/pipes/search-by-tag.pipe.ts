@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IBoard } from '../../board';
+import { IBoard } from '../../../core';
 
 @Pipe({ name: 'searchByTag' })
 export class SearchByTagPipe implements PipeTransform {
-  public transform(data: IBoard[], value: string): any {
+  public transform(data: IBoard[], value: string): IBoard[] {
     if (!value) {
       return data;
     }

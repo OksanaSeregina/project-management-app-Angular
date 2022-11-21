@@ -4,9 +4,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { ColumnFacade, NotificationService } from '../../../../core';
-import { BoardModalComponent, IBoardModal, IBoardModalAction, INavigateButton } from '../../../shared';
-import { IColumn } from '../../models';
+import { ColumnFacade, IColumn, INavigateButton, NotificationService } from '../../../../core';
+import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',

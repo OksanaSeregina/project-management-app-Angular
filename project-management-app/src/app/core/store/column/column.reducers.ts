@@ -1,5 +1,5 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
-import { IColumn } from '../../../modules/board';
+import { IColumn } from '../../models';
 import * as ColumnActions from './column.actions';
 import { ColumnState, initialColumnState } from './column.state';
 

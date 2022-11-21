@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { INavigateButton } from '../../../shared';
+import { INavigateButton } from '../../../../core';
 
 @Component({
   selector: 'app-button-multicolor',

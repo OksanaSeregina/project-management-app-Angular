@@ -15,7 +15,7 @@ export class SearchFormComponent implements OnInit {
 
   constructor(private commonFacade: CommonFacade) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.commonFacade.searchValue$.pipe(take(1)).subscribe((value: string) => (this.value = value));
   }
 

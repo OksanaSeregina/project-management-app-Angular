@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CARD_TEAM } from '../../../../constants';
 
 @Component({
@@ -6,10 +6,6 @@ import { CARD_TEAM } from '../../../../constants';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   public cardTeam = CARD_TEAM;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

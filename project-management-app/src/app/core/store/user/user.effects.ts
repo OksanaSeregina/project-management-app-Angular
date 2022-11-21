@@ -3,12 +3,10 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, tap, catchError, filter } from 'rxjs/operators';
-import { AuthService } from '../../../modules/auth';
-import { UserService } from '../../../modules/user';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { UserResp, UserSigninReq, UserSignupReq, UserToken } from '../../models';
+import { AuthService, StorageService, TokenService, UserService } from '../../services';
 import { NotificationActions } from '../notification';
-import { StorageService, TokenService } from '../../services';
 import * as UserActions from './user.actions';
 
 @Injectable()

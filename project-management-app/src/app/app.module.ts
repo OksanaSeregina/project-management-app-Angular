@@ -5,11 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppStoreModule, HttpLoaderFactory, InterceptorsModule } from './core';
-import { SharedModule, SpinnerModule } from './modules/shared';
+import { AppStoreModule, ConfirmationDialogComponent, HttpLoaderFactory, InterceptorsModule } from './core';
+import { SharedModule } from './modules/shared';
+import { SpinnerModule } from './modules/spinner';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +19,7 @@ import { SharedModule, SpinnerModule } from './modules/shared';
     InterceptorsModule,
     HttpClientModule,
     SharedModule,
-    SpinnerModule.forRoot(),
+    SpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

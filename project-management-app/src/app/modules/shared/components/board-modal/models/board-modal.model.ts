@@ -1,4 +1,4 @@
-import { IBoard, IColumn } from '../../../../board';
+import { IBoard, IColumn } from '../../../../../core';
 
 export interface IBoardModal {
   action: string;

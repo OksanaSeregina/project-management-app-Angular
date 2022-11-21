@@ -6,11 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { HEADER_BUTTONS } from '../../../../constants';
-import { BoardFacade, CommonFacade, UserFacade } from '../../../../core';
-import { IBoard } from '../../../board';
+import { BoardFacade, CommonFacade, IBoard, INavigateButton, UserFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
 import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../board-modal';
-import { INavigateButton } from '../models';
 
 @Component({
   selector: 'app-header',

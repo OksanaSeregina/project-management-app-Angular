@@ -1,9 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { IBoardModal, INavigateButton } from '../../../shared';
+import { INavigateButton } from '../../../../core';
+import { IBoardModal } from '../../../shared';
 
 @Component({
   selector: 'app-board-modal',

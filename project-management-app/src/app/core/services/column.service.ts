@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HTTP_CONFIG } from '../../../constants/http.constant';
+import { HTTP_CONFIG } from '../../constants';
 import { IColumn } from '../models';
 
 const URL = `${HTTP_CONFIG.baseUrl}boards`;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IBoard } from '../../../modules/board';
+import { IBoard } from '../../models';
 import { AppState } from '../app.state';
 import * as BoardActions from './board.actions';
 import { selectBoards } from './board.selectors';

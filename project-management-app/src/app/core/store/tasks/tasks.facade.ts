@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { TaskResp } from '../../models';
 import { AppState } from '../app.state';
-import { TaskResp } from '../../../modules/board';
 import * as TasksActions from './tasks.actions';
 
 @Injectable()
