@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, switchMap, tap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { UserService } from '../../../modules/user/services/user.service';
 import { UserResp } from '../../models';
 import { NotificationActions } from '../notification';
@@ -16,19 +16,11 @@ export class UsersEffects {
       ofType(UsersAction.LOAD_USERS),
       switchMap(() => {
         return this.usersService.loadAllUsers().pipe(
-          /**
-           * Check the feature
-           */
-          tap((userResp: UserResp[]) => console.log('All user: ', userResp)),
           map((usersResp: UserResp[]) => {
             return UsersAction.loadSuccess({ usersResp });
           }),
-          catchError((err) => {
-            const fail = err.message;
-            return of(
-              NotificationActions.showFailToast({ message: 'errors.user.loadAllUsers' }),
-              UsersAction.loadFail({ fail }),
-            );
+          catchError(() => {
+            return of(NotificationActions.showFailToast({ message: 'errors.user.loadAllUsers' }));
           }),
         );
       }),

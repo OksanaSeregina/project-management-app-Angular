@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HTTP_CONFIG, HTTP_OPTIONS } from '../../../constants/http.constant';
-import { TaskResp, TaskCreateReq, TaskUpdateReq, TaskSetReq } from '../models/task.model';
+import { TaskResp, TaskSetReq } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,8 @@ export class TasksService {
     return this.http.get<TaskResp[]>(url, HTTP_OPTIONS);
   }
 
-  public create(req: TaskCreateReq, boardId: string, columnId: string): Observable<TaskResp> {
-    const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${boardId}/${HTTP_CONFIG.columns}/${columnId}/${HTTP_CONFIG.tasks}`;
+  public create(req: TaskResp): Observable<TaskResp> {
+    const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${req.boardId}/${HTTP_CONFIG.columns}/${req.columnId}/${HTTP_CONFIG.tasks}`;
     const body: string = JSON.stringify({
       title: req.title,
       order: 0,
@@ -32,8 +32,8 @@ export class TasksService {
     return this.http.get<TaskResp>(url, HTTP_OPTIONS);
   }
 
-  public update(req: TaskUpdateReq, boardId: string, columnId: string, taskId: string): Observable<TaskResp> {
-    const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${boardId}/${HTTP_CONFIG.columns}/${columnId}/${HTTP_CONFIG.tasks}/${taskId}`;
+  public update(req: TaskResp): Observable<TaskResp> {
+    const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${req.boardId}/${HTTP_CONFIG.columns}/${req.columnId}/${HTTP_CONFIG.tasks}/${req._id}`;
     const body: string = JSON.stringify({
       title: req.title,
       order: 0,

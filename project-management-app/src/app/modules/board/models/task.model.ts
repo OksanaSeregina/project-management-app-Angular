@@ -9,23 +9,6 @@ export interface TaskResp {
   users: string[];
 }
 
-export interface TaskCreateReq {
-  title: string;
-  order: number;
-  description: string;
-  userId: number;
-  users: string[];
-}
-
-export interface TaskUpdateReq {
-  title: string;
-  order: number;
-  description: string;
-  columnId: string;
-  userId: number;
-  users: string[];
-}
-
 export interface TaskSetReq {
   _id: string;
   order: number;
