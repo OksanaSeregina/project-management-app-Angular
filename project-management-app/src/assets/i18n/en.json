@@ -10,11 +10,15 @@
       "title": "",
       "message": "Do you really want to delete the column?"
     },
+    "confirmation-user": {
+      "title": "",
+      "message": "Do you really want to delete the user?"
+    },
     "login": {
-      "title": "Log In",
+      "title": "Authorization",
       "login": "Login",
       "pass": "Password",
-      "button": "Log In",
+      "button": "Login",
       "signup": "Don't have an account yet?"
     },
     "signup": {
@@ -41,15 +45,15 @@
     },
     "username": {
       "required": "Please, enter login",
-      "common": "Your login doesn't match the rules ",
-      "minLength": "at least 2 characters",
-      "lettersOrNumbers": "only letters or numbers"
+      "common": "Your login doesn't match the rules: ",
+      "minLength": "includes at least 2 characters; ",
+      "lettersOrNumbers": "only letters or numbers; "
     },
     "pass": {
       "required": "Please, enter password",
-      "common": "Your password is not strong enough ",
-      "minLength": "at least 4 characters",
-      "lettersAndNumbers": "and letters, and numbers",
+      "common": "Your password is not strong enough: ",
+      "minLength": "should has at least 4 characters; ",
+      "lettersAndNumbers": "should contain letters and numbers; ",
       "confirmed": "Password not the same"
     },
     "name": {

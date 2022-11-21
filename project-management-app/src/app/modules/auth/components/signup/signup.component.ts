@@ -19,7 +19,27 @@ export class SignupComponent implements OnInit {
 
   constructor(private userFacade: UserFacade) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.createForm();
+  }
+
+  public onSubmit(): void {
+    if (this.signupForm.valid) {
+      const { name, username, password } = this.signupForm.value;
+      const userReq = {
+        name: name,
+        login: username,
+        password: password,
+      };
+      this.userFacade.signupUser(userReq);
+    }
+  }
+
+  public hasFieldError(field: string, errorType: string): boolean {
+    return this.signupForm.get(field)?.errors && this.signupForm.get(field)?.errors?.[errorType];
+  }
+
+  private createForm(): void {
     this.signupForm = new FormGroup(
       {
         name: new FormControl('', [Validators.required, Validators.minLength(MIN_LENGTH_LOGIN), onlyLettersValidator]),
@@ -41,22 +61,5 @@ export class SignupComponent implements OnInit {
       },
       { validators: confirmedPassValidator },
     );
-  }
-
-  onSubmit(): void {
-    if (this.signupForm.valid) {
-      const { name, username, password } = this.signupForm.value;
-      const userReq = {
-        name: name,
-        login: username,
-        password: password,
-      };
-      this.userFacade.signupUser(userReq);
-      this.signupForm.reset();
-    }
-  }
-
-  public hasFieldError(field: string, errorType: string): boolean {
-    return this.signupForm.get(field)?.errors && this.signupForm.get(field)?.errors?.[errorType];
   }
 }

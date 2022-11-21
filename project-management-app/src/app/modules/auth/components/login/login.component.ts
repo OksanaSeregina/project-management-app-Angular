@@ -15,7 +15,26 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.createForm();
+  }
+
+  public onSubmit(): void {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      const userReq: UserSigninReq = {
+        login: username,
+        password: password,
+      };
+      this.userFacade.loginUser(userReq);
+    }
+  }
+
+  public hasFieldError(field: string, errorType: string): boolean {
+    return this.loginForm.get(field)?.errors && this.loginForm.get(field)?.errors?.[errorType];
+  }
+
+  private createForm(): void {
     this.loginForm = new FormGroup({
       username: new FormControl('', [
         Validators.required,
@@ -28,21 +47,5 @@ export class LoginComponent implements OnInit {
         isLettersAndNumbersValidator,
       ]),
     });
-  }
-
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      const userReq: UserSigninReq = {
-        login: username,
-        password: password,
-      };
-      this.userFacade.loginUser(userReq);
-      this.loginForm.reset();
-    }
-  }
-
-  public hasFieldError(field: string, errorType: string): boolean {
-    return this.loginForm.get(field)?.errors && this.loginForm.get(field)?.errors?.[errorType];
   }
 }

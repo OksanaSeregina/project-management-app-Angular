@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { take } from 'rxjs/operators';
 import {
   onlyLettersValidator,
   isLettersAndNumbersValidator,
   onlyLettersAndNumbersValidator,
   confirmedPassValidator,
   UserFacade,
-  UsersFacade,
+  NotificationService,
+  UserData,
 } from '../../../../core';
 import { TokenService } from 'src/app/core/services/token.service';
 
@@ -21,33 +24,18 @@ export const MIN_LENGTH_PASSWORD = 4;
 export class UserComponent implements OnInit {
   public userForm: FormGroup;
 
-  constructor(private tokenService: TokenService, private usersFacade: UsersFacade, private userFacade: UserFacade) {}
+  constructor(
+    private tokenService: TokenService,
+    private translate: TranslateService,
+    private userFacade: UserFacade,
+    private notificationService: NotificationService,
+  ) {}
 
-  ngOnInit() {
-    this.userForm = new FormGroup(
-      {
-        name: new FormControl('', [Validators.required, Validators.minLength(MIN_LENGTH_LOGIN), onlyLettersValidator]),
-        username: new FormControl('', [
-          Validators.required,
-          Validators.minLength(MIN_LENGTH_LOGIN),
-          onlyLettersAndNumbersValidator,
-        ]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(MIN_LENGTH_PASSWORD),
-          isLettersAndNumbersValidator,
-        ]),
-        repass: new FormControl('', [
-          Validators.required,
-          Validators.minLength(MIN_LENGTH_PASSWORD),
-          isLettersAndNumbersValidator,
-        ]),
-      },
-      { validators: confirmedPassValidator },
-    );
+  public ngOnInit(): void {
+    this.userFacade.user$.pipe(take(1)).subscribe((user) => this.createForm(<UserData>user));
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.userForm.valid) {
       const { name, username, password } = this.userForm.value;
       const userReq = {
@@ -56,24 +44,46 @@ export class UserComponent implements OnInit {
         password: password,
       };
       this.userFacade.updateUser({ userReq });
-      this.userForm.reset();
     }
   }
 
-  public removeUser(): void {
+  public deleteUser(): void {
     const userId = this.tokenService.getDataByToken()?.id as string;
-    this.userFacade.deleteUser({ userId });
-  }
-
-  public loadUser(): void {
-    this.userFacade.loadUser();
-  }
-
-  public loadUsers(): void {
-    this.usersFacade.load();
+    const message = this.translate.instant('components.confirmation-user.message');
+    const okCallback = (): void => this.userFacade.deleteUser({ userId });
+    const title = this.translate.instant('components.confirmation-user.title');
+    this.notificationService.confirm(message, okCallback, title);
   }
 
   public hasFieldError(field: string, errorType: string): boolean {
     return this.userForm.get(field)?.errors && this.userForm.get(field)?.errors?.[errorType];
+  }
+
+  private createForm(user: UserData): void {
+    this.userForm = new FormGroup(
+      {
+        name: new FormControl(user?.name, [
+          Validators.required,
+          Validators.minLength(MIN_LENGTH_LOGIN),
+          onlyLettersValidator,
+        ]),
+        username: new FormControl(user?.login, [
+          Validators.required,
+          Validators.minLength(MIN_LENGTH_LOGIN),
+          onlyLettersAndNumbersValidator,
+        ]),
+        password: new FormControl(user?.password, [
+          Validators.required,
+          Validators.minLength(MIN_LENGTH_PASSWORD),
+          isLettersAndNumbersValidator,
+        ]),
+        repass: new FormControl(user?.password, [
+          Validators.required,
+          Validators.minLength(MIN_LENGTH_PASSWORD),
+          isLettersAndNumbersValidator,
+        ]),
+      },
+      { validators: confirmedPassValidator },
+    );
   }
 }

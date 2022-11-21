@@ -1,122 +1,101 @@
-<form class="user__form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<form *ngIf="userForm" class="form__form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <h2 class="user__title">{{ 'components.user.title' | translate }}</h2>
-  <div class="user__input_wrapper">
-    <label for="user__input_name" class="user__text">{{ 'components.user.name' | translate }}</label>
-    <input
-      type="text"
-      class="user__input user__input_login"
-      id="user__input_name"
-      formControlName="name"
-      title="......."
-      autocomplete="off"
-    />
-    <div class="input__explainer" *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
-      <small *ngIf="hasFieldError('name', 'required')">
-        {{ 'validators.name.required' | translate }}
-      </small>
-      <small *ngIf="!hasFieldError('name', 'required')">
-        {{ 'validators.name.common' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('name', 'minlength')">
-        {{ 'validators.name.minLength' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('name', 'onlyLetters') && !hasFieldError('name', 'required')">
-        {{ 'validators.name.onlyLetters' | translate }}
-      </small>
-    </div>
+  <div class="form__input_wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'components.user.name' | translate }}</mat-label>
+      <input matInput type="text" placeholder="" autocomplete="off" formControlName="name" />
+    </mat-form-field>
+    <ng-container *ngTemplateOutlet="nameErrorsRef; context: { $implicit: userForm.controls.name }"></ng-container>
   </div>
-
-  <div class="user__input_wrapper">
-    <label for="user__input_login" class="user__text">{{ 'components.user.login' | translate }}</label>
-    <input
-      type="text"
-      class="user__input user__input_login"
-      id="user__input_login"
-      formControlName="username"
-      title="......."
-      autocomplete="off"
-    />
-    <div class="input__explainer" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
-      <small *ngIf="hasFieldError('username', 'required')">
-        {{ 'validators.username.required' | translate }}
-      </small>
-      <small *ngIf="!hasFieldError('username', 'required')">
-        {{ 'validators.username.common' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('username', 'minlength')">
-        {{ 'validators.username.minLength' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('username', 'onlyLettersAndNumbers') && !hasFieldError('username', 'required')">
-        {{ 'validators.username.lettersOrNumbers' | translate }}
-      </small>
-    </div>
+  <div class="form__input_wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'components.user.login' | translate }}</mat-label>
+      <input matInput type="text" placeholder="" autocomplete="off" formControlName="username" />
+    </mat-form-field>
+    <ng-container
+      *ngTemplateOutlet="userNameErrorsRef; context: { $implicit: userForm.controls.username }"
+    ></ng-container>
   </div>
-
-  <div class="user__input_wrapper">
-    <label for="user__input_password" class="user__text">{{ 'components.login.pass' | translate }}</label>
-    <input
-      type="password"
-      class="user__input user__input_password"
-      id="user__input_password"
-      formControlName="password"
-      placeholder="*******"
-      autocomplete="off"
-    />
-    <div class="input__explainer" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-      <small *ngIf="hasFieldError('password', 'required')">
-        {{ 'validators.pass.required' | translate }}
-      </small>
-      <small *ngIf="!hasFieldError('password', 'required')">
-        {{ 'validators.pass.common' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('password', 'minlength')">
-        {{ 'validators.pass.minLength' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('password', 'isLettersAndNumbers') && !hasFieldError('password', 'required')">
-        {{ 'validators.pass.lettersAndNumbers' | translate }}
-      </small>
-    </div>
+  <div class="form__input_wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'components.user.pass' | translate }}</mat-label>
+      <input matInput type="password" placeholder="" autocomplete="off" formControlName="password" />
+    </mat-form-field>
+    <ng-container
+      *ngTemplateOutlet="passwordErrorsRef; context: { $implicit: userForm.controls.password }"
+    ></ng-container>
   </div>
-
-  <div class="user__input_wrapper">
-    <label for="user__input_repass" class="user__text">{{ 'components.user.repass' | translate }}</label>
-    <input
-      type="password"
-      class="user__input user__input_password"
-      id="user__input_repass"
-      formControlName="repass"
-      placeholder="*******"
-      autocomplete="off"
-    />
-    <div class="input__explainer" *ngIf="userForm.get('repass')?.invalid && userForm.get('repass')?.touched">
-      <small *ngIf="hasFieldError('repass', 'required')">
-        {{ 'validators.pass.required' | translate }}
-      </small>
-      <small *ngIf="!hasFieldError('repass', 'required')">
-        {{ 'validators.pass.common' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('repass', 'minlength')">
-        {{ 'validators.pass.minLength' | translate }}
-      </small>
-      <small *ngIf="hasFieldError('repass', 'isLettersAndNumbers') && !hasFieldError('repass', 'required')">
-        {{ 'validators.pass.lettersAndNumbers' | translate }}
-      </small>
-    </div>
-
-    <div class="input__explainer" *ngIf="userForm.errors?.confirmedPass">
-      <small> {{ 'validators.pass.confirmed' | translate }} </small>
-    </div>
+  <div class="form__input_wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'components.user.repass' | translate }}</mat-label>
+      <input matInput type="password" placeholder="" autocomplete="off" formControlName="repass" />
+    </mat-form-field>
+    <ng-container
+      *ngTemplateOutlet="passwordErrorsRef; context: { $implicit: userForm.controls.repass }"
+    ></ng-container>
+    <mat-error *ngIf="userForm.errors?.confirmedPass">
+      {{ 'validators.pass.confirmed' | translate }}
+    </mat-error>
   </div>
-  <div class="user__button-wrapper">
-    <button class="user__button" type="submit" [disabled]="userForm.invalid">
+  <div mat-dialog-actions>
+    <button mat-icon-button class="btn-multicolor" type="submit" [disabled]="userForm.invalid">
+      <mat-icon>how_to_reg</mat-icon>
       {{ 'components.user.button' | translate }}
     </button>
-    <button class="user__button" (click)="removeUser()">
+    <button mat-icon-button class="btn-multicolor" (click)="deleteUser()">
+      <mat-icon>delete_forever</mat-icon>
       {{ 'components.user.buttonDelete' | translate }}
     </button>
   </div>
-  <div class="user__button-wrapper">
-    <button class="user__button" (click)="loadUsers()">GET All user</button>
-    <button class="user__button" (click)="loadUser()">GET Current user</button>
-  </div>
 </form>
+
+<ng-template #nameErrorsRef let-control>
+  <mat-error *ngIf="control.invalid && control.touched">
+    <ng-container *ngIf="control.hasError('required')">
+      {{ 'validators.name.required' | translate }}
+    </ng-container>
+    <ng-container *ngIf="!control.hasError('required')">
+      {{ 'validators.name.common' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('minlength')">
+      {{ 'validators.name.minLength' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('onlyLetters') && !control.hasError('required')">
+      {{ 'validators.name.onlyLetters' | translate }}
+    </ng-container>
+  </mat-error>
+</ng-template>
+
+<ng-template #userNameErrorsRef let-control>
+  <mat-error *ngIf="control.invalid && control.touched">
+    <ng-container *ngIf="control.hasError('required')">
+      {{ 'validators.username.required' | translate }}
+    </ng-container>
+    <ng-container *ngIf="!control.hasError('required')">
+      {{ 'validators.username.common' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('minlength')">
+      {{ 'validators.username.minLength' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('onlyLettersAndNumbers') && !control.hasError('required')">
+      {{ 'validators.username.lettersOrNumbers' | translate }}
+    </ng-container>
+  </mat-error>
+</ng-template>
+
+<ng-template #passwordErrorsRef let-control>
+  <mat-error *ngIf="control.invalid && control.touched">
+    <ng-container *ngIf="control.hasError('required')">
+      {{ 'validators.pass.required' | translate }}
+    </ng-container>
+    <ng-container *ngIf="!control.hasError('required')">
+      {{ 'validators.pass.common' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('minlength')">
+      {{ 'validators.pass.minLength' | translate }}
+    </ng-container>
+    <ng-container *ngIf="control.hasError('isLettersAndNumbers') && !control.hasError('required')">
+      {{ 'validators.pass.lettersAndNumbers' | translate }}
+    </ng-container>
+  </mat-error>
+</ng-template>
