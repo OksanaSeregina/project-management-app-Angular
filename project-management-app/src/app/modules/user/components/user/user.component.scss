@@ -1,5 +1,10 @@
 @import '_styles';
 
+:host {
+  align-self: center;
+  margin: 1em;
+}
+
 .mat-error {
   position: relative;
   bottom: 1.3rem;
@@ -10,5 +15,5 @@
 .mat-dialog-actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem ;
+  margin-bottom: 1rem;
 }

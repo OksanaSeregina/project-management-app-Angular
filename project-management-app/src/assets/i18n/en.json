@@ -37,6 +37,9 @@
       "repass": "Confirm password",
       "button": "Update",
       "buttonDelete": "Delete"
+    },
+    "button-back": {
+      "title": "Navigate to Boards"
     }
   },
   "validators": {

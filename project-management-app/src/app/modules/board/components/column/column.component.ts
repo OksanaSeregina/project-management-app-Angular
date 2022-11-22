@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -30,6 +30,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   constructor(
     private columnFacade: ColumnFacade,
     private dialog: MatDialog,
+    private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
     private notificationService: NotificationService,
@@ -74,6 +75,10 @@ export class ColumnComponent implements OnInit, OnDestroy {
         this.openDialog({ title: 'column.add_column', action: IBoardModalAction.Create });
         break;
     }
+  }
+
+  public navigateToMain(): void {
+    this.router.navigate(['main']);
   }
 
   private sort(columns: IColumn[]): IColumn[] {

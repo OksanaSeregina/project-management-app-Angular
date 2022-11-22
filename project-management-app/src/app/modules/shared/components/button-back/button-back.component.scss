@@ -1,0 +1,16 @@
+@import '_styles';
+
+.back-button {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  font-family: $font-comfortaa;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

@@ -37,6 +37,9 @@
       "repass": "Подтвердить пароль",
       "button": "Изменить",
       "buttonDelete": "Удалить"
+    },
+    "button-back": {
+      "title": "Перейти к доскам"
     }
   },
   "validators": {
