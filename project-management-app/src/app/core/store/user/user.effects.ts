@@ -37,7 +37,8 @@ export class UserEffects {
               return UserActions.loadUser();
             }),
             catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.user.login' }), UserActions.logoutUser());
+              this.router.navigate(['/auth/login']);
+              return of(NotificationActions.showFailToast({ message: 'errors.user.login' }));
             }),
           );
         }),
