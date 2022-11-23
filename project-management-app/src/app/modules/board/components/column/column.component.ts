@@ -1,12 +1,12 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
+import some from 'lodash/some';
+import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import values from 'lodash/values';
-import some from 'lodash/some';
 import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService } from '../../../../core';
 import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
@@ -25,7 +25,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     this.isDragDisabled = some(values(state), (value) => !!value);
   }
 
-  public isDragDisabled: boolean = false;
+  public isDragDisabled = false;
   public boardTitle: string;
   public columns: IColumn[];
   public buttons: INavigateButton[] = [

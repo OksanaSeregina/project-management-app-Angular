@@ -33,10 +33,11 @@ export class UserEffects {
           return this.authService.signin(userReq).pipe(
             map((token: UserToken) => {
               this.storageService.set('token', token.token);
+              this.router.navigate(['main']);
               return UserActions.loadUser();
             }),
             catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.user.login' }));
+              return of(NotificationActions.showFailToast({ message: 'errors.user.login' }), UserActions.logoutUser());
             }),
           );
         }),
@@ -118,7 +119,6 @@ export class UserEffects {
         switchMap((id) => {
           return this.userService.loadUser(id).pipe(
             map((userResp: UserResp) => {
-              this.router.navigate(['main']);
               return UserActions.loadUserSuccess({ userResp });
             }),
             catchError(() => {

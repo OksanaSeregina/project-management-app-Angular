@@ -10,8 +10,8 @@ import { IColumn } from '../../../../../core';
 export class ColumnItemComponent {
   private _value: IColumn;
 
-  public isEditable: boolean = false;
-  public title: string = '';
+  public isEditable = false;
+  public title = '';
 
   @Input()
   public set value(column: IColumn) {

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ColumnComponent } from './components';
 
 const routes: Routes = [
-  { path: '', redirectTo: ':id', pathMatch: 'full' },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: ':id', component: ColumnComponent },
 ];
 
