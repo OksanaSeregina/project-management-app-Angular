@@ -99,7 +99,7 @@ export class CommonEffects {
       this.actions$.pipe(
         ofType(CommonActions.loadIsList),
         switchMap(() => {
-          const isListExist: boolean = !isNil(this.storage.get('isList'));
+          const isListExist = !isNil(this.storage.get('isList'));
           const isList = isListExist ? <boolean>this.storage.get('isList') : true;
           return of(CommonActions.loadIsListSuccess({ isList }));
         }),

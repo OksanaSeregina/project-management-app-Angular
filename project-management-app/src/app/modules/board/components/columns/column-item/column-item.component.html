@@ -1,6 +1,12 @@
 <article class="column-item">
   <div class="header-column-item">
-    <button [appTooltip]="value.title" data-tooltip-position='bottom' class="item-title" *ngIf="!isEditable; else editableRef" (click)="toggle()">
+    <button
+      [appTooltip]="value.title"
+      data-tooltip-position="bottom"
+      class="item-title"
+      *ngIf="!isEditable; else editableRef"
+      (click)="toggle()"
+    >
       {{ value.title | truncate: 20 }}
     </button>
     <div class="item-buttons">

@@ -12,10 +12,10 @@ import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../sh
 
 @Component({
   selector: 'app-column',
-  templateUrl: './column.component.html',
-  styleUrls: ['./column.component.scss'],
+  templateUrl: './columns.component.html',
+  styleUrls: ['./columns.component.scss'],
 })
-export class ColumnComponent implements OnInit, OnDestroy {
+export class ColumnsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private boardId: string;
   private _columnEditableState = {};
@@ -25,7 +25,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     this.isDragDisabled = some(values(state), (value) => !!value);
   }
 
-  public isDragDisabled: boolean = false;
+  public isDragDisabled = false;
   public boardTitle: string;
   public columns: IColumn[];
   public buttons: INavigateButton[] = [

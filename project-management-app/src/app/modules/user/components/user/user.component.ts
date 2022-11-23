@@ -3,8 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 import {
-  confirmedPassValidator, isLettersAndNumbersValidator, NotificationService, onlyLettersAndNumbersValidator,
-  onlyLettersValidator, TokenService, UserData, UserFacade
+  confirmedPassValidator,
+  isLettersAndNumbersValidator,
+  NotificationService,
+  onlyLettersAndNumbersValidator,
+  onlyLettersValidator,
+  TokenService,
+  UserData,
+  UserFacade,
 } from '../../../../core';
 
 export const MIN_LENGTH_LOGIN = 2;
