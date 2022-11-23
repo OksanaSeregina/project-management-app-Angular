@@ -142,5 +142,8 @@
     "update_column_fail_message": "Не удалось обновить колонку",
     "delete_column_success_message": "Колонка успешно удалена",
     "delete_column_fail_message": "Не удалось удалить колонку"
+  },
+  "tasks": {
+    "add_new_task": "Создать задачу"
   }
 }

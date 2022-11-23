@@ -27,6 +27,10 @@ export class ColumnsService {
     });
   }
 
+  public updateColumnsSet(columns: Pick<IColumn, '_id' | 'order'>[]): Observable<IColumn[]> {
+    return this.http.patch<IColumn[]>(`${HTTP_CONFIG.baseUrl}columnsSet`, columns);
+  }
+
   public delete(boardId: string, columnId: string): Observable<IColumn> {
     return this.http.delete<IColumn>(`${URL}/${boardId}/columns/${columnId}`);
   }

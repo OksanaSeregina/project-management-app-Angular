@@ -8,13 +8,39 @@ import { IColumn } from '../../../../../core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnItemComponent {
-  @Input() public value: IColumn;
+  private _value: IColumn;
+
+  public isEditable: boolean = false;
+  public title: string = '';
+
+  @Input()
+  public set value(column: IColumn) {
+    this._value = column;
+    this.title = column.title;
+  }
+
+  public get value() {
+    return this._value;
+  }
 
   @Output() public update = new EventEmitter<IColumn>();
   @Output() public delete = new EventEmitter<IColumn>();
+  @Output() public editableState = new EventEmitter<boolean>();
+
+  constructor() {}
+
+  public toggle(): void {
+    this.isEditable = !this.isEditable;
+    this.editableState.emit(this.isEditable);
+  }
+
+  public revertColumn(): void {
+    this.title = this.value.title;
+    this.toggle();
+  }
 
   public updateColumn(): void {
-    this.update.emit(this.value);
+    this.update.emit({ ...this.value, title: this.title });
   }
 
   public deleteColumn(): void {

@@ -1,24 +1,34 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { ColumnFacade, IColumn, INavigateButton, NotificationService } from '../../../../core';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import values from 'lodash/values';
+import some from 'lodash/some';
+import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService } from '../../../../core';
 import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private boardId: string;
+  private _columnEditableState = {};
 
-  public columns$: Observable<IColumn[]>;
-  buttons: INavigateButton[] = [
+  public set columnEditableState(state: { [key: string]: boolean }) {
+    this._columnEditableState = state;
+    this.isDragDisabled = some(values(state), (value) => !!value);
+  }
+
+  public isDragDisabled: boolean = false;
+  public boardTitle: string;
+  public columns: IColumn[];
+  public buttons: INavigateButton[] = [
     {
       icon: 'add',
       value: this.translate.instant('column.add_column'),
@@ -29,6 +39,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   constructor(
     private columnFacade: ColumnFacade,
+    private boardFacade: BoardFacade,
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
@@ -49,7 +60,18 @@ export class ColumnComponent implements OnInit, OnDestroy {
       }),
     );
 
-    this.columns$ = this.columnFacade.columns$.pipe(map((columns: IColumn[]) => this.sort(columns)));
+    this.subscription.add(
+      this.boardFacade.boards$.subscribe((boards) => {
+        const board: IBoard | undefined = boards.find((board) => board._id === this.boardId);
+        if (board) {
+          this.boardTitle = board.title;
+        }
+      }),
+    );
+
+    this.subscription.add(
+      this.columnFacade.columns$.subscribe((columns: IColumn[]) => (this.columns = this.sort(columns))),
+    );
   }
 
   public ngOnDestroy(): void {
@@ -58,8 +80,8 @@ export class ColumnComponent implements OnInit, OnDestroy {
     }
   }
 
-  public updateColumn(column: IColumn): void {
-    this.openDialog({ title: 'column.edit_column', action: IBoardModalAction.Update, board: column });
+  public updateColumn({ title, _id, order }: IColumn): void {
+    this.columnFacade.updateColumn(this.boardId, <Pick<IColumn, '_id' | 'title' | 'order'>>{ title, _id, order });
   }
 
   public deleteColumn(column: IColumn): void {
@@ -81,8 +103,20 @@ export class ColumnComponent implements OnInit, OnDestroy {
     this.router.navigate(['main']);
   }
 
+  public drop(event: CdkDragDrop<IColumn[]>): void {
+    if (event.previousIndex !== event.currentIndex) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      const columns: Pick<IColumn, '_id' | 'order'>[] = event.container.data.map(({ _id }, order) => ({ _id, order }));
+      this.columnFacade.updateColumnsSet(this.boardId, columns);
+    }
+  }
+
+  public updateEditableState(value: boolean, column: IColumn): void {
+    this.columnEditableState = { ...this._columnEditableState, [column._id]: value };
+  }
+
   private sort(columns: IColumn[]): IColumn[] {
-    return [...columns].sort((a, b) => (<string>a._id).localeCompare(<string>b._id, undefined, { numeric: false }));
+    return [...columns].sort((a, b) => a.order - b.order);
   }
 
   private openDialog(data: IBoardModal): void {
@@ -95,14 +129,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((data: IBoardModal) => {
         if (data?.board) {
-          switch (data.action) {
-            case IBoardModalAction.Create:
-              this.columnFacade.createColumn(this.boardId, { ...data.board, order: 0 });
-              break;
-            case IBoardModalAction.Update:
-              this.columnFacade.updateColumn(this.boardId, <Pick<IColumn, '_id' | 'title' | 'order'>>data.board);
-              break;
-          }
+          this.columnFacade.createColumn(this.boardId, { ...data.board, order: this.columns?.length || 0 });
         }
       });
   }

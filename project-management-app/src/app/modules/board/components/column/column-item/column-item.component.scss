@@ -1,10 +1,78 @@
-.items-column {
+@import '_styles';
+
+.column-item {
+  display: flex;
+  flex: 1 1 0px;
+  flex-direction: column;
+  background-color: $light-blue;
+  width: 250px;
+  height: 100%;
+  border: 1px solid $gray;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.header-column-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
 
   .item-buttons {
     display: flex;
+    flex: 0 1 60px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
+  }
+}
+
+.button {
+  background: transparent;
+  border: none;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.item-title {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  font-family: $font-comfortaa;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.item-title--edit {
+  all: unset;
+  width: calc(100% - 60px);
+}
+
+.item-task-container {
+  justify-self: flex-start;
+  flex: 1 0 0px;
+  width: 100%;
+}
+
+.item-footer {
+  width: 100%;
+  height: 40px;
+
+  .button {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-comfortaa;
+    font-size: 16px;
   }
 }

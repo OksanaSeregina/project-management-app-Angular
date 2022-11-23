@@ -1,11 +1,35 @@
-<article class="items-column">
-  <h3>{{ value.title }}</h3>
-  <div class="item-buttons">
-    <button mat-icon-button (click)="updateColumn()">
-      <mat-icon>edit</mat-icon>
+<article class="column-item">
+  <div class="header-column-item">
+    <button class="item-title" *ngIf="!isEditable; else editableRef" (click)="toggle()">
+      {{ value.title | truncate: 20 }}
     </button>
-    <button mat-icon-button (click)="deleteColumn()">
-      <mat-icon>delete</mat-icon>
+    <div class="item-buttons">
+      <button
+        *ngIf="isEditable"
+        class="button"
+        mat-icon-button
+        [disabled]="value.title === title || !title.trim().length"
+        (click)="updateColumn(); $event.stopPropagation()"
+      >
+        <mat-icon>done</mat-icon>
+      </button>
+      <button *ngIf="isEditable" class="button" mat-icon-button (click)="revertColumn(); $event.stopPropagation()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button *ngIf="!isEditable" class="button" mat-icon-button (click)="deleteColumn(); $event.stopPropagation()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="item-task-container"><!-- Put tasks here --></div>
+  <div class="item-footer">
+    <button [disabled]="isEditable" class="button" mat-icon-button>
+      <mat-icon>add</mat-icon>
+      {{ 'tasks.add_new_task' | translate }}
     </button>
   </div>
 </article>
+
+<ng-template #editableRef>
+  <input class="item-title--edit" type="text" placeholder="" autocomplete="off" [(ngModel)]="title" />
+</ng-template>

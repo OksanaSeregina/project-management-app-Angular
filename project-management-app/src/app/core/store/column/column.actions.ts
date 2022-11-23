@@ -19,5 +19,10 @@ export const updateColumn = createAction(
 );
 export const updateColumnSuccess = createAction('[Column] UPDATE_COLUMN_SUCCESS', props<{ column: IColumn }>());
 
+export const updateColumnsSet = createAction(
+  '[Column] UPDATE_COLUMNS_SET',
+  props<{ boardId: string; columns: Pick<IColumn, '_id' | 'order'>[] }>(),
+);
+
 export const deleteColumn = createAction('[Column] DELETE_COLUMN', props<{ boardId: string; columnId: string }>());
 export const deleteColumnSuccess = createAction('[Column] DELETE_COLUMN_SUCCESS', props<{ id: string }>());

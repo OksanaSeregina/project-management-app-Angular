@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { Observable, of, from } from 'rxjs';
+import { catchError, switchMap, mergeMap } from 'rxjs/operators';
 import { IColumn } from '../../models';
 import { ColumnsService } from '../../services';
 import { NotificationActions } from '../notification';
@@ -18,6 +18,7 @@ export class ColumnEffects {
   public loadColumns$: Observable<Action>;
   public createColumn$: Observable<Action>;
   public updateColumn$: Observable<Action>;
+  public updateColumnsSet$: Observable<Action>;
   public deleteColumn$: Observable<Action>;
 
   constructor(actions$: Actions, private columnService: ColumnsService) {
@@ -58,6 +59,25 @@ export class ColumnEffects {
               NotificationActions.showSuccessToast({ message: 'column.update_column_success_message' }),
             ]),
             catchError(() => of(NotificationActions.showFailToast({ message: 'column.update_column_fail_message' }))),
+          );
+        }),
+      ),
+    );
+
+    this.updateColumnsSet$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(ColumnActions.updateColumnsSet),
+        switchMap((payload) => {
+          return this.columnService.updateColumnsSet(payload.columns).pipe(
+            switchMap((columns: IColumn[]) => {
+              return from(columns).pipe(mergeMap((column) => of(ColumnActions.updateColumnSuccess({ column }))));
+            }),
+            catchError(() =>
+              of(
+                NotificationActions.showFailToast({ message: 'column.update_column_fail_message' }),
+                ColumnActions.loadColumns({ boardId: payload.boardId }), // NOTE: We need to upload initial state as we already emulated changes from UI perspective
+              ),
+            ),
           );
         }),
       ),

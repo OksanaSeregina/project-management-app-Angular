@@ -1,14 +1,26 @@
-<div class="wrapper">
+<div cdkDropListGroup class="wrapper">
   <div class="head">
     <app-button-back (navigate)="navigateToMain()"></app-button-back>
+    <h3 *ngIf="boardTitle">{{ boardTitle }}</h3>
     <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
   </div>
-  <div class="grid-container">
-    <app-column-item
-      *ngFor="let value of columns$ | async"
-      [value]="value"
-      (update)="updateColumn($event)"
-      (delete)="deleteColumn($event)"
-    ></app-column-item>
+  <div
+    class="scroll-container"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="columns"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="flex-container">
+      <app-column-item
+        *ngFor="let value of columns"
+        cdkDrag
+        [cdkDragDisabled]="isDragDisabled"
+        [value]="value"
+        (editableState)="updateEditableState($event, value)"
+        (update)="updateColumn($event)"
+        (delete)="deleteColumn($event)"
+      ></app-column-item>
+    </div>
   </div>
 </div>

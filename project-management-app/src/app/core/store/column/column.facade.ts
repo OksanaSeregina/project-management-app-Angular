@@ -32,6 +32,10 @@ export class ColumnFacade {
     this.store.dispatch(ColumnActions.updateColumn({ boardId, column }));
   }
 
+  public updateColumnsSet(boardId: string, columns: Pick<IColumn, '_id' | 'order'>[]): void {
+    this.store.dispatch(ColumnActions.updateColumnsSet({ boardId, columns }));
+  }
+
   public deleteColumn(boardId: string, columnId: string): void {
     this.store.dispatch(ColumnActions.deleteColumn({ boardId, columnId }));
   }

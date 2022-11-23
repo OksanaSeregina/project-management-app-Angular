@@ -142,5 +142,8 @@
     "update_column_fail_message": "Can not update the column",
     "delete_column_success_message": "The column was successfully deleted",
     "delete_column_fail_message": "Can not delete the column"
+  },
+  "tasks": {
+    "add_new_task": "Add task"
   }
 }
