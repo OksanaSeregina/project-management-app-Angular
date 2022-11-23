@@ -1,10 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { TasksState } from './tasks.state';
 
-const selectFeature = createFeatureSelector<TasksState>('tasks');
+const selectTasksState = createFeatureSelector<TasksState>('tasks');
+
+export const selectTasks = createSelector(selectTasksState, (state: TasksState) => state);
 
 export const selectTasksByColumn = (columnId: string) =>
-  createSelector(selectFeature, (state: TasksState) => state[columnId]);
+  createSelector(selectTasksState, (state: TasksState) => state[columnId]);
 
 export const selectTaskInColumn = (columnId: string, taskId: string) =>
-  createSelector(selectFeature, (state: TasksState) => state[columnId].find(({ _id }) => _id === taskId));
+  createSelector(selectTasksState, (state: TasksState) => state[columnId].find(({ _id }) => _id === taskId));

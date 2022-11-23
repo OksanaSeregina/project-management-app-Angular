@@ -16,6 +16,7 @@ export class TasksEffects {
   public updateTask$: Observable<Action>;
   public deleteTask$: Observable<Action>;
   public searchTasks$: Observable<Action>;
+  public updateTasksSet$: Observable<Action>;
 
   constructor(private readonly actions$: Actions, private tasksService: TasksService) {
     this.loadTask$ = createEffect(() => {
@@ -115,5 +116,25 @@ export class TasksEffects {
         }),
       );
     });
+
+    this.updateTasksSet$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(TasksActions.updateTasksSet),
+        switchMap((payload) => {
+          return this.tasksService.updateTasksSet(payload.tasks).pipe(
+            switchMap((tasks: TaskResp[]) => {
+              return from(tasks).pipe(mergeMap((taskResp) => of(TasksActions.updateTaskSuccess({ taskResp }))));
+            }),
+            catchError(() =>
+              of(
+                NotificationActions.showFailToast({ message: 'errors.tasks.update' }),
+                TasksActions.loadTasks({ boardId: payload.boardId, columns: payload.columns }), // NOTE: We need to upload initial state as we already emulated changes from UI perspective
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { TaskResp, TasksFacade } from '../../../../../core/';
+import { IColumn, TaskResp, TasksFacade } from '../../../../../core/';
 
 @Component({
   selector: 'app-task-item',
@@ -9,6 +9,7 @@ import { TaskResp, TasksFacade } from '../../../../../core/';
 })
 export class TaskItemComponent {
   @Input() public task: TaskResp;
+  @Input() public columns: IColumn[];
 
   @Output() public update = new EventEmitter<TaskResp>();
   @Output() public delete = new EventEmitter<TaskResp>();

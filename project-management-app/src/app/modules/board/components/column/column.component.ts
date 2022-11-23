@@ -20,14 +20,10 @@ export class ColumnComponent implements OnInit, OnDestroy {
   private boardId: string;
   private _columnEditableState = {};
 
-  public set columnEditableState(state: { [key: string]: boolean }) {
-    this._columnEditableState = state;
-    this.isDragDisabled = some(values(state), (value) => !!value);
-  }
-
   public isDragDisabled = false;
   public boardTitle: string;
   public columns: IColumn[];
+  public columnsIds: string[];
   public buttons: INavigateButton[] = [
     {
       icon: 'add',
@@ -36,6 +32,10 @@ export class ColumnComponent implements OnInit, OnDestroy {
       route: 'add',
     },
   ];
+  public set columnEditableState(state: { [key: string]: boolean }) {
+    this._columnEditableState = state;
+    this.isDragDisabled = some(values(state), (value) => !!value);
+  }
 
   constructor(
     private columnFacade: ColumnFacade,
@@ -70,7 +70,10 @@ export class ColumnComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.columnFacade.columns$.subscribe((columns: IColumn[]) => (this.columns = this.sort(columns))),
+      this.columnFacade.columns$.subscribe((columns: IColumn[]) => {
+        this.columns = this.sort(columns);
+        this.columnsIds = this.columns.map((column) => column._id);
+      }),
     );
   }
 

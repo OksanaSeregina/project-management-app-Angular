@@ -1,31 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NotificationService, TasksFacade, IColumn, TaskResp } from '../../../../core';
+import { TranslateService } from '@ngx-translate/core';
+import { ColumnFacade, NotificationService, TaskResp, TasksFacade } from '../../../../core';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
 })
-export class TasksComponent implements OnInit {
-  @Input() public value: IColumn;
-
-  private subscription: Subscription;
-
-  public tasks$: Observable<TaskResp[]>;
+export class TasksComponent {
+  @Input() public tasks: TaskResp[];
 
   constructor(
     private tasksFacade: TasksFacade,
+    private columnFacade: ColumnFacade,
     private translate: TranslateService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
   ) {}
-
-  public ngOnInit(): void {
-    this.tasks$ = this.tasksFacade.getTasksByColumn(this.value._id);
-  }
 
   public updateTask(task: TaskResp): void {}
 
