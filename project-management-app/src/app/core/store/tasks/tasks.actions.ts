@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { TaskResp } from '../../models';
+import { IColumn, TaskResp } from '../../models';
 
 const LOAD_TASK = '[Tasks] LOAD_TASK';
 const LOAD_TASK_SUCCESS = '[Tasks] LOAD_TASK_SUCCESS';
@@ -17,7 +17,7 @@ const SEARCH_TASKS_SUCCESS = '[Tasks] SEARCH_TASKS_SUCCESS';
 export const loadTask = createAction(LOAD_TASK, props<{ boardId: string; columnId: string; taskId: string }>());
 export const loadTaskSuccess = createAction(LOAD_TASK_SUCCESS, props<{ taskResp: TaskResp }>());
 
-export const loadTasks = createAction(LOAD_TASKS, props<{ boardId: string; columnId: string }>());
+export const loadTasks = createAction(LOAD_TASKS, props<{ boardId: string; columns: IColumn[] }>());
 export const loadTasksSuccess = createAction(LOAD_TASKS_SUCCESS, props<{ tasksResp: TaskResp[] }>());
 
 export const createTask = createAction(CREATE_TASK, props<{ taskReq: TaskResp }>());

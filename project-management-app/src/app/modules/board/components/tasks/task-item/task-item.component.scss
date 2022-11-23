@@ -1,0 +1,11 @@
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .task-item__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}

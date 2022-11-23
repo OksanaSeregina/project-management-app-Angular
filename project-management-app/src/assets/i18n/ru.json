@@ -14,6 +14,10 @@
       "title": "",
       "message": "Вы действительно хотите удалить пользователя?"
     },
+    "confirmation-task": {
+      "title": "",
+      "message": "Вы действительно хотите удалить задачу"
+    },
     "login": {
       "title": "Авторизация",
       "login": "Логин",
@@ -37,6 +41,24 @@
       "repass": "Подтвердить пароль",
       "button": "Изменить",
       "buttonDelete": "Удалить"
+    },
+    "tasks": {
+      "add": "Добавить задачу",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "addSuccessMessage": "Новая задача успешно добавлена",
+      "addFailMessage": "Не удалось добавить задачу",
+      "updateSuccessMessage": "Задача успешно обновлена",
+      "updateFailMessage": "Не удалось обновить задачу",
+      "deleteSuccessMessage": "Задача успешно удалена",
+      "deleteFailMessage": "Не удалось удалить задачу"
+    },
+    "task-modal": {
+      "title": "Название",
+      "description": "Описание",
+      "cancel": "Отменить",
+      "create": "Создать",
+      "save": "Сохранить"
     },
     "button-back": {
       "title": "Перейти к доскам"

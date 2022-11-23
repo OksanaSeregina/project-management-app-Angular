@@ -1,0 +1,9 @@
+<div class="tasks__container">
+  <h3>Hello!</h3>
+  <app-task-item
+    *ngFor="let element of tasks$ | async"
+    [task]="element"
+    (update)="updateTask($event)"
+    (delete)="deleteTask($event)"
+  ></app-task-item>
+</div>

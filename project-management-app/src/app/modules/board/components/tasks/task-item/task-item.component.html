@@ -1,0 +1,11 @@
+<article class="task-item">
+  <h3>{{ task.title }}</h3>
+  <div class="task-item__buttons">
+    <button mat-icon-button (click)="updateTask(); $event.stopPropagation()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteTask(); $event.stopPropagation()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</article>

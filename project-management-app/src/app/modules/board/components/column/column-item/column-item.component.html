@@ -1,6 +1,12 @@
 <article class="column-item">
   <div class="header-column-item">
-    <button [appTooltip]="value.title" data-tooltip-position='bottom' class="item-title" *ngIf="!isEditable; else editableRef" (click)="toggle()">
+    <button
+      [appTooltip]="value.title"
+      data-tooltip-position="bottom"
+      class="item-title"
+      *ngIf="!isEditable; else editableRef"
+      (click)="toggle()"
+    >
       {{ value.title | truncate: 20 }}
     </button>
     <div class="item-buttons">
@@ -21,7 +27,9 @@
       </button>
     </div>
   </div>
-  <div class="item-task-container"><!-- Put tasks here --></div>
+  <div class="item-task-container">
+    <app-tasks [value]="value"></app-tasks>
+  </div>
   <div class="item-footer">
     <button [disabled]="isEditable" class="button" mat-icon-button>
       <mat-icon>add</mat-icon>

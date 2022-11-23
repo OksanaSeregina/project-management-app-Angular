@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  BoardModalComponent, ButtonBackComponent, ButtonMulticolorComponent, FooterComponent, HeaderComponent,
-  NotFoundComponent,
-} from './components';
+import { BoardModalComponent, ButtonBackComponent, ButtonMulticolorComponent, FooterComponent, HeaderComponent,
+  NotFoundComponent } from './components';
 import { DirectivesModule } from './directives';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';

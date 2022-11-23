@@ -14,11 +14,14 @@ export const tasksReducers = createReducer(
     };
   }),
   on(TasksActions.loadTasksSuccess, (state, { tasksResp }): TasksState => {
-    const key = tasksResp[0].columnId;
-    return {
-      ...state,
-      [key]: [...tasksResp],
-    };
+    if (tasksResp.length) {
+      const key = tasksResp[0].columnId;
+      return {
+        ...state,
+        [key]: [...tasksResp],
+      };
+    }
+    return { ...state };
   }),
   on(TasksActions.createTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;

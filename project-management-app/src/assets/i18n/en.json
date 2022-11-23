@@ -14,6 +14,10 @@
       "title": "",
       "message": "Do you really want to delete the user?"
     },
+    "confirmation-task": {
+      "title": "",
+      "message": "Do you really want to delete the task"
+    },
     "login": {
       "title": "Authorization",
       "login": "Login",
@@ -37,6 +41,24 @@
       "repass": "Confirm password",
       "button": "Update",
       "buttonDelete": "Delete"
+    },
+    "tasks": {
+      "add": "Add new task",
+      "edit": "Edit",
+      "delete": "Delete",
+      "addSuccessMessage": "New task was successfully added",
+      "addFailMessage": "Can not add new task",
+      "updateSuccessMessage": "The task was successfully updated",
+      "updateFailMessage": "Can not update the task",
+      "deleteSuccessMessage": "The task was successfully deleted",
+      "deleteFailMessage": "Can not delete the task"
+    },
+    "task-modal": {
+      "title": "Title",
+      "description": "Description",
+      "cancel": "Cancel",
+      "create": "Create",
+      "save": "Save"  
     },
     "button-back": {
       "title": "Navigate to Boards"

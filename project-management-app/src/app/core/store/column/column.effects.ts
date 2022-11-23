@@ -6,6 +6,7 @@ import { catchError, switchMap, mergeMap } from 'rxjs/operators';
 import { IColumn } from '../../models';
 import { ColumnsService } from '../../services';
 import { NotificationActions } from '../notification';
+import * as TasksActions from '../tasks/tasks.actions';
 import * as ColumnActions from './column.actions';
 
 /**
@@ -23,16 +24,21 @@ export class ColumnEffects {
 
   constructor(actions$: Actions, private columnService: ColumnsService) {
     this.actions$ = actions$;
-    this.loadColumns$ = createEffect(() =>
-      this.actions$.pipe(
+    this.loadColumns$ = createEffect(() => {
+      return this.actions$.pipe(
         ofType(ColumnActions.loadColumns),
         switchMap(({ boardId }) => {
           return this.columnService
             .get(boardId)
-            .pipe(switchMap((columns: IColumn[]) => of(ColumnActions.loadColumnsSuccess({ columns }))));
+            .pipe(
+              switchMap((columns: IColumn[]) => [
+                ColumnActions.loadColumnsSuccess({ columns }),
+                TasksActions.loadTasks({ boardId, columns }),
+              ]),
+            );
         }),
-      ),
-    );
+      );
+    });
 
     this.createColumn$ = createEffect(() =>
       this.actions$.pipe(

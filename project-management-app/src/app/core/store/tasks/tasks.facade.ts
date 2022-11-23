@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { TaskResp } from '../../models';
+import { IColumn, TaskResp } from '../../models';
 import { AppState } from '../app.state';
 import * as TasksActions from './tasks.actions';
+import { selectTasksByColumn } from './tasks.selectors';
 
 @Injectable()
 export class TasksFacade {
@@ -19,8 +20,8 @@ export class TasksFacade {
     this.store.dispatch(TasksActions.loadTask({ boardId, columnId, taskId }));
   }
 
-  public loadTasks(boardId: string, columnId: string): void {
-    this.store.dispatch(TasksActions.loadTasks({ boardId, columnId }));
+  public loadTasks(boardId: string, columns: IColumn[]): void {
+    this.store.dispatch(TasksActions.loadTasks({ boardId, columns }));
   }
 
   public createTask(taskReq: TaskResp): void {
@@ -37,5 +38,9 @@ export class TasksFacade {
 
   public searchTasks(ids: string[], userId: string, search: string): void {
     this.store.dispatch(TasksActions.searchTasks({ ids, userId, search }));
+  }
+
+  public getTasksByColumn(columnId: string): Observable<TaskResp[]> {
+    return this.store.select(selectTasksByColumn(columnId));
   }
 }

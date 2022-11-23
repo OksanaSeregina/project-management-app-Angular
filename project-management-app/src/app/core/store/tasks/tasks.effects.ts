@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { TaskResp } from '../../models';
 import { TasksService } from '../../services';
 import { NotificationActions } from '../notification';
@@ -37,15 +37,17 @@ export class TasksEffects {
     this.loadTasks$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(TasksActions.loadTasks),
-        switchMap(({ boardId, columnId }) => {
-          return this.tasksService.getTasksInColumn(boardId, columnId).pipe(
-            map((tasksResp: TaskResp[]) => {
-              return TasksActions.loadTasksSuccess({ tasksResp });
-            }),
-            catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.tasks.loadTasks' }));
-            }),
-          );
+        switchMap(({ boardId, columns }) => {
+          return from(columns)
+            .pipe(
+              mergeMap((column) => this.tasksService.getTasksInColumn(boardId, column._id)),
+              map((tasksResp: TaskResp[]) => TasksActions.loadTasksSuccess({ tasksResp })),
+            )
+            .pipe(
+              catchError(() => {
+                return of(NotificationActions.showFailToast({ message: 'errors.tasks.loadTasks' }));
+              }),
+            );
         }),
       );
     });
