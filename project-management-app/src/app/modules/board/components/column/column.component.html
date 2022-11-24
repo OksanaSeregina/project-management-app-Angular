@@ -17,7 +17,7 @@
         cdkDrag
         [cdkDragDisabled]="isDragDisabled"
         [value]="value"
-        [columns]="columns"
+        [columns]="columns.slice()"
         [columnsIds]="columnsIds"
         (editableState)="updateEditableState($event, value)"
         (update)="updateColumn($event)"
