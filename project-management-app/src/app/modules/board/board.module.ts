@@ -8,6 +8,7 @@ import { ColumnsComponent, ColumnItemComponent } from './components';
 
 @NgModule({
   declarations: [ColumnItemComponent, ColumnsComponent],
+
   imports: [CommonModule, FormsModule, SharedModule, BoardRoutingModule, TranslateModule],
 })
 export class BoardModule {}

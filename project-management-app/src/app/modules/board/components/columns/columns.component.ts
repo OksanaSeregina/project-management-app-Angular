@@ -1,14 +1,14 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
+import some from 'lodash/some';
+import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import values from 'lodash/values';
-import some from 'lodash/some';
 import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService } from '../../../../core';
-import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../shared';
+import { DialogComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',
@@ -20,14 +20,18 @@ export class ColumnsComponent implements OnInit, OnDestroy {
   private boardId: string;
   private _columnEditableState = {};
 
+<<<<<<< HEAD:project-management-app/src/app/modules/board/components/columns/columns.component.ts
   public set columnEditableState(state: { [key: string]: boolean }) {
     this._columnEditableState = state;
     this.isDragDisabled = some(values(state), (value) => !!value);
   }
 
+=======
+>>>>>>> develop:project-management-app/src/app/modules/board/components/column/column.component.ts
   public isDragDisabled = false;
   public boardTitle: string;
   public columns: IColumn[];
+  public columnsIds: string[];
   public buttons: INavigateButton[] = [
     {
       icon: 'add',
@@ -36,6 +40,10 @@ export class ColumnsComponent implements OnInit, OnDestroy {
       route: 'add',
     },
   ];
+  public set columnEditableState(state: { [key: string]: boolean }) {
+    this._columnEditableState = state;
+    this.isDragDisabled = some(values(state), (value) => !!value);
+  }
 
   constructor(
     private columnFacade: ColumnFacade,
@@ -70,7 +78,10 @@ export class ColumnsComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.columnFacade.columns$.subscribe((columns: IColumn[]) => (this.columns = this.sort(columns))),
+      this.columnFacade.columns$.subscribe((columns: IColumn[]) => {
+        this.columns = this.sort(columns);
+        this.columnsIds = this.columns.map((column) => column._id);
+      }),
     );
   }
 
@@ -120,7 +131,7 @@ export class ColumnsComponent implements OnInit, OnDestroy {
   }
 
   private openDialog(data: IBoardModal): void {
-    const dialogRef = this.dialog.open(BoardModalComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '50vw',
       data,
     });

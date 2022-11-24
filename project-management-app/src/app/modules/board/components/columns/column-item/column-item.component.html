@@ -27,7 +27,16 @@
       </button>
     </div>
   </div>
-  <div class="item-task-container"><!-- Put tasks here --></div>
+  <div
+    class="item-task-container"
+    cdkDropList
+    [id]="value._id"
+    [cdkDropListData]="tasks"
+    [cdkDropListConnectedTo]="columnsIds"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <app-tasks [tasks]="tasks"></app-tasks>
+  </div>
   <div class="item-footer">
     <button [disabled]="isEditable" class="button" mat-icon-button>
       <mat-icon>add</mat-icon>

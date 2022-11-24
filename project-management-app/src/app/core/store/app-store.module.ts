@@ -9,6 +9,7 @@ import { BoardStoreModule } from './board';
 import { ColumnStoreModule } from './column';
 import { CommonStoreModule } from './common';
 import { NotificationStoreModule } from './notification';
+import { TasksStoreModule } from './tasks';
 import { UserStoreModule } from './user';
 import { UsersStoreModule } from './users';
 
@@ -32,6 +33,7 @@ import { UsersStoreModule } from './users';
     UserStoreModule,
     UsersStoreModule,
     ColumnStoreModule,
+    TasksStoreModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
 })

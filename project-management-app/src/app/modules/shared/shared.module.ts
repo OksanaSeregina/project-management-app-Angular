@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  BoardModalComponent,
+  DialogComponent,
   ButtonBackComponent,
   ButtonMulticolorComponent,
   FooterComponent,
@@ -22,7 +22,7 @@ import { PipesModule } from './pipes';
     FooterComponent,
     ButtonBackComponent,
     ButtonMulticolorComponent,
-    BoardModalComponent,
+    DialogComponent,
     ButtonBackComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, TranslateModule, PipesModule, FormsModule, DirectivesModule],
@@ -32,7 +32,7 @@ import { PipesModule } from './pipes';
     NotFoundComponent,
     MaterialModule,
     PipesModule,
-    BoardModalComponent,
+    DialogComponent,
     ButtonBackComponent,
     ButtonMulticolorComponent,
     DirectivesModule,

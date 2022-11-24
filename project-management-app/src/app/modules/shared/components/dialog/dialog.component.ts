@@ -4,15 +4,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { INavigateButton } from '../../../../core';
-import { IBoardModal } from '../../../shared';
+import { IBoardModal } from '../..';
 
 @Component({
-  selector: 'app-board-modal',
-  templateUrl: './board-modal.component.html',
-  styleUrls: ['./board-modal.component.scss'],
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BoardModalComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   form: FormGroup;
@@ -34,7 +34,7 @@ export class BoardModalComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IBoardModal,
-    private dialogRef: MatDialogRef<BoardModalComponent>,
+    private dialogRef: MatDialogRef<DialogComponent>,
     private translate: TranslateService,
   ) {}
 

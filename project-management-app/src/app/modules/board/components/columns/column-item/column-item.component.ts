@@ -1,25 +1,34 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IColumn } from '../../../../../core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import isEqual from 'lodash/isEqual';
+import { Subscription } from 'rxjs';
+import { IColumn, TaskResp, TaskSetReq, TasksFacade } from '../../../../../core';
 
 @Component({
   selector: 'app-column-item',
   templateUrl: './column-item.component.html',
   styleUrls: ['./column-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColumnItemComponent {
+export class ColumnItemComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   private _value: IColumn;
 
   public isEditable = false;
   public title = '';
+<<<<<<< HEAD:project-management-app/src/app/modules/board/components/columns/column-item/column-item.component.ts
+=======
+  public tasks: TaskResp[];
+>>>>>>> develop:project-management-app/src/app/modules/board/components/column/column-item/column-item.component.ts
 
+  @Input() public columns: IColumn[];
+  @Input() public columnsIds: string[];
   @Input()
   public set value(column: IColumn) {
     this._value = column;
     this.title = column.title;
   }
 
-  public get value() {
+  public get value(): IColumn {
     return this._value;
   }
 
@@ -27,7 +36,19 @@ export class ColumnItemComponent {
   @Output() public delete = new EventEmitter<IColumn>();
   @Output() public editableState = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(private tasksFacade: TasksFacade) {}
+
+  public ngOnInit(): void {
+    this.subscription = this.tasksFacade.tasks$.subscribe(
+      (tasks) => (this.tasks = this.sort(tasks[this.value._id] || [])),
+    );
+  }
+
+  public ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   public toggle(): void {
     this.isEditable = !this.isEditable;
@@ -45,5 +66,29 @@ export class ColumnItemComponent {
 
   public deleteColumn(): void {
     this.delete.emit(this.value);
+  }
+
+  public drop(event: CdkDragDrop<TaskResp[]>): void {
+    let tasks: TaskSetReq[] = this.tasks;
+    if (event.previousContainer === event.container) {
+      if (event.previousIndex !== event.currentIndex) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        tasks = event.container.data.map(({ _id, columnId }, order) => ({ _id, order, columnId }));
+      }
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      tasks = [
+        ...event.previousContainer.data.map(({ _id, order, columnId }) => ({ _id, order, columnId })),
+        ...event.container.data.map(({ _id }, order) => ({ _id, order, columnId: event.container.id })),
+      ];
+    }
+    // NOTE: avoid to request data if no changes
+    if (!isEqual(tasks, this.tasks)) {
+      this.tasksFacade.updateTasksSet(this.tasks[0].boardId, this.columns, tasks);
+    }
+  }
+
+  private sort(tasks: TaskResp[]): TaskResp[] {
+    return [...tasks].sort((a, b) => a.order - b.order);
   }
 }
