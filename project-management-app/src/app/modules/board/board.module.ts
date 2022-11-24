@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared';
 import { BoardRoutingModule } from './board-routing.module';
-import { ColumnsComponent, ColumnItemComponent } from './components';
+import { ColumnComponent, ColumnItemComponent, TaskItemComponent, TasksComponent } from './components';
 
 @NgModule({
-  declarations: [ColumnItemComponent, ColumnsComponent],
-
+  declarations: [ColumnItemComponent, ColumnComponent, TaskItemComponent, TasksComponent],
   imports: [CommonModule, FormsModule, SharedModule, BoardRoutingModule, TranslateModule],
 })
 export class BoardModule {}

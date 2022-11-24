@@ -15,10 +15,7 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
 
   public isEditable = false;
   public title = '';
-<<<<<<< HEAD:project-management-app/src/app/modules/board/components/columns/column-item/column-item.component.ts
-=======
   public tasks: TaskResp[];
->>>>>>> develop:project-management-app/src/app/modules/board/components/column/column-item/column-item.component.ts
 
   @Input() public columns: IColumn[];
   @Input() public columnsIds: string[];
