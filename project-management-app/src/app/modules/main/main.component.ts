@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { BoardFacade, CommonFacade, IBoard, ISort, NotificationService } from '../../core';
-import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../shared';
+import { DialogComponent, IBoardModal, IBoardModalAction } from '../shared';
 
 @Component({
   selector: 'app-main',
@@ -51,7 +51,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public editBoard(board: IBoard): void {
-    const dialogRef = this.dialog.open(BoardModalComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '50vw',
       data: {
         board,

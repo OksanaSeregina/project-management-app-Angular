@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardModalComponent } from './board-modal.component';
+import { DialogComponent } from './dialog.component';
 
 describe('BoardModalComponent', () => {
-  let component: BoardModalComponent;
-  let fixture: ComponentFixture<BoardModalComponent>;
+  let component: DialogComponent;
+  let fixture: ComponentFixture<DialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BoardModalComponent],
+      declarations: [DialogComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardModalComponent);
+    fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

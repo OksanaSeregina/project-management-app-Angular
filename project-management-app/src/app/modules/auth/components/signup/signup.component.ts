@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-  confirmedPassValidator, isLettersAndNumbersValidator, onlyLettersAndNumbersValidator, onlyLettersValidator, UserFacade
+  confirmedPassValidator,
+  isLettersAndNumbersValidator,
+  onlyLettersAndNumbersValidator,
+  onlyLettersValidator,
+  UserFacade,
 } from '../../../../core';
 import { MIN_LENGTH_LOGIN, MIN_LENGTH_PASSWORD } from '../../constants';
 

@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonBackComponent {
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
 
   @Output() public navigate = new EventEmitter();
 

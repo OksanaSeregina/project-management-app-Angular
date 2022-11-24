@@ -8,7 +8,7 @@ import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService } from '../../../../core';
-import { BoardModalComponent, IBoardModal, IBoardModalAction } from '../../../shared';
+import { DialogComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',
@@ -123,7 +123,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   }
 
   private openDialog(data: IBoardModal): void {
-    const dialogRef = this.dialog.open(BoardModalComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '50vw',
       data,
     });
