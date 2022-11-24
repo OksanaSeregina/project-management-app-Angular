@@ -12,14 +12,22 @@ import { DialogComponent, IBoardModal, IBoardModalAction } from '../../../shared
 
 @Component({
   selector: 'app-column',
-  templateUrl: './column.component.html',
-  styleUrls: ['./column.component.scss'],
+  templateUrl: './columns.component.html',
+  styleUrls: ['./columns.component.scss'],
 })
-export class ColumnComponent implements OnInit, OnDestroy {
+export class ColumnsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private boardId: string;
   private _columnEditableState = {};
 
+<<<<<<< HEAD:project-management-app/src/app/modules/board/components/columns/columns.component.ts
+  public set columnEditableState(state: { [key: string]: boolean }) {
+    this._columnEditableState = state;
+    this.isDragDisabled = some(values(state), (value) => !!value);
+  }
+
+=======
+>>>>>>> develop:project-management-app/src/app/modules/board/components/column/column.component.ts
   public isDragDisabled = false;
   public boardTitle: string;
   public columns: IColumn[];

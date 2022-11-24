@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ColumnComponent } from './components';
+import { ColumnsComponent } from './components';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
-  { path: ':id', component: ColumnComponent },
+  { path: '', redirectTo: ':id', pathMatch: 'full' },
+  { path: ':id', component: ColumnsComponent },
 ];
 
 @NgModule({
