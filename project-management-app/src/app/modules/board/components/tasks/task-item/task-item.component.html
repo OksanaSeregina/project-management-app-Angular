@@ -1,5 +1,7 @@
 <article class="task-item" cdkDragHandle>
-  <h4 class="button" (click)="updateTask(); $event.stopPropagation()">{{ task.title | truncate: 16 }}</h4>
+  <h4 class="button" (click)="updateTask(); $event.stopPropagation()" [appTooltip]="task.title">
+    {{ task.title | truncate: 16 }}
+  </h4>
   <div class="task-item__buttons">
     <button mat-icon-button class="button" (click)="deleteTask(); $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
