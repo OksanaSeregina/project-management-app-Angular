@@ -10,13 +10,12 @@ import { ITaskDialog } from './models';
   selector: 'app-task-dialog',
   templateUrl: './task-dialog.component.html',
   styleUrls: ['./task-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class TaskDialogComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
-  form: FormGroup;
-  buttons: INavigateButton[] = [
+  public form: FormGroup;
+  public buttons: INavigateButton[] = [
     {
       icon: '',
       value: this.translate.instant('components.task-dialog.save'),
