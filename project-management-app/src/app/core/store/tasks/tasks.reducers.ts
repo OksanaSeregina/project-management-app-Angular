@@ -28,9 +28,15 @@ export const tasksReducers = createReducer(
   }),
   on(TasksActions.createTaskSuccess, (state, { taskResp }): TasksState => {
     const key = taskResp.columnId;
+    if (key in state) {
+      return {
+        ...state,
+        [key]: [...state[key], taskResp],
+      };
+    }
     return {
       ...state,
-      [key]: [...state[key], taskResp],
+      [key]: [taskResp],
     };
   }),
   on(TasksActions.updateTaskSuccess, (state, { taskResp }): TasksState => {

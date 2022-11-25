@@ -12,3 +12,11 @@ export const selectUserById = (id: string) =>
     }
     return null;
   });
+
+export const selectUsersByIds = (ids: string[]) =>
+  createSelector(selectFeature, (state: UsersState) => {
+    if (state.users) {
+      return ids.map((id) => state.users.find(({ _id }) => _id === id));
+    }
+    return null;
+  });

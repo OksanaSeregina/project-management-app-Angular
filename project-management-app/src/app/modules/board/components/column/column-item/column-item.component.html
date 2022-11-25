@@ -38,7 +38,7 @@
     <app-tasks [tasks]="tasks"></app-tasks>
   </div>
   <div class="item-footer">
-    <button [disabled]="isEditable" class="button" mat-icon-button>
+    <button [disabled]="isEditable" class="button" mat-icon-button (click)="createTask()">
       <mat-icon>add</mat-icon>
       {{ 'tasks.add_new_task' | translate }}
     </button>

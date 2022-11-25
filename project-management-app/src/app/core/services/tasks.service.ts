@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HTTP_CONFIG } from '../../constants';
+import { HTTP_CONFIG, HTTP_OPTIONS } from '../../constants';
 import { TaskResp, TaskSetReq } from '../models';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class TasksService {
       userId: 0,
       users: req.users.slice(),
     });
-    return this.http.post<TaskResp>(url, body);
+    return this.http.post<TaskResp>(url, body, HTTP_OPTIONS);
   }
 
   public getTaskById(boardId: string, columnId: string, taskId: string): Observable<TaskResp> {
@@ -42,7 +42,7 @@ export class TasksService {
       userId: 0,
       users: req.users.slice(),
     });
-    return this.http.put<TaskResp>(url, body);
+    return this.http.put<TaskResp>(url, body, HTTP_OPTIONS);
   }
 
   public delete(boardId: string, columnId: string, taskId: string): Observable<TaskResp> {
