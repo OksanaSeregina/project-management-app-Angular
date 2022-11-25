@@ -48,12 +48,9 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
 
     this.form = new FormGroup({
       title: new FormControl(this.data?.task?.title || '', [Validators.required]),
-      description: new FormControl(this.data?.task?.description || '', [Validators.required]),
-      // users: new FormControl(this.data?.task?.users[0] || ''),
+      description: new FormControl(this.data?.task?.description || ''),
     });
-    this.subscription = (
-      (<FormControl>this.form.get('title')).valueChanges && (<FormControl>this.form.get('description')).valueChanges
-    ).subscribe((value) => {
+    this.subscription = (<FormControl>this.form.get('title')).valueChanges.subscribe((value) => {
       const disabled = !value;
       const [saveBtn, cancelBtn] = this.buttons;
       if (disabled !== saveBtn.disabled) {
@@ -78,7 +75,6 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
             ...task,
             title: this.form.get('title')?.value,
             description: this.form.get('description')?.value,
-            // users: this.form.get('users')?.value,
           },
         });
         break;
