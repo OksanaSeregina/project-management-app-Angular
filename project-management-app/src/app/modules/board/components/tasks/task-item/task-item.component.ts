@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IColumn, TaskResp, TasksFacade } from '../../../../../core/';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { TaskResp, TasksFacade, UsersFacade } from '../../../../../core/';
 
 @Component({
   selector: 'app-task-item',
@@ -7,14 +7,23 @@ import { IColumn, TaskResp, TasksFacade } from '../../../../../core/';
   styleUrls: ['./task-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskItemComponent {
+export class TaskItemComponent implements OnInit {
   @Input() public task: TaskResp;
-  @Input() public columns: IColumn[];
 
   @Output() public update = new EventEmitter<TaskResp>();
   @Output() public delete = new EventEmitter<TaskResp>();
 
-  constructor(private tasksFacade: TasksFacade) {}
+  public username = '';
+
+  constructor(private tasksFacade: TasksFacade, private usersFacade: UsersFacade) {}
+
+  public ngOnInit(): void {
+    this.usersFacade.getUsersByIds(this.task.users).subscribe((item) => {
+      if (item?.length && item[0]) {
+        this.username = item[0].login[0];
+      }
+    });
+  }
 
   public updateTask(): void {
     this.update.emit(this.task);
