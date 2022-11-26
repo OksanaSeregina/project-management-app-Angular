@@ -11,7 +11,16 @@ import { ColumnFacade, NotificationService, TaskResp, TasksFacade } from '../../
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
-  @Input() public tasks: TaskResp[];
+  private _tasks: TaskResp[];
+
+  @Input()
+  public set tasks(value: TaskResp[]) {
+    this._tasks = this.sort(value);
+  }
+
+  public get tasks(): TaskResp[] {
+    return this._tasks;
+  }
 
   constructor(
     private tasksFacade: TasksFacade,
@@ -30,6 +39,10 @@ export class TasksComponent {
     const okCallback = (): void => this.tasksFacade.deleteTask(task.boardId, task.columnId, task._id);
     const title = this.translate.instant('components.confirmation-task.title');
     this.notificationService.confirm(message, okCallback, title);
+  }
+
+  private sort(tasks: TaskResp[]): TaskResp[] {
+    return [...tasks].sort((a, b) => a.order - b.order);
   }
 
   private openDialog(data: ITaskDialog): void {

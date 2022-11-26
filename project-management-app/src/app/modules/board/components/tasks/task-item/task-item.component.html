@@ -1,5 +1,10 @@
 <article class="task-item" cdkDragHandle>
-  <h3 class="button task-item__title" (click)="updateTask(); $event.stopPropagation()" [appTooltip]="task.title">
+  <h3
+    class="button task-item__title"
+    (click)="updateTask(); $event.stopPropagation()"
+    [appTooltip]="task.title"
+    data-tooltip-position="bottom"
+  >
     {{ task.title | truncate: 16 }}
   </h3>
   <div class="task-item__buttons">
