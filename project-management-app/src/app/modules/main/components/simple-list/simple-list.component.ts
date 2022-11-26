@@ -12,7 +12,7 @@ import { IBoard, INavigateButton } from '../../../../core';
 export class SimpleListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
-  buttons: INavigateButton[] = [
+  public buttons: INavigateButton[] = [
     {
       icon: 'edit',
       value: this.translate.instant('board.edit_board'),
@@ -35,7 +35,7 @@ export class SimpleListComponent implements OnInit, OnDestroy {
 
   constructor(private translate: TranslateService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const [editBtn, deleteBtn] = this.buttons;
     this.subscription = this.translate.onLangChange.subscribe(() => {
       this.buttons = [
@@ -45,7 +45,7 @@ export class SimpleListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

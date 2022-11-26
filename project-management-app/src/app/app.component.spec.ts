@@ -1,31 +1,41 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { CommonFacade, SpinnerService, UserFacade } from './core';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, TranslateModule.forRoot()],
       declarations: [AppComponent],
+      providers: [
+        {
+          provide: CommonFacade,
+          useValue: { language$: {}, loadLanguage: () => {} },
+        },
+        {
+          provide: UserFacade,
+          useValue: { loadUser: () => {} },
+        },
+        {
+          provide: SpinnerService,
+          useValue: { isVisible$: of({}) },
+        },
+        {
+          provide: TranslateService,
+          useValue: { addLangs: () => {}, use: () => {} },
+        },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('should create', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'project-management-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('project-management-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('project-management-app app is running!');
   });
 });

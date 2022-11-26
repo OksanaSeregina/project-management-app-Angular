@@ -1,31 +1,60 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { BoardFacade, CommonFacade, NotificationService } from '../../core';
+import { SharedModule } from '../shared';
 import { MainComponent } from './main.component';
 
-describe('AppComponent', () => {
+describe('MainComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, SharedModule],
       declarations: [MainComponent],
+      providers: [
+        {
+          provide: BoardFacade,
+          useValue: { boards$: of({}), loadBoards: () => {} },
+        },
+        {
+          provide: CommonFacade,
+          useValue: {
+            searchValue$: of({}),
+            isList$: of({}),
+            loadSortBy: () => {},
+            loadList: () => {},
+            updateIsList: () => {},
+            updateSearchValue: () => {},
+            updateSortBy: () => {},
+          },
+        },
+        {
+          provide: NotificationService,
+          useValue: { confirm: () => {} },
+        },
+        {
+          provide: TranslateService,
+          useValue: { instant: () => {} },
+        },
+        {
+          provide: MatDialog,
+          useValue: { open: () => {} },
+        },
+        {
+          provide: Router,
+          useValue: { navigate: () => {} },
+        },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('should create', () => {
     const fixture = TestBed.createComponent(MainComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'project-management-app'`, () => {
-    const fixture = TestBed.createComponent(MainComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('project-management-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(MainComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('project-management-app app is running!');
   });
 });
