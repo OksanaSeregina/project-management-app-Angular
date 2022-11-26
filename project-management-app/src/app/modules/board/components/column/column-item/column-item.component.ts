@@ -43,8 +43,7 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
     this.subscription = this.tasksFacade.tasks$.subscribe(
       (tasks) => (this.tasks = this.sort(tasks[this.value._id] || [])),
     );
-
-    this.userFacade.user$.subscribe((item) => (this.user = item));
+    this.subscription.add(this.userFacade.user$.subscribe((item) => (this.user = item)));
   }
 
   public ngOnDestroy(): void {
@@ -117,7 +116,7 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
             columnId: this.value._id,
             description: data.task.description || ' ',
             userId: this.user?._id || '',
-            users: [],
+            users: data.task.users || [],
           };
           this.tasksFacade.createTask(taskReq);
         }

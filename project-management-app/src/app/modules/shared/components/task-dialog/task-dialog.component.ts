@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
-import { INavigateButton, UserResp, UsersFacade } from '../../../../core';
-import { ITaskDialog } from './models';
+import { INavigateButton, UserFacade, UserResp, UsersFacade } from '../../../../core';
+import { ITaskDialog, ITaskDialogAction } from './models';
 
 @Component({
   selector: 'app-task-dialog',
@@ -32,39 +32,55 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
   ];
 
   public users$: Observable<(UserResp | undefined)[] | null>;
+  private userId = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ITaskDialog,
     private dialogRef: MatDialogRef<TaskDialogComponent>,
     private translate: TranslateService,
     private usersFacade: UsersFacade,
+    private userFacade: UserFacade,
   ) {}
 
-  ngOnInit(): void {
-    if (this.data.task?.users) {
-      this.users$ = this.usersFacade.getUsersByIds(this.data.task?.users);
+  public ngOnInit(): void {
+    let selectUser: string[];
+
+    this.users$ = this.usersFacade.users$;
+
+    this.subscription = this.userFacade.user$.subscribe((item) => {
+      if (item) {
+        this.userId = item._id as string;
+      }
+    });
+
+    if (this.data.action === ITaskDialogAction.Create) {
+      selectUser = [this.userId];
+    } else {
+      selectUser = [this.data?.task?.users[0] as string];
     }
 
     this.form = new FormGroup({
       title: new FormControl(this.data?.task?.title || '', [Validators.required]),
       description: new FormControl(this.data?.task?.description || ''),
+      users: new FormControl(selectUser[0]),
     });
-    this.subscription = (<FormControl>this.form.get('title')).valueChanges.subscribe((value) => {
-      const disabled = !value;
-      const [saveBtn, cancelBtn] = this.buttons;
-      if (disabled !== saveBtn.disabled) {
-        this.buttons = [{ ...saveBtn, disabled }, cancelBtn];
-      }
-    });
+
+    if (this.data.action === ITaskDialogAction.Create) {
+      this.subscription.add(
+        (<FormControl>this.form.get('title')).valueChanges.subscribe((value) => this.isEnableSaveButton(value)),
+      );
+    } else {
+      this.subscription.add(this.form.valueChanges.subscribe((value: string) => this.isEnableSaveButton(value)));
+    }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
-  navigate(button: INavigateButton): void {
+  public navigate(button: INavigateButton): void {
     const task = this.data?.task || {};
     switch (button.route) {
       case 'save':
@@ -74,12 +90,21 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
             ...task,
             title: this.form.get('title')?.value,
             description: this.form.get('description')?.value,
+            users: this.form.get('users')?.value,
           },
         });
         break;
       case 'cancel':
         this.dialogRef.close();
         break;
+    }
+  }
+
+  private isEnableSaveButton(value: string) {
+    const disabled = !value;
+    const [saveBtn, cancelBtn] = this.buttons;
+    if (disabled !== saveBtn.disabled) {
+      this.buttons = [{ ...saveBtn, disabled }, cancelBtn];
     }
   }
 }

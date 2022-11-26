@@ -8,7 +8,7 @@
   border-radius: 10px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px 0 8px;
+  padding: 0 0 0 8px;
   box-sizing: border-box;
 
   .task-item__buttons {
@@ -27,8 +27,24 @@
   }
 }
 
+.task-user {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: $gray;
+  color: #fff;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .task-item__title {
     font-size: 14px;
   }
 }
+

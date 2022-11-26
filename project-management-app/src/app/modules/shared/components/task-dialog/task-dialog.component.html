@@ -2,12 +2,20 @@
 <form class="task-dialog" [formGroup]="form">
   <mat-form-field appearance="fill">
     <mat-label>{{ 'components.task-dialog.title' | translate }}</mat-label>
-    <input matInput formControlName="title" />
+    <input matInput formControlName="title" autocomplete="off" />
     <mat-error *ngIf="form.invalid">{{ 'validators.common.required' | translate }}</mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>{{ 'components.task-dialog.description' | translate }}</mat-label>
     <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'components.task-dialog.users' | translate }}</mat-label>
+    <mat-select formControlName="users" class="select">
+      <mat-option *ngFor="let user of users$ | async" [value]="user._id" class="select__option">
+        {{ user.login }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <div mat-dialog-actions>
     <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>

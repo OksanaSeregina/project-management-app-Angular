@@ -8,7 +8,8 @@
     {{ task.title | truncate: 16 }}
   </h3>
   <div class="task-item__buttons">
-    <button mat-icon-button class="button" (click)="deleteTask(); $event.stopPropagation()">
+    <div *ngIf="username" class="task-user" (click)="updateTask(); $event.stopPropagation()">{{ username }}</div>
+    <button mat-icon-button class="button task-item__delete" (click)="deleteTask(); $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
