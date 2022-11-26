@@ -17,14 +17,15 @@
 
 .header-column-item {
   display: flex;
+  flex: 0 0 30px;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
   width: 100%;
+  height: 30px;
 
   .item-buttons {
     display: flex;
-    flex: 0 1 60px;
+    flex: 0 0 30px;
     align-items: center;
     justify-content: flex-end;
   }
@@ -58,13 +59,15 @@
 
 .item-task-container {
   justify-self: flex-start;
-  flex: 1 0 0px;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .item-footer {
+  flex: 0 0 30px;
   width: 100%;
-  height: 40px;
+  height: 30px;
 
   .button {
     width: inherit;

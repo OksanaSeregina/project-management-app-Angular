@@ -1,4 +1,4 @@
-@import '../../../../../styles/styles.scss';
+@import '_styles';
 
 .header {
   background: $gray;
@@ -27,5 +27,60 @@
   }
   .mat-button-toggle-checked {
     background-color: $light-green;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .logo {
+    width: 150px;
+  }
+
+  .btn-toggle-group {
+    font-size: 14px;
+  }
+
+  :host {
+    ::ng-deep {
+      .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        padding: 0 8px;
+      }
+
+      .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        line-height: 35px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    ::ng-deep {
+      .header {
+        .header-icon {
+          min-width: fit-content;
+          &-name {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .logo {
+    width: 96px;
+  }
+
+  :host {
+    ::ng-deep {
+      .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        padding: 0 7px;
+      }
+
+      .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        line-height: 20px;
+      }
+    }
   }
 }

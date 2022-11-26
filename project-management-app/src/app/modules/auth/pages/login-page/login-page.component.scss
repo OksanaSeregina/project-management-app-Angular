@@ -1,6 +1,8 @@
+@import '_styles';
+
 :host {
   display: flex;
   justify-content: center;
-  padding: 1em 1em;
-  margin: 10% auto;
+  align-items: center;
+  min-height: $min-content-height;
 }

@@ -15,6 +15,7 @@ import * as BoardActions from './board.actions';
 @Injectable()
 export class BoardEffects {
   public loadBoards$: Observable<Action>;
+  public loadBoardById$: Observable<Action>;
   public createBoard$: Observable<Action>;
   public updateBoard$: Observable<Action>;
   public deleteBoard$: Observable<Action>;
@@ -25,6 +26,18 @@ export class BoardEffects {
         ofType(BoardActions.loadBoards),
         switchMap(() => {
           return this.boardService.get().pipe(switchMap((boards) => of(BoardActions.loadBoardsSuccess({ boards }))));
+        }),
+      ),
+    );
+
+    this.loadBoardById$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(BoardActions.loadBoardById),
+        switchMap(({ id }) => {
+          return this.boardService.getById(id).pipe(
+            map((board: IBoard) => BoardActions.loadBoardByIdSuccess({ board })),
+            catchError(() => of(NotificationActions.showFailToast({ message: 'board.load_board_fail_message' }))),
+          );
         }),
       ),
     );

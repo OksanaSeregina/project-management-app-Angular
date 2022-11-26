@@ -11,3 +11,7 @@ $font-comfortaa: 'Comfortaa', cursive;
 $font-josefin: 'Josefin Sans', sans-serif;
 
 $gap: 12px;
+$large-padding: 32px;
+$medium-padding: 16px;
+
+$min-content-height: calc(100vh - 164px - #{2 * $medium-padding});

@@ -26,3 +26,9 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .task-item__title {
+    font-size: 14px;
+  }
+}

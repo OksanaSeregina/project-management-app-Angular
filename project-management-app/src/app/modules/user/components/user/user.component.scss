@@ -17,3 +17,15 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
+
+@media screen and (max-width: 425px) {
+  .user__title {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .user__title {
+    font-size: 1em;
+  }
+}

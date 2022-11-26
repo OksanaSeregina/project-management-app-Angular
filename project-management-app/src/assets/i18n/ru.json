@@ -142,6 +142,7 @@
     "add_board": "Добавить новую доску",
     "edit_board": "Редактировать",
     "delete_board": "Удалить",
+    "load_board_fail_message": "Не удалось загрузить доску",
     "add_board_success_message": "Доска успешно добавлена",
     "add_board_fail_message": "Не удалось добавить доску",
     "update_board_success_message": "Доска успешно обновлена",

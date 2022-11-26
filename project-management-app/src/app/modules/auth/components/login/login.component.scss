@@ -8,7 +8,7 @@
 }
 
 .mat-dialog-actions {
-  margin-bottom: 1rem ;
+  margin-bottom: 1rem;
 }
 
 .login__link {
@@ -18,5 +18,15 @@
 
   &:hover {
     opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .login__title {
+    font-size: 1.2em;
+  }
+
+  .login__link {
+    font-size: 14px;
   }
 }

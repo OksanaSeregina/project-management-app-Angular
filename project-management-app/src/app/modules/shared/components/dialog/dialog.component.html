@@ -1,4 +1,4 @@
-<h2 *ngIf="data.title">{{ data.title | translate }}</h2>
+<h2 class="title" *ngIf="data.title">{{ data.title | translate }}</h2>
 <form class="board-modal" [formGroup]="form">
   <mat-form-field appearance="fill">
     <mat-label>{{ 'board-modal.title' | translate }}</mat-label>

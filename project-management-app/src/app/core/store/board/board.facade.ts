@@ -24,6 +24,10 @@ export class BoardFacade {
     this.store.dispatch(BoardActions.loadBoards());
   }
 
+  public loadBoardById(id: string): void {
+    this.store.dispatch(BoardActions.loadBoardById({ id }));
+  }
+
   public createBoard(board: Pick<IBoard, 'title'>): void {
     this.store.dispatch(BoardActions.createBoard({ board }));
   }

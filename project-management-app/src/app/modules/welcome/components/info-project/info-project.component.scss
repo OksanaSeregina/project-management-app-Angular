@@ -1,18 +1,82 @@
-@import '../../../../../styles/styles.scss';
+@import '_styles';
 
 .info-project {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  min-height: 400px;
-  background-image: url('../../../../../assets/images/kanban.png');
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: 50%;
   padding: 0 16px;
   color: $dusty-brown;
 
   &-title {
     width: 50%;
+    line-height: 38px;
     margin: 0;
+  }
+
+  &-image {
+    width: 50%;
+    min-height: 400px;
+    background-image: url('../../../../../assets/images/kanban.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .info-project {
+    &-title {
+      font-size: 1.5em;
+    }
+
+    &-image {
+      min-height: 310px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info-project {
+    &-title {
+      font-size: 1.2em;
+      line-height: 26px;
+    }
+
+    &-image {
+      min-height: 220px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .info-project {
+    display: block;
+    text-align: center;
+
+    &-title {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    &-image {
+      width: 100%;
+      min-height: 245px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .info-project {
+    background-size: 65%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .info-project-title {
+    text-align: justify;
+  }
+
+  .info-project-image {
+    min-height: 170px;
   }
 }

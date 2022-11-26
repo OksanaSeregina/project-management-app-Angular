@@ -58,7 +58,7 @@
       "description": "Description",
       "cancel": "Cancel",
       "create": "Create",
-      "save": "Save"  
+      "save": "Save"
     },
     "button-back": {
       "title": "Navigate to Boards"
@@ -142,6 +142,7 @@
     "add_board": "Add new board",
     "edit_board": "Edit",
     "delete_board": "Delete",
+    "load_board_fail_message": "Can not load the board",
     "add_board_success_message": "New board was successfully added",
     "add_board_fail_message": "Can not add new board",
     "update_board_success_message": "The board was successfully updated",

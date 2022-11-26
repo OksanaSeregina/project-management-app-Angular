@@ -7,6 +7,9 @@ import { IBoard } from '../../models';
 export const loadBoards = createAction('[Board] LOAD_BOARDS');
 export const loadBoardsSuccess = createAction('[Board] LOAD_BOARDS_SUCCESS', props<{ boards: IBoard[] }>());
 
+export const loadBoardById = createAction('[Board] LOAD_BOARD_BY_ID', props<{ id: string }>());
+export const loadBoardByIdSuccess = createAction('[Board] LOAD_BOARD_BY_ID_SUCCESS', props<{ board: IBoard }>());
+
 export const createBoard = createAction('[Board] CREATE_BOARD', props<{ board: Pick<IBoard, 'title'> }>());
 export const createBoardSuccess = createAction('[Board] CREATE_BOARD_SUCCESS', props<{ board: IBoard }>());
 

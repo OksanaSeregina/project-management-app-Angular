@@ -42,7 +42,7 @@
   display: flex;
   flex-wrap: nowrap;
   grid-gap: 20px;
-  padding: 0 0 16px;
+  padding: 0 0 $medium-padding;
   height: 100%;
   box-sizing: border-box;
   overflow-x: auto;
@@ -60,5 +60,33 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: $gray;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .head {
+    flex-wrap: wrap;
+  }
+
+  .board-title {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .board-title {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  :host {
+    app-button-multicolor {
+      margin: auto;
+      margin-top: 5px;
+    }
   }
 }

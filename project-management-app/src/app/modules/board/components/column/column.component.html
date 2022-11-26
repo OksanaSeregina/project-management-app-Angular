@@ -1,7 +1,7 @@
 <div cdkDropListGroup class="wrapper">
   <div class="head">
     <app-button-back (navigate)="navigateToMain()"></app-button-back>
-    <h3 *ngIf="boardTitle">{{ boardTitle }}</h3>
+    <h3 class="board-title" *ngIf="boardTitle">{{ boardTitle }}</h3>
     <app-button-multicolor [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
   </div>
   <div

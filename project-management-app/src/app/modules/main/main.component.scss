@@ -1,3 +1,5 @@
+@import '_styles';
+
 .button {
   width: max-content;
   height: max-content;
@@ -28,8 +30,17 @@
 
 .head {
   display: flex;
+  flex-wrap: wrap;
   flex: 1 1 0px;
   align-items: center;
   justify-content: space-between;
-  margin: 32px 16px;
+  margin: $large-padding $medium-padding;
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    &.columns {
+      grid-template-columns: auto;
+    }
+  }
 }

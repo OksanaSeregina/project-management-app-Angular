@@ -1,4 +1,4 @@
-@import '../../../../../styles/styles.scss';
+@import '_styles';
 
 .list {
   display: grid;
@@ -41,5 +41,33 @@
     &:not([disabled]) {
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    ::ng-deep {
+      .list {
+        .header-icon {
+          min-width: fit-content;
+          &-name {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .title {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .columns {
+    width: 278px;
+    margin: 0 auto;
   }
 }

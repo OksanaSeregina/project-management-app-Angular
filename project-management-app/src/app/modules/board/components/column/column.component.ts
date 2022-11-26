@@ -56,6 +56,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.route.params.subscribe((params: Params) => {
         this.boardId = params['id'];
+        this.boardFacade.loadBoardById(this.boardId);
         this.columnFacade.loadColumns(this.boardId);
       }),
     );

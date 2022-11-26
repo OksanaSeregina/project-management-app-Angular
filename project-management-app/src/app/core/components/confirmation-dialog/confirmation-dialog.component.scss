@@ -9,3 +9,33 @@
     margin-bottom: 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  :host {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    justify-content: center;
+  }
+
+  .mat-dialog-container {
+    padding: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mat-dialog-title {
+    margin: 0;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  :host {
+    font-size: 14px;
+  }
+}

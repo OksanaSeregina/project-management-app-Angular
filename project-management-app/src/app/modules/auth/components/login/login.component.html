@@ -1,5 +1,5 @@
 <form *ngIf="loginForm" class="form__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <h2>{{ 'components.login.title' | translate }}</h2>
+  <h2 class="login__title">{{ 'components.login.title' | translate }}</h2>
   <div class="form__input_wrapper">
     <mat-form-field appearance="fill">
       <mat-label>{{ 'components.login.login' | translate }}</mat-label>

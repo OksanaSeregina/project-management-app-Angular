@@ -1,6 +1,6 @@
 <article class="list" [ngClass]="{ row: isList, columns: !isList }">
   <header>
-    <h3 [appTooltip]="value.title">{{ value.title | truncate: 50 }}</h3>
+    <h3 class="title" [appTooltip]="value.title">{{ value.title | truncate: 50 }}</h3>
   </header>
   <app-button-multicolor class="buttons" [buttons]="buttons" (navigate)="navigate($event)"></app-button-multicolor>
 </article>

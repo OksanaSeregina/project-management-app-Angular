@@ -16,6 +16,10 @@ export class BoardsService {
     return this.http.get<Array<IBoard>>(URL);
   }
 
+  public getById(boardId: string): Observable<IBoard> {
+    return this.http.get<IBoard>(`${URL}/${boardId}`);
+  }
+
   public create(board: IBoard): Observable<IBoard> {
     return this.http.post<IBoard>(URL, board);
   }

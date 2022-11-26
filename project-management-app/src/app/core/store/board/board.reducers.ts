@@ -8,6 +8,12 @@ const reducer: ActionReducer<BoardState> = createReducer(
   on(BoardActions.loadBoardsSuccess, (state, { boards }) => {
     return { ...state, boards };
   }),
+  on(BoardActions.loadBoardByIdSuccess, (state, payload) => {
+    const index: number = state.boards.findIndex((item) => item._id === payload.board._id);
+    const boards: Array<IBoard> =
+      index > -1 ? [...state.boards.slice(0, index), payload.board, ...state.boards.slice(index + 1)] : [payload.board];
+    return { ...state, boards };
+  }),
   on(BoardActions.createBoardSuccess, (state, { board }) => {
     return { ...state, boards: [...state.boards, board] };
   }),

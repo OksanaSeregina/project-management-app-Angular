@@ -1,4 +1,4 @@
-@import '../../../../../styles/styles.scss';
+@import '_styles';
 
 .board-modal {
   display: grid;
@@ -38,4 +38,16 @@ mat-form-field.mat-form-field,
   display: inline-block;
   width: inherit;
   color: $light-blue;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .title {
+    font-size: 1em;
+  }
 }

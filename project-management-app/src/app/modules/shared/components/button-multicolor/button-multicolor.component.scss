@@ -1,4 +1,4 @@
-@import '../../../../../styles/styles.scss';
+@import '_styles';
 
 :host {
   display: inline-flex;
@@ -13,5 +13,21 @@
   &-img,
   &-name {
     vertical-align: middle;
+  }
+}
+
+/* @media screen and (max-width: 768px) {
+  .header-icon {
+    min-width: fit-content;
+
+    &-name {
+      display: none;
+    }
+  }
+} */
+
+@media screen and (max-width: 375px) {
+  :host {
+    gap: 5px;
   }
 }
