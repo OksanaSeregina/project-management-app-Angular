@@ -62,6 +62,14 @@
     },
     "button-back": {
       "title": "Navigate to Boards"
+    },
+    "task-dialog": {
+      "title": "Title",
+      "description": "Description",
+      "cancel": "Cancel",
+      "create": "Create",
+      "save": "Save",
+      "users": "Users"
     }
   },
   "validators": {

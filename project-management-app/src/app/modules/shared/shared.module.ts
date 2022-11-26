@@ -14,6 +14,7 @@ import {
 import { DirectivesModule } from './directives';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';
+import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PipesModule } from './pipes';
     ButtonMulticolorComponent,
     DialogComponent,
     ButtonBackComponent,
+    TaskDialogComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, TranslateModule, PipesModule, FormsModule, DirectivesModule],
   exports: [
@@ -36,6 +38,7 @@ import { PipesModule } from './pipes';
     ButtonBackComponent,
     ButtonMulticolorComponent,
     DirectivesModule,
+    TaskDialogComponent,
   ],
 })
 export class SharedModule {}

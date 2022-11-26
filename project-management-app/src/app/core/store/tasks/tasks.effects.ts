@@ -58,11 +58,12 @@ export class TasksEffects {
         ofType(TasksActions.createTask),
         switchMap(({ taskReq }) => {
           return this.tasksService.create(taskReq).pipe(
-            map((taskResp: TaskResp) => {
-              return TasksActions.createTaskSuccess({ taskResp });
-            }),
+            switchMap((taskResp: TaskResp) => [
+              TasksActions.createTaskSuccess({ taskResp }),
+              NotificationActions.showSuccessToast({ message: 'components.tasks.addSuccessMessage' }),
+            ]),
             catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.tasks.create' }));
+              return of(NotificationActions.showFailToast({ message: 'components.tasks.addFailMessage' }));
             }),
           );
         }),
@@ -74,11 +75,12 @@ export class TasksEffects {
         ofType(TasksActions.updateTask),
         switchMap(({ taskReq }) => {
           return this.tasksService.update(taskReq).pipe(
-            map((taskResp: TaskResp) => {
-              return TasksActions.createTaskSuccess({ taskResp });
-            }),
+            switchMap((taskResp: TaskResp) => [
+              TasksActions.updateTaskSuccess({ taskResp }),
+              NotificationActions.showSuccessToast({ message: 'components.tasks.updateSuccessMessage' }),
+            ]),
             catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.tasks.update' }));
+              return of(NotificationActions.showFailToast({ message: 'components.tasks.updateFailMessage' }));
             }),
           );
         }),
@@ -90,11 +92,12 @@ export class TasksEffects {
         ofType(TasksActions.deleteTask),
         switchMap(({ boardId, columnId, taskId }) => {
           return this.tasksService.delete(boardId, columnId, taskId).pipe(
-            map((taskResp: TaskResp) => {
-              return TasksActions.deleteTaskSuccess({ taskResp });
-            }),
+            switchMap((taskResp: TaskResp) => [
+              TasksActions.deleteTaskSuccess({ taskResp }),
+              NotificationActions.showSuccessToast({ message: 'components.tasks.deleteSuccessMessage' }),
+            ]),
             catchError(() => {
-              return of(NotificationActions.showFailToast({ message: 'errors.tasks.delete' }));
+              return of(NotificationActions.showFailToast({ message: 'components.tasks.deleteFailMessage' }));
             }),
           );
         }),
@@ -135,6 +138,5 @@ export class TasksEffects {
         }),
       ),
     );
-
   }
 }

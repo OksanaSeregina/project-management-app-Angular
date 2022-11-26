@@ -1,8 +1,11 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import isEqual from 'lodash/isEqual';
 import { Subscription } from 'rxjs';
-import { IColumn, TaskResp, TaskSetReq, TasksFacade } from '../../../../../core';
+import { take } from 'rxjs/operators';
+import { IColumn, TaskResp, TaskSetReq, TasksFacade, UserData, UserFacade } from '../../../../../core';
+import { ITaskDialog, ITaskDialogAction, TaskDialogComponent } from '../../../../shared';
 
 @Component({
   selector: 'app-column-item',
@@ -16,6 +19,7 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
   public isEditable = false;
   public title = '';
   public tasks: TaskResp[];
+  public user: UserData | null;
 
   @Input() public columns: IColumn[];
   @Input() public columnsIds: string[];
@@ -33,12 +37,14 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
   @Output() public delete = new EventEmitter<IColumn>();
   @Output() public editableState = new EventEmitter<boolean>();
 
-  constructor(private tasksFacade: TasksFacade) {}
+  constructor(private tasksFacade: TasksFacade, private userFacade: UserFacade, private dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.subscription = this.tasksFacade.tasks$.subscribe(
       (tasks) => (this.tasks = this.sort(tasks[this.value._id] || [])),
     );
+
+    this.userFacade.user$.subscribe((item) => (this.user = item));
   }
 
   public ngOnDestroy(): void {
@@ -87,5 +93,34 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
 
   private sort(tasks: TaskResp[]): TaskResp[] {
     return [...tasks].sort((a, b) => a.order - b.order);
+  }
+
+  public createTask(): void {
+    this.openDialog({ title: 'components.tasks.add', action: ITaskDialogAction.Create });
+  }
+
+  private openDialog(data: ITaskDialog): void {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '50vw',
+      data,
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((data: ITaskDialog) => {
+        if (data?.task) {
+          const taskReq: TaskResp = {
+            _id: '',
+            title: data.task.title,
+            order: 0,
+            boardId: this.value.boardId,
+            columnId: this.value._id,
+            description: data.task.description || ' ',
+            userId: this.user?._id || '',
+            users: [],
+          };
+          this.tasksFacade.createTask(taskReq);
+        }
+      });
   }
 }

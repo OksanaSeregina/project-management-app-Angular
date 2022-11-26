@@ -62,6 +62,14 @@
     },
     "button-back": {
       "title": "Перейти к доскам"
+    },
+    "task-dialog": {
+      "title": "Название",
+      "description": "Описание",
+      "cancel": "Отменить",
+      "create": "Создать",
+      "save": "Сохранить",
+      "users": "Пользователи"
     }
   },
   "validators": {
