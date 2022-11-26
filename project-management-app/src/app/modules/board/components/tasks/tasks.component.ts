@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ITaskDialog, ITaskDialogAction, TaskDialogComponent } from '../../../shared';
-import { ColumnFacade, NotificationService, TaskResp, TasksFacade } from '../../../../core';
+import { NotificationService, TaskResp, TasksFacade } from '../../../../core';
 
 @Component({
   selector: 'app-tasks',
@@ -24,7 +24,6 @@ export class TasksComponent {
 
   constructor(
     private tasksFacade: TasksFacade,
-    private columnFacade: ColumnFacade,
     private translate: TranslateService,
     private notificationService: NotificationService,
     private dialog: MatDialog,

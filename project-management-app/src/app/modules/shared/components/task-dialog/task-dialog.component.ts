@@ -32,7 +32,7 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
   ];
 
   public users$: Observable<(UserResp | undefined)[] | null>;
-  private user = '';
+  private userId = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ITaskDialog,
@@ -40,20 +40,21 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private usersFacade: UsersFacade,
     private userFacade: UserFacade,
-  ) {
-    this.users$ = this.usersFacade.users$;
-    this.userFacade.user$.subscribe((item) => {
-      if (item) {
-        this.user = item._id as string;
-      }
-    });
-  }
+  ) {}
 
   public ngOnInit(): void {
     let selectUser: string[];
 
+    this.users$ = this.usersFacade.users$;
+
+    this.subscription = this.userFacade.user$.subscribe((item) => {
+      if (item) {
+        this.userId = item._id as string;
+      }
+    });
+
     if (this.data.action === ITaskDialogAction.Create) {
-      selectUser = [this.user];
+      selectUser = [this.userId];
     } else {
       selectUser = [this.data?.task?.users[0] as string];
     }
@@ -65,11 +66,11 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
     });
 
     if (this.data.action === ITaskDialogAction.Create) {
-      this.subscription = (<FormControl>this.form.get('title')).valueChanges.subscribe((value) =>
-        this.isEnableSaveButton(value),
+      this.subscription.add(
+        (<FormControl>this.form.get('title')).valueChanges.subscribe((value) => this.isEnableSaveButton(value)),
       );
     } else {
-      this.subscription = this.form.valueChanges.subscribe((value: string) => this.isEnableSaveButton(value));
+      this.subscription.add(this.form.valueChanges.subscribe((value: string) => this.isEnableSaveButton(value)));
     }
   }
 
@@ -81,7 +82,6 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
 
   public navigate(button: INavigateButton): void {
     const task = this.data?.task || {};
-    const us = this.form.get('users')?.value;
     switch (button.route) {
       case 'save':
         this.dialogRef.close({
@@ -90,7 +90,7 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
             ...task,
             title: this.form.get('title')?.value,
             description: this.form.get('description')?.value,
-            users: us,
+            users: this.form.get('users')?.value,
           },
         });
         break;
