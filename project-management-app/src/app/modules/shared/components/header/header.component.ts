@@ -8,7 +8,7 @@ import { map, take } from 'rxjs/operators';
 import { HEADER_BUTTONS } from '../../../../constants';
 import { BoardFacade, CommonFacade, IBoard, INavigateButton, UserFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
-import { DialogComponent, IDialog, IBoardModalAction } from '../dialog';
+import { DialogComponent, IDialog, IDialogAction } from '../dialog';
 
 @Component({
   selector: 'app-header',
@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
       width: '50vw',
       data: {
         title: 'board.add_board',
-        action: IBoardModalAction.Create,
+        action: IDialogAction.Create,
       },
     });
     dialogRef

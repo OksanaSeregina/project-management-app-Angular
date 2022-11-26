@@ -1,2 +1,2 @@
 export * from './dialog.model';
-export * from './board-modal-action.model';
+export * from './dialog-action.model';

@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { BoardFacade, CommonFacade, IBoard, ISort, NotificationService } from '../../core';
-import { DialogComponent, IDialog, IBoardModalAction } from '../shared';
+import { DialogComponent, IDialog, IDialogAction } from '../shared';
 
 @Component({
   selector: 'app-main',
@@ -56,15 +56,15 @@ export class MainComponent implements OnInit, OnDestroy {
       data: {
         board,
         title: 'board.edit_board',
-        action: IBoardModalAction.Update,
+        action: IDialogAction.Update,
       },
     });
     dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe((boardModal: IDialog) => {
-        if (boardModal?.board) {
-          const board: IBoard = <IBoard>boardModal.board;
+      .subscribe((dialog: IDialog) => {
+        if (dialog?.board) {
+          const board: IBoard = <IBoard>dialog.board;
           this.boardFacade.updateBoard(board);
         }
       });

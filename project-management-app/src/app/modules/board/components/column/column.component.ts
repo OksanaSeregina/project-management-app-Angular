@@ -8,7 +8,7 @@ import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService, UsersFacade } from '../../../../core';
-import { DialogComponent, IDialog, IBoardModalAction } from '../../../shared';
+import { DialogComponent, IDialog, IDialogAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',
@@ -101,7 +101,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   public navigate(button: INavigateButton): void {
     switch (button.route) {
       case 'add':
-        this.openDialog({ title: 'column.add_column', action: IBoardModalAction.Create });
+        this.openDialog({ title: 'column.add_column', action: IDialogAction.Create });
         break;
     }
   }
