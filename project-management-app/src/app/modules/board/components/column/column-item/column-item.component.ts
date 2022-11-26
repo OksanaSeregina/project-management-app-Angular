@@ -111,7 +111,7 @@ export class ColumnItemComponent implements OnInit, OnDestroy {
           const taskReq: TaskResp = {
             _id: '',
             title: data.task.title,
-            order: 0,
+            order: this.tasks.length || 0,
             boardId: this.value.boardId,
             columnId: this.value._id,
             description: data.task.description || ' ',

@@ -19,9 +19,9 @@ export class TasksService {
     const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${req.boardId}/${HTTP_CONFIG.columns}/${req.columnId}/${HTTP_CONFIG.tasks}`;
     const body = {
       title: req.title,
-      order: 0,
+      order: req.order,
       description: req.description,
-      userId: 0,
+      userId: req.userId,
       users: req.users.slice(),
     };
     return this.http.post<TaskResp>(url, body);
@@ -36,10 +36,10 @@ export class TasksService {
     const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.boards}/${req.boardId}/${HTTP_CONFIG.columns}/${req.columnId}/${HTTP_CONFIG.tasks}/${req._id}`;
     const body = {
       title: req.title,
-      order: 0,
+      order: req.order,
       description: req.description,
       columnId: req.columnId,
-      userId: 0,
+      userId: req.userId,
       users: req.users.slice(),
     };
     return this.http.put<TaskResp>(url, body);
