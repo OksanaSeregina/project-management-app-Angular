@@ -8,6 +8,7 @@
     {{ task.title | truncate: 16 }}
   </h3>
   <div class="task-item__buttons">
+    <div class="task-user">{{ username }}</div>
     <button mat-icon-button class="button" (click)="deleteTask(); $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
     </button>

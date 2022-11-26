@@ -7,7 +7,7 @@ import some from 'lodash/some';
 import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService } from '../../../../core';
+import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService, UsersFacade } from '../../../../core';
 import { DialogComponent, IBoardModal, IBoardModalAction } from '../../../shared';
 
 @Component({
@@ -45,6 +45,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private notificationService: NotificationService,
+    private usersFacade: UsersFacade,
   ) {}
 
   public ngOnInit(): void {
@@ -76,6 +77,8 @@ export class ColumnComponent implements OnInit, OnDestroy {
         this.columnsIds = this.columns.map((column) => column._id);
       }),
     );
+
+    this.usersFacade.load();
   }
 
   public ngOnDestroy(): void {

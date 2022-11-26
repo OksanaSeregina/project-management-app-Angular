@@ -4,13 +4,16 @@ import { Observable } from 'rxjs';
 import { UserResp } from '../../models';
 import { AppState } from '../app.state';
 import * as UsersActions from './users.actions';
-import { selectUsersByIds } from './users.selectors';
+import { selectAllUsers, selectUsersByIds } from './users.selectors';
 
 @Injectable()
 export class UsersFacade {
   private store: Store<AppState>;
+  public users$: Observable<UserResp[]>;
+
   constructor(store: Store<AppState>) {
     this.store = store;
+    this.users$ = this.store.select(selectAllUsers);
   }
 
   public load(): void {
