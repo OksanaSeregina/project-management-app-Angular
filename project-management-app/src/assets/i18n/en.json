@@ -133,10 +133,15 @@
     "logout": "Log out"
   },
   "welcome": {
-    "info-project": "It's a work management tool that empowers all team to plan, track and manage any type of work that flexes your team's needs."
+    "info-project": "It's a work management tool that empowers all team to plan, track and manage any type of work that flexes your team's needs.",
+    "info-course": "The RS School is working by the principle of 'Pay it forward'. Members of our community share their knowledge and check students' tasks for free. And we hope that our students will continue this work as our mentors in the future. This course will teach you the fundamentals of working with the latest version of Angular. You will learn everything you need to know to create complete applications including: components, services, directives, pipes, routing, HTTP, and even testing.",
+    "info-course-title": "Angular course"
   },
   "card-team": {
-    "title": "Our team"
+    "title": "Our team",
+    "ivan": "On the project I used a lot of tools and libraries, likes lodash, added Main page, did code review and refactoring. I implemented modal Dialog using Angular Material and participated in Coloumn page development.",
+    "oksana": "I'm a Frontend developer with JS primary skill. So, I developed UI using Typescript Angular and Sass. As a team player, I was responsible for reviewing team's output, keeping treck off, and stucturing various tasks on the project.",
+    "alexander": "I'm a Fullstack developer with awesome knowledge of software development processes. I implemented Task page with draggin functionality, worked with Authentication in the app and created registration form, guards and some API Services."
   },
   "board": {
     "add_board": "Add new board",

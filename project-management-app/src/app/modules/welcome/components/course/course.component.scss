@@ -1,0 +1,36 @@
+@import '_styles';
+
+.course {
+  &-title {
+    width: 100%;
+    text-align: center;
+    font-family: $font-josefin;
+    color: $green;
+    text-transform: uppercase;
+  }
+
+  &-content {
+    font-size: 1.5em;
+    line-height: 38px;
+    font-weight: bold;
+    color: $dusty-brown;
+    padding: 0 16px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .course {
+    &-content {
+      font-size: 1.3em;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .course {
+    &-content {
+      font-size: 1em;
+      line-height: 26px;
+    }
+  }
+}

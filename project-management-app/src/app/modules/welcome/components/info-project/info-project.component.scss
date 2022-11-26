@@ -51,7 +51,6 @@
 @media screen and (max-width: 600px) {
   .info-project {
     display: block;
-    text-align: center;
 
     &-title {
       width: 100%;
@@ -72,10 +71,6 @@
 }
 
 @media screen and (max-width: 375px) {
-  .info-project-title {
-    text-align: justify;
-  }
-
   .info-project-image {
     min-height: 170px;
   }
