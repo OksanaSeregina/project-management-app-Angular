@@ -8,7 +8,7 @@ import { map, take } from 'rxjs/operators';
 import { HEADER_BUTTONS } from '../../../../constants';
 import { BoardFacade, CommonFacade, IBoard, INavigateButton, UserFacade } from '../../../../core';
 import { TranslateNames } from '../../../../enums';
-import { DialogComponent, IBoardModal, IBoardModalAction } from '../dialog';
+import { DialogComponent, IDialog, IBoardModalAction } from '../dialog';
 
 @Component({
   selector: 'app-header',
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
     dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe((boardModal: IBoardModal) => {
+      .subscribe((boardModal: IDialog) => {
         if (boardModal?.board) {
           const board: Pick<IBoard, 'title'> = boardModal.board;
           this.boardFacade.createBoard(board);

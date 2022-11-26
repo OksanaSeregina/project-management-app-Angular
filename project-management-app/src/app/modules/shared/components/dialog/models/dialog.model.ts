@@ -1,6 +1,6 @@
 import { IBoard, IColumn } from '../../../../../core';
 
-export interface IBoardModal {
+export interface IDialog {
   action: string;
   title?: string;
   board?: IBoard | IColumn;

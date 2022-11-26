@@ -8,7 +8,7 @@ import values from 'lodash/values';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BoardFacade, ColumnFacade, IBoard, IColumn, INavigateButton, NotificationService, UsersFacade } from '../../../../core';
-import { DialogComponent, IBoardModal, IBoardModalAction } from '../../../shared';
+import { DialogComponent, IDialog, IBoardModalAction } from '../../../shared';
 
 @Component({
   selector: 'app-column',
@@ -126,7 +126,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     return [...columns].sort((a, b) => a.order - b.order);
   }
 
-  private openDialog(data: IBoardModal): void {
+  private openDialog(data: IDialog): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '50vw',
       data,
@@ -134,7 +134,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
     dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe((data: IBoardModal) => {
+      .subscribe((data: IDialog) => {
         if (data?.board) {
           this.columnFacade.createColumn(this.boardId, { ...data.board, order: this.columns?.length || 0 });
         }

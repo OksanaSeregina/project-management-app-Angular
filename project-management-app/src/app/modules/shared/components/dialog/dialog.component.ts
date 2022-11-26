@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { INavigateButton } from '../../../../core';
-import { IBoardModal } from '../..';
+import { IDialog } from './models';
 
 @Component({
   selector: 'app-dialog',
@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: IBoardModal,
+    @Inject(MAT_DIALOG_DATA) public data: IDialog,
     private dialogRef: MatDialogRef<DialogComponent>,
     private translate: TranslateService,
   ) {}
