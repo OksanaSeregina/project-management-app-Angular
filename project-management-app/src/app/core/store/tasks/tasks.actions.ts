@@ -5,6 +5,8 @@ const LOAD_TASK = '[Tasks] LOAD_TASK';
 const LOAD_TASK_SUCCESS = '[Tasks] LOAD_TASK_SUCCESS';
 const LOAD_TASKS = '[Tasks] LOAD_TASKS';
 const LOAD_TASKS_SUCCESS = '[Tasks] LOAD_TASKS_SUCCESS';
+const LOAD_ALL_TASKS = '[Tasks] LOAD_ALL_TASKS';
+const LOAD_ALL_TASKS_SUCCESS = '[Tasks] LOAD_ALL_TASKS_SUCCESS';
 const CREATE_TASK = '[Tasks] CREATE_TASK';
 const CREATE_TASK_SUCCESS = '[Tasks] CREATE_TASK_SUCCESS';
 const UPDATE_TASK = '[Tasks] UPDATE_TASK';
@@ -20,6 +22,9 @@ export const loadTaskSuccess = createAction(LOAD_TASK_SUCCESS, props<{ taskResp:
 
 export const loadTasks = createAction(LOAD_TASKS, props<{ boardId: string; columns: IColumn[] }>());
 export const loadTasksSuccess = createAction(LOAD_TASKS_SUCCESS, props<{ tasksResp: TaskResp[] }>());
+
+export const loadAllTasks = createAction(LOAD_ALL_TASKS, props<{ boardIds: string[] }>());
+export const loadAllTasksSuccess = createAction(LOAD_ALL_TASKS_SUCCESS, props<{ tasksResp: TaskResp[] }>());
 
 export const createTask = createAction(CREATE_TASK, props<{ taskReq: TaskResp }>());
 export const createTaskSuccess = createAction(CREATE_TASK_SUCCESS, props<{ taskResp: TaskResp }>());

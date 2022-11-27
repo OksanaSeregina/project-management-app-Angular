@@ -18,11 +18,9 @@ export class TaskItemComponent implements OnInit {
   constructor(private tasksFacade: TasksFacade, private usersFacade: UsersFacade) {}
 
   public ngOnInit(): void {
-    this.usersFacade.getUsersByIds(this.task.users).subscribe((item) => {
-      if (item?.length && item[0]) {
-        this.username = item[0].login[0];
-      }
-    });
+    if (this.task.users.length && this.task.users[0]) {
+      this.username = this.task.users[0][0];
+    }
   }
 
   public updateTask(): void {

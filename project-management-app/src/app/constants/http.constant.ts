@@ -1,7 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 
 export const HTTP_CONFIG = {
-  baseUrl: 'https://final-task-backend-production-b8d2.up.railway.app/',
+  baseUrl: 'https://final-task-backend-production-8c3c.up.railway.app/',
   signup: 'auth/signup',
   signin: 'auth/signin',
   users: 'users',

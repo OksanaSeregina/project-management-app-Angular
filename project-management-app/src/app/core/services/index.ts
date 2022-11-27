@@ -7,3 +7,4 @@ export * from './boards.service';
 export * from './tasks.service';
 export * from './auth.service';
 export * from './spinner.service';
+export * from './search.service';

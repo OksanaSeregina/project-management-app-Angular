@@ -33,6 +33,7 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
 
   public users$: Observable<(UserResp | undefined)[] | null>;
   private userId = '';
+  private username = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ITaskDialog,
@@ -50,11 +51,12 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
     this.subscription = this.userFacade.user$.subscribe((item) => {
       if (item) {
         this.userId = item._id as string;
+        this.username = item.login as string;
       }
     });
 
     if (this.data.action === ITaskDialogAction.Create) {
-      selectUser = [this.userId];
+      selectUser = [this.username];
     } else {
       selectUser = [this.data?.task?.users[0] as string];
     }

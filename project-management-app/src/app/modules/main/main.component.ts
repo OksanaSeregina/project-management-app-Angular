@@ -4,7 +4,18 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { BoardFacade, CommonFacade, IBoard, ISort, NotificationService } from '../../core';
+import {
+  BoardFacade,
+  CommonFacade,
+  IBoard,
+  ISort,
+  NotificationService,
+  SearchService,
+  StorageService,
+  TaskResp,
+  TasksFacade,
+  UsersFacade,
+} from '../../core';
 import { DialogComponent, IDialog, IDialogAction } from '../shared';
 
 @Component({
@@ -20,6 +31,8 @@ export class MainComponent implements OnInit, OnDestroy {
   public searchValue$: Observable<string>;
   public sortBy$: Observable<ISort>;
   public isList: boolean;
+  public boardsIds: string[];
+  public tasksSearchReq: TaskResp[] = [];
 
   constructor(
     private boardFacade: BoardFacade,
@@ -28,6 +41,10 @@ export class MainComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private dialog: MatDialog,
     private router: Router,
+    private usersFacade: UsersFacade,
+    private tasksFacade: TasksFacade,
+    private searchService: SearchService,
+    private storageService: StorageService,
   ) {}
 
   public ngOnInit(): void {
@@ -42,9 +59,17 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.boardFacade.loadBoards();
     this.boards$ = this.boardFacade.boards$.pipe(map((boards: IBoard[]) => this.sort(boards)));
+
+    this.boards$.subscribe((boards) => {
+      this.boardsIds = boards.map(({ _id }) => _id);
+      this.tasksFacade.loadAllTasks(this.boardsIds);
+    });
+
+    this.usersFacade.load();
   }
 
   public ngOnDestroy(): void {
+    this.storageService.remove('searchValue');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
@@ -83,6 +108,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public onSearch(value: string): void {
     this.commonFacade.updateSearchValue(value);
+    this.storageService.set('searchTask', value);
+    this.router.navigate([`search`]);
   }
 
   public onSort(value: ISort): void {

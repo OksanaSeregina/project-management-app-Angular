@@ -1,0 +1,7 @@
+<article class="search-task-item">
+  <div class="item search-task-item__title">{{ task.title }}</div>
+  <div class="item search-task-item__description" [appTooltip]="task.description">
+    {{ task.description | truncate: 150 }}
+  </div>
+  <div class="item search-task-item__users">{{ username }}</div>
+</article>

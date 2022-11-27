@@ -1,0 +1,12 @@
+<div class="search__head">
+  <app-button-back (navigate)="navigateToMain()"></app-button-back>
+</div>
+
+<div *ngIf="isSearchResult" class="search__container">
+  <p class="no-result">{{ 'components.search.result' | translate }}</p>
+  <div class="task-items">
+    <app-search-task-item *ngFor="let task of tasks" [task]="task"></app-search-task-item>
+  </div>
+</div>
+
+<p *ngIf="!isSearchResult" class="no-result">{{ 'components.search.noResult' | translate }}</p>

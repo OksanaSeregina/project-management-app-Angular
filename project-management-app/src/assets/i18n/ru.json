@@ -70,6 +70,10 @@
       "create": "Создать",
       "save": "Сохранить",
       "users": "Пользователи"
+    },
+    "search": {
+      "result": "Результат поиска:",
+      "noResult": "Ничего не найдено. Попробуйте другой поиск!"
     }
   },
   "validators": {
@@ -165,8 +169,10 @@
   "main": {
     "sort_by_title": "Сортировать по названию",
     "search_by_button": "Найти",
-    "search_by_placeholder": "Поиск по названию",
-    "toggle_view": "Переключить вид"
+    "search_by_placeholder": "Поиск по задачам",
+    "toggle_view": "Переключить вид",
+    "filter_by_button": "Фильтр",
+    "filter_by_placeholder": "Фильтр досок по названию"
   },
   "column": {
     "add_column": "Добавить колонку",

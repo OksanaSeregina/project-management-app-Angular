@@ -77,4 +77,11 @@ export const tasksReducers = createReducer(
       [key]: [...tasksResp],
     };
   }),
+  on(TasksActions.loadAllTasksSuccess, (state, { tasksResp }): TasksState => {
+    const key = 'tasks';
+    return {
+      ...state,
+      [key]: [...tasksResp],
+    };
+  }),
 );

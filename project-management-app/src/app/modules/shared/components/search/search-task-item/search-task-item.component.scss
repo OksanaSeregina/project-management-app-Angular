@@ -1,0 +1,21 @@
+@import '_styles';
+
+.search-task-item {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-auto-rows: auto;
+  font-size: 1.2em;
+  background: $light-gray;
+  border: 1px solid $gray;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px 8px;
+}
+
+.item {
+  align-items: center;
+  justify-content: space-between;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 0 5px;
+}
