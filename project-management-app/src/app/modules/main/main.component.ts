@@ -108,6 +108,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public onSearch(value: string): void {
     this.commonFacade.updateSearchValue(value);
+  }
+
+  public onSearchTask(value: string): void {
+    this.commonFacade.updateSearchValue(value);
     this.storageService.set('searchTask', value);
     this.router.navigate([`search`]);
   }

@@ -1,11 +1,12 @@
 <form class="search-form" (ngSubmit)="onSubmit()" ngForm>
   <input
     [(ngModel)]="value"
-    [placeholder]="'main.search_by_placeholder' | translate"
+    [placeholder]="placeholderText | translate"
     class="search"
     type="text"
     name="search"
     autocomplete="off"
+    [style.background]="color"
   />
-  <button class="submit">{{ 'main.search_by_button' | translate }}</button>
+  <button class="submit">{{ buttonText | translate }}</button>
 </form>

@@ -1,5 +1,6 @@
 <div class="head">
-  <app-search-form (search)="onSearch($event)"></app-search-form>
+  <app-search-form (search)="onSearchTask($event)" [isFilter]="false"></app-search-form>
+  <app-search-form (search)="onSearch($event)" [isFilter]="true"></app-search-form>
   <app-sort-form (sort)="onSort($event)"></app-sort-form>
   <app-toggle-form (isListView)="toggleList($event)"></app-toggle-form>
 </div>
