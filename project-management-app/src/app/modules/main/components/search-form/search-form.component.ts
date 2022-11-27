@@ -30,6 +30,7 @@ export class SearchFormComponent implements OnInit {
     } else {
       this.placeholderText = 'main.search_by_placeholder';
       this.buttonText = 'main.search_by_button';
+      this.color = '#e6f0da';
     }
   }
 
