@@ -3,7 +3,12 @@
 </div>
 
 <div *ngIf="isSearchResult" class="search__container">
-  <p class="no-result">{{ 'components.search.result' | translate }}</p>
+  <p class="no-result">
+    {{ 'components.search.result' | translate }}
+    <b
+      ><i>{{ searchReq }}</i></b
+    >
+  </p>
   <div class="task-items">
     <app-search-task-item *ngFor="let task of tasks" [task]="task"></app-search-task-item>
   </div>

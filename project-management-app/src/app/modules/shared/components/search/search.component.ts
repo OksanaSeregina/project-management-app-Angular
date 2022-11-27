@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public isSearchResult = false;
   public tasks: TaskResp[] = [];
+  public searchReq = '';
 
   constructor(
     private storageService: StorageService,
@@ -22,10 +23,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const search = <string>this.storageService.get('searchTask');
+    this.searchReq = <string>this.storageService.get('searchTask');
     this.subscription = this.tasksFacade.tasks$.subscribe((state) => {
       const allTasks = state.tasks || [];
-      this.tasks = this.searchService.searchByTasks(search, allTasks);
+      this.tasks = this.searchService.searchByTasks(this.searchReq, allTasks);
     });
 
     if (this.tasks.length) {
