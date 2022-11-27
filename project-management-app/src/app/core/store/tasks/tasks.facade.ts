@@ -49,4 +49,8 @@ export class TasksFacade {
   public updateTasksSet(boardId: string, columns: IColumn[], tasks: TaskSetReq[]): void {
     this.store.dispatch(TasksActions.updateTasksSet({ boardId, columns, tasks }));
   }
+
+  public loadAllTasks(boardIds: string[]): void {
+    this.store.dispatch(TasksActions.loadAllTasks({ boardIds }));
+  }
 }

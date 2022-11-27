@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core';
-import { NotFoundComponent } from './modules/shared';
+import { NotFoundComponent, SearchComponent } from './modules/shared';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -26,6 +26,11 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./modules/user/user.module').then((module) => module.UserModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
     canActivate: [AuthGuard],
   },
   { path: 'page-not-found', component: NotFoundComponent },

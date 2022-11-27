@@ -10,4 +10,5 @@ export interface IStorage {
   searchValue: string;
   isList: boolean;
   sortBy: ISort;
+  searchTask: string;
 }

@@ -17,6 +17,7 @@ export class TasksEffects {
   public deleteTask$: Observable<Action>;
   public searchTasks$: Observable<Action>;
   public updateTasksSet$: Observable<Action>;
+  public loadAllTasks$: Observable<Action>;
 
   constructor(private readonly actions$: Actions, private tasksService: TasksService) {
     this.loadTask$ = createEffect(() => {
@@ -138,5 +139,20 @@ export class TasksEffects {
         }),
       ),
     );
+
+    this.loadAllTasks$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(TasksActions.loadAllTasks),
+        switchMap(({ boardIds }) => {
+          return this.tasksService.getAllTasks(boardIds).pipe(
+            map((res) => {
+              const tasksResp: TaskResp[] = [];
+              res.forEach(({ task }) => tasksResp.push(...task));
+              return TasksActions.loadAllTasksSuccess({ tasksResp });
+            }),
+          );
+        }),
+      );
+    });
   }
 }

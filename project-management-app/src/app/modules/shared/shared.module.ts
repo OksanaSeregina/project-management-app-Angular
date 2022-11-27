@@ -15,6 +15,8 @@ import { DirectivesModule } from './directives';
 import { MaterialModule } from './material';
 import { PipesModule } from './pipes';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchTaskItemComponent } from './components/search/search-task-item/search-task-item.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { TaskDialogComponent } from './components/task-dialog/task-dialog.compon
     DialogComponent,
     ButtonBackComponent,
     TaskDialogComponent,
+    SearchComponent,
+    SearchTaskItemComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, TranslateModule, PipesModule, FormsModule, DirectivesModule],
   exports: [
@@ -39,6 +43,7 @@ import { TaskDialogComponent } from './components/task-dialog/task-dialog.compon
     ButtonMulticolorComponent,
     DirectivesModule,
     TaskDialogComponent,
+    SearchTaskItemComponent,
   ],
 })
 export class SharedModule {}

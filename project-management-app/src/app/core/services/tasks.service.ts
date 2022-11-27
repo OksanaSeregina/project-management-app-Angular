@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { HTTP_CONFIG } from '../../constants';
 import { TaskResp, TaskSetReq } from '../models';
 
@@ -65,5 +65,15 @@ export class TasksService {
   public getTasksInBoard(boardId: string): Observable<TaskResp[]> {
     const url = `${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.tasksSet}/${boardId}`;
     return this.http.get<TaskResp[]>(url);
+  }
+
+  public getAllTasks(boardIds: string[]) {
+    return forkJoin(
+      boardIds.map((boardId) =>
+        forkJoin({
+          task: this.http.get<TaskResp[]>(`${HTTP_CONFIG.baseUrl}${HTTP_CONFIG.tasksSet}/${boardId}`),
+        }),
+      ),
+    );
   }
 }

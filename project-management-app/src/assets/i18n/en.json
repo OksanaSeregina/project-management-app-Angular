@@ -70,6 +70,10 @@
       "create": "Create",
       "save": "Save",
       "users": "Users"
+    },
+    "search": {
+      "result": "Search result:",
+      "noResult": "Nothing matches. Try another search!"
     }
   },
   "validators": {
@@ -165,8 +169,10 @@
   "main": {
     "sort_by_title": "Sort by title",
     "search_by_button": "Search",
-    "search_by_placeholder": "Search by title",
-    "toggle_view": "Toggle view"
+    "search_by_placeholder": "Search by tasks",
+    "toggle_view": "Toggle view",
+    "filter_by_button": "Filter",
+    "filter_by_placeholder": "Filter board by title"
   },
   "column": {
     "add_column": "Add new column",

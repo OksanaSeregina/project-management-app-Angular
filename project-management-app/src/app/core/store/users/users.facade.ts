@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { UserResp } from '../../models';
 import { AppState } from '../app.state';
 import * as UsersActions from './users.actions';
-import { selectAllUsers, selectUsersByIds } from './users.selectors';
+import { selectAllUsers, selectUserById, selectUsersByIds } from './users.selectors';
 
 @Injectable()
 export class UsersFacade {
@@ -18,6 +18,10 @@ export class UsersFacade {
 
   public load(): void {
     this.store.dispatch(UsersActions.load());
+  }
+
+  public getUserById(id: string): Observable<(UserResp | undefined) | null> {
+    return this.store.select(selectUserById(id));
   }
 
   public getUsersByIds(ids: string[]): Observable<(UserResp | undefined)[] | null> {
