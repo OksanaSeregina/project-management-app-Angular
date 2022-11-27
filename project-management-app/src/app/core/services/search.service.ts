@@ -13,8 +13,8 @@ export class SearchService {
       const title = item.title.toLowerCase() === searchReq;
       const description = item.description.toLowerCase().includes(searchReq);
       const userId = item.userId.toLowerCase() === searchReq;
-      const users = item.users.find((item) => item.toLowerCase() === searchReq);
-      return title || description || userId || users?.length;
+      const users = item.users.includes(search);
+      return title || description || userId || users;
     });
 
     return taskResp;
